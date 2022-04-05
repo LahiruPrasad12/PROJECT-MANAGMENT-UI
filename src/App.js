@@ -1,4 +1,4 @@
-import LandingPage from "./components/Pages/Landing Page/landingPage"
+import LandingPage from "./landing_page/landingPage"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import React from "react"
 
