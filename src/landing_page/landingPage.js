@@ -1,5 +1,6 @@
 import React from "react";
 import './landingPagestyle.css';
+import {Link} from 'react-router-dom';
 
 export default function LandingPage(){
 
@@ -10,7 +11,6 @@ export default function LandingPage(){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
@@ -30,7 +30,7 @@ export default function LandingPage(){
                 <li><a href="#">Features</a></li>
                 <li><a href="#">Pricing</a></li>
                 <li><a href="#">Testimonials</a></li>
-                <li><a href="#" class="btn">Sign up</a></li>
+                <Link to="/login"><li class="btn">Sign up</li></Link>
               </ul>
             </div>
 
