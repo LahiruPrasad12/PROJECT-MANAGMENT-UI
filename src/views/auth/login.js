@@ -7,9 +7,9 @@ export default function Login(){
   return(
 <>
 <head>
-  <meta charset="UTF-8" />
+  <meta charSet="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
   <title>Login Page</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css" />
@@ -43,7 +43,7 @@ export default function Login(){
                   <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login" />
                 </form>
                 <a href="#!" class="forgot-password-link">Forgot password?</a>
-                <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
+                <p class="login-card-footer-text">Don't have an account? <a href="/register" class="text-reset">Register here</a></p>
             </div>
           </div>
         </div>

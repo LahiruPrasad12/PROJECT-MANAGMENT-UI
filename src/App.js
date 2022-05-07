@@ -1,24 +1,14 @@
-import LandingPage from "./landing_page/landingPage"
-import Login from "./views/auth/login"
-import Register from "./views/auth/register"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+
+import Routers from './Router'
+
 import React from "react"
 
 function App() {
   return (
-    <Router>
+      <div>
+        <Routers/>
+      </div>
 
-        <LandingPage/>
-        {/* <Register/> */}
-        {/* Login/> */}
-        {/* <Route path="/" component={LandingPage} /> */}
-      
-    </Router>
   )
 }
 
