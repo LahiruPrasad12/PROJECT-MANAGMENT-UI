@@ -7,8 +7,8 @@ export default function LandingPage(){
     return (
         <>
     <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charSet="UTF-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
   </head>
@@ -30,7 +30,7 @@ export default function LandingPage(){
                 <li><a href="#">Features</a></li>
                 <li><a href="#">Pricing</a></li>
                 <li><a href="#">Testimonials</a></li>
-                <Link to="/login"><li class="btn">Sign up</li></Link>
+                <Link to="/login"><li class="btn">Sign in</li></Link>
               </ul>
             </div>
 
