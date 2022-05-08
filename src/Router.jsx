@@ -8,6 +8,7 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
+import Home from "./views/dashboard/Home";
 
 const Routers = () => {
     return (
@@ -15,6 +16,8 @@ const Routers = () => {
             <Route exact path="/" component={LandingPage} />
             <Route exact path = "/login"><Login/></Route>
             <Route exact path = "/register"><Register/></Route>
+
+            <Route exact path = "/home"><Home/></Route>
 
         </Router>
     );
