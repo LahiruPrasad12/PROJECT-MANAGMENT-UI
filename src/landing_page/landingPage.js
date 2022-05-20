@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import './landingPagestyle.css';
 import {Link} from 'react-router-dom';
+import Footer from "../layouts/footer";
+import Header from "../layouts/header";
 
 export default function LandingPage(){
 
@@ -14,40 +16,14 @@ export default function LandingPage(){
   </head>
   <body>
     <main>
-      <div class="big-wrapper">
-        <img src="https://i.postimg.cc/BbrzhpXf/services-left-dec.png" alt="" class="shape" />
-
-        <header>
-        <img src="https://i.postimg.cc/bws7zGf5/slider-left-dec.png" alt="" class="shape" />
-          <div class="container">
-            <div class="logo">
-              <img src="https://i.postimg.cc/J4ymPYYv/newl.png" alt="Logo" />
-              <h3>XIOS</h3>
-            </div>
-
-            <div class="links">
-              <ul>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <Link to="/login"><li class="btn">Sign in</li></Link>
-              </ul>
-            </div>
-
-            <div class="overlay"></div>
-
-            <div class="hamburger-menu">
-              <div class="bar"></div>
-            </div>
-          </div>
-        </header>
-
+      <Header/>
+      <img src="https://i.postimg.cc/BbrzhpXf/services-left-dec.png" alt="" class="shape" />
         <div class="showcase-area">
           <div class="container">
             <div class="left">
               <div class="big-title">
-                <h1>Welcome To Axios</h1>
-                <h1>Start Exploring now.</h1>
+                <h1>Welcome To SLIIT</h1>
+                <h1>Start Research Project Now.</h1>
               </div>
               <p class="text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -57,21 +33,20 @@ export default function LandingPage(){
                 vitae!
               </p>
               <div class="cta">
-                <a href="#" class="btn">Get started</a>
+
+               <Link><li href="#" class="btn2">Get started</li></Link>
+
               </div>
             </div>
 
             <div class="right">
-              <img src="https://i.postimg.cc/ZYWq0Lzb/Engineering-Manager-MERN-Stack.gif" />
+              <img src="https://i.postimg.cc/3xFysm8k/mobile-app.gif" />
             </div>
               <row></row>
           </div>
         </div>
-
-      </div> 
     </main>
-
-
+    <Footer/>
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script src="./app.js"></script>
   </body>

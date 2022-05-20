@@ -27,8 +27,7 @@ export default function Register(){
           <div class="col-md-7">
             <div class="card-body">
             <div class="logo">
-              <img src="https://i.postimg.cc/J4ymPYYv/newl.png" alt="Logo" />
-              <h3>XIOS</h3>
+              <Link to='/'><img src="https://i.postimg.cc/B6N12sKm/SLIIT.png" alt="Logo" /></Link>
             </div>
               <p class="login-card-description">Signup to your account</p>
               <form action="#">

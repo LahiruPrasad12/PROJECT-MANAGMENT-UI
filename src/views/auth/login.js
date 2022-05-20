@@ -27,14 +27,13 @@ export default function Login(){
           <div class="col-md-7">
             <div class="card-body">
             <div class="logo">
-              <img src="https://i.postimg.cc/J4ymPYYv/newl.png" alt="Logo" />
-              <h3>XIOS</h3>
+              <Link to='/'><img src="https://i.postimg.cc/B6N12sKm/SLIIT.png" alt="Logo" /></Link>
             </div>
               <p class="login-card-description">Sign into your account</p>
               <form action="#!">
                   <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" />
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email Address" />
                   </div>
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Password</label>
