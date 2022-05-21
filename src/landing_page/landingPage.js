@@ -12,9 +12,9 @@ export default function LandingPage(){
     if(loggedIn === null){
       window.location = '/login'
     }else if(loggedIn.role === 'owner'){
-      window.location = '/homeowner'
+      window.location = '/home'
     }else {
-      window.location = '/homeclient'
+      window.location = '/home'
     }
 
   }
