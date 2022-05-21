@@ -9,17 +9,13 @@ import {
     Redirect,
 } from "react-router-dom";
 import Home from "./views/dashboard/Home";
+import UserRoutes from './routes/userRoutes'
 
 const Routers = () => {
     return (
-        <Router>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path = "/login"><Login/></Route>
-            <Route exact path = "/register"><Register/></Route>
-
-            <Route exact path = "/home"><Home/></Route>
-
-        </Router>
+       <div>
+           <UserRoutes/>
+       </div>
     );
 };
 
