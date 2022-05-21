@@ -1,7 +1,7 @@
 import React from 'react';
 import LandingPage from "./landing_page/landingPage"
 import Login from "./views/auth/login"
-import Register from "./views/auth/register"
+import Register from "./views/auth/userRegister"
 import {
     BrowserRouter as Router,
     Switch,
