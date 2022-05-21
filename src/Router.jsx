@@ -1,22 +1,13 @@
 import React from 'react';
-import LandingPage from "./landing_page/landingPage"
-import Login from "./views/auth/login"
-import Register from "./views/auth/register"
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect,
-} from "react-router-dom";
+import AuthRoutes from './routes/authRoutes'
+import StudentRoutes from './routes/studentRoutes'
 
 const Routers = () => {
     return (
-        <Router>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path = "/login"><Login/></Route>
-            <Route exact path = "/register"><Register/></Route>
-
-        </Router>
+       <div>
+           <AuthRoutes/>
+           <StudentRoutes/>
+       </div>
     );
 };
 

@@ -3,8 +3,21 @@ import './landingPagestyle.css';
 import {Link} from 'react-router-dom';
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
+import AuthContext from "../context/AuthContext";
 
 export default function LandingPage(){
+  const { loggedIn } = useContext(AuthContext);
+
+  const redirectPage = ()=>{
+    if(loggedIn === null){
+      window.location = '/login'
+    }else if(loggedIn.role === 'owner'){
+      window.location = '/home'
+    }else {
+      window.location = '/home'
+    }
+
+  }
 
     return (
         <>
@@ -34,7 +47,7 @@ export default function LandingPage(){
               </p>
               <div class="cta">
 
-               <Link><li href="#" class="btn2">Get started</li></Link>
+               <Link><button onClick={redirectPage} class="btn2">Get started</button></Link>
 
               </div>
             </div>
