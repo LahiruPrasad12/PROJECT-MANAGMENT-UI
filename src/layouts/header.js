@@ -16,7 +16,7 @@ export default function Header() {
 
           <div class="links">
             <ul>
-                  <Link to=""><li><a>Student</a></li></Link>
+                  <Link to="/studenthome"><li><a>Student</a></li></Link>
                   <Link to=""><li><a>Supervisor</a></li></Link>
                   <Link to=""><li><a>Staff</a></li></Link>
                   <Link to="/login"><li class="btn2">Signin</li></Link>
