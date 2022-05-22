@@ -27,7 +27,7 @@ export default function Sidenav(){
         <h4>Welcome</h4>
         <h5>Kavindu Lakshan</h5>
     </div>
-    <Link to='/studenthome'><div className="menusb"><i class="fas fa-desktop"></i><span>Dashboard</span></div></Link>
+    <Link to='/studenthome'><div className="menusb"><i class="fas fa-user-friends"></i><span>Group Details</span></div></Link>
     <Link to=''><div className="menusb"><i class="fas fa-cogs"></i><span>Components</span></div></Link>
     <Link to=''><div className="menusb"><i class="fas fa-table"></i><span>Tables</span></div></Link>
     <Link to=''><div className="menusb"><i class="fas fa-th"></i><span>Forms</span></div></Link>
