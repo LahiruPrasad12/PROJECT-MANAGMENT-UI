@@ -27,12 +27,11 @@ export default function Sidenav(){
         <h4>Welcome</h4>
         <h5>Kavindu Lakshan</h5>
     </div>
-    <Link to='/studenthome'><div className="menusb"><i class="fas fa-user-friends"></i><span>Group Details</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-cogs"></i><span>Components</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-table"></i><span>Tables</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-th"></i><span>Forms</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-info-circle"></i><span>About</span></div></Link>
-    <Link to='/documents'><div className="menusb"><i class="fas fa-file-alt"></i><span>Documents</span></div></Link>
+    <Link to='/student/home'><div className="menusb"><i class="fas fa-user-friends"></i><span>Group Details</span></div></Link>
+    <Link to='/student/topicregister'><div className="menusb"><i class="fas fa-book"></i><span>Topic Register</span></div></Link>
+    <Link to=''><div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div></Link>
+    <Link to=''><div className="menusb"><i class="fas fa-th"></i><span>Co-Supervisor</span></div></Link>
+    <Link to='/student/document'><div className="menusb"><i class="fas fa-file-alt"></i><span>Documents</span></div></Link>
 </div>
   </>
     )

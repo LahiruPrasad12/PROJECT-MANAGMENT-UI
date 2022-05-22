@@ -12,7 +12,7 @@ export default function Documents(){
 <div  class="container">
 <center>
     <h1>DOCUMENTS</h1>
-    <p><Link to='studenthome'>Student</Link> / Documents</p>
+    <p><Link to='/student/home'>Student</Link> / Documents</p>
   <div style={{marginTop: '15%'}} class="row">
     <div class="col">
         <div className="card">
