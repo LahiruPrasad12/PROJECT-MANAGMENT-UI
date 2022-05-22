@@ -31,8 +31,8 @@ export default function Header() {
                   {/*<Link to="/login"><li class="btn2">Signing</li></Link>*/}
                 {
                     loggedIn === null && (<>
-                        <Link to="/login"><li><a >About us</a></li></Link>
-                        <Link to="/login"><li><a >Contact us</a></li></Link>
+                        {/* <Link to="/login"><li><a >About us</a></li></Link> */}
+                        <Link to="/register"><li class="btn2">Sign up</li></Link>
                         <Link to="/login"><li class="btn2">Sign in</li></Link>
                     </>)
                 }
@@ -44,6 +44,10 @@ export default function Header() {
                         <Link to="/login"><li class="btn2" onClick={logout}>Logout</li></Link>
                     </>)
                 }
+                  {/* <Link to="/studenthome"><li><a>Student</a></li></Link>
+                  <Link to=""><li><a>Supervisor</a></li></Link>
+                  <Link to=""><li><a>Staff</a></li></Link>
+                  <Link to="/login"><li class="btn2">Signin</li></Link> */}
             </ul>
           </div>
         </div>
