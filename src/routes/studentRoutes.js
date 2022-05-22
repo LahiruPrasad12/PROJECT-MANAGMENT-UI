@@ -2,12 +2,13 @@ import React from 'react';
 import {
     BrowserRouter as Router, Route,
 } from "react-router-dom";
-import Home from '../views/dashboard/student-dashboard/student'
+import StudentHome from '../views/dashboard/student-dashboard/home'
+// import SdentHome from '../views/student/studenthome'
 
 const AuthRoutes = () => {
     return (
         <Router>
-            <Route exact path="/home"><Home/></Route>
+            <Route exact path="/student/home"><StudentHome/></Route>
         </Router>
     );
 };

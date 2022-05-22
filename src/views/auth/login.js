@@ -5,6 +5,7 @@ import {SigningForm} from "../../validations";
 import {Field, Form, Formik} from "formik";
 import auth from "../../apis/modules/auth";
 
+
 export default function Login(){
 
   //if user already logged in user redirect to
@@ -23,8 +24,8 @@ export default function Login(){
       let respond = await auth.login(payload)
       console.log(respond.data.data.user.role)
       localStorage.setItem('JWT', respond.data.token)
-      if(respond.data.data.user.role === 'owner'){
-        // window.location = '/homeowner'
+      if(respond.data.data.user.role === 'student'){
+        window.location = '/student/home'
       }else {
         // window.location = '/homeclient'
       }
