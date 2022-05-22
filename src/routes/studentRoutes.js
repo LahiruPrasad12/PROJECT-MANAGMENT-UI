@@ -8,7 +8,7 @@ import SdentHome from '../views/student/studenthome'
 const AuthRoutes = () => {
     return (
         <Router>
-            <Route exact path="/student/home"><SdentHome/></Route>
+            <Route exact path="/student/home"><StudentHome/></Route>
         </Router>
     );
 };
