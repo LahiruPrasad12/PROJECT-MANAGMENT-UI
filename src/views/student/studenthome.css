@@ -42,6 +42,26 @@ headersn {
     background: #ec7c24;
 }
 
+.back_btn {
+    padding: 5px;
+    background: #3a6099;
+    text-decoration: none;
+    float: right;
+    margin-top: -30px;
+    margin-right: 40px;
+    border-radius: 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.5s;
+    border-radius: 5px;
+    transition-property: background;
+}
+
+.back_btn:hover {
+    background: #e08d4e;
+}
+
 .sidebar {
     z-index: 1;
     top: 0;

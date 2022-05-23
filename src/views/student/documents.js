@@ -13,9 +13,9 @@ export default function Documents(){
 <center>
     <h1>DOCUMENTS</h1>
     <p><Link to='/student/home'>Student</Link> / Documents</p>
-  <div style={{marginTop: '15%'}} class="row">
+  <div style={{marginTop: '12%'}} class="row">
     <div class="col">
-        <div className="card">
+    <div style={{paddingTop: '3%', paddingLeft: '5%', paddingRight: '5%', paddingBottom: '3%'}} className="card">
       <h4>Download Template</h4>
       <label style={{paddingBottom: '3%'}} class="form-label">(Click to download template)</label>
       <button style={{borderRadius: '0'}} type="button" class="btn btn-primary btn-lg">Download</button>

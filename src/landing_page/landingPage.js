@@ -11,8 +11,8 @@ export default function LandingPage(){
   const redirectPage = ()=>{
     if(loggedIn === null){
       window.location = '/login'
-    }else if(loggedIn.role === 'owner'){
-      window.location = '/home'
+    }else if(loggedIn.role === 'student'){
+      window.location = '/student/home'
     }else {
       window.location = '/home'
     }
