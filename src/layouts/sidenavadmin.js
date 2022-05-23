@@ -11,6 +11,7 @@ export default function Sidenavadmin(){
     </label>
     <div class="right_area">
         <button class="logout_btn">Logout</button>    
+        <Link to='/'><button class="back_btn">Back to Home</button></Link>   
     </div>
 </headersn>
 <div class="mobile_nav">
