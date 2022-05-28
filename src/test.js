@@ -1,32 +1,112 @@
-import React from 'react';
+import * as React from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import SaveIcon from '@mui/icons-material/Save';
+import SendIcon from '@mui/icons-material/Send';
 
-const Test = () => {
+export default function LoadingButtonsTransition() {
+    const [loading, setLoading] = React.useState(true);
+    function handleClick() {
+        setLoading(true);
+    }
+
     return (
-        <div>
+        <Box>
+            <FormControlLabel
+                sx={{
+                    display: 'block',
+                }}
+                control={
+                    <Switch
+                        checked={loading}
+                        onChange={() => setLoading(!loading)}
+                        name="loading"
+                        color="primary"
+                    />
+                }
+                label="Loading"
+            />
+            <Box sx={{ '& > button': { m: 1 } }}>
+                <LoadingButton
+                    size="small"
+                    onClick={handleClick}
+                    loading={loading}
+                    variant="outlined"
+                    disabled
+                >
+                    disabled
+                </LoadingButton>
+                <LoadingButton
+                    size="small"
+                    onClick={handleClick}
+                    loading={loading}
+                    loadingIndicator="Loading..."
+                    variant="outlined"
+                >
+                    Fetch data
+                </LoadingButton>
+                <LoadingButton
+                    size="small"
+                    onClick={handleClick}
+                    endIcon={<SendIcon />}
+                    loading={loading}
+                    loadingPosition="end"
+                    variant="contained"
+                >
+                    Send
+                </LoadingButton>
+                <LoadingButton
+                    size="small"
+                    color="secondary"
+                    onClick={handleClick}
+                    loading={loading}
+                    loadingPosition="start"
+                    startIcon={<SaveIcon />}
+                    variant="contained"
+                >
+                    Save
+                </LoadingButton>
+            </Box>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <Box sx={{ '& > button': { m: 1 } }}>
+                <LoadingButton
+                    onClick={handleClick}
+                    loading={loading}
+                    variant="outlined"
+                    disabled
+                >
+                    disabled
+                </LoadingButton>
+                <LoadingButton
+                    onClick={handleClick}
+                    loading={loading}
+                    loadingIndicator="Loading..."
+                    variant="outlined"
+                >
+                    Fetch data
+                </LoadingButton>
+                <LoadingButton
+                    onClick={handleClick}
+                    endIcon={<SendIcon />}
+                    loading={loading}
+                    loadingPosition="end"
+                    variant="contained"
+                >
+                    Send
+                </LoadingButton>
+                <LoadingButton
+                    color="secondary"
+                    onClick={handleClick}
+                    loading={loading}
+                    loadingPosition="start"
+                    startIcon={<SaveIcon />}
+                    variant="contained"
+                >
+                    Save
+                </LoadingButton>
+            </Box>
+        </Box>
     );
-};
-
-export default Test;
+}

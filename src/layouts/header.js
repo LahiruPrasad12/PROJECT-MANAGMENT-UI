@@ -40,7 +40,7 @@ export default function Header() {
                 {
                     loggedIn !== null && loggedIn.role === 'student' && (<>
                         <Link to="/student/groupregister"><li><a>Group Register</a></li></Link>
-                        <Link to="/student/home"><li><a>Student Dashboard</a></li></Link>
+                        {/*<Link to="/student/home"><li><a>Student Dashboard</a></li></Link>*/}
                         <Link to="/login"><li class="btn2" onClick={logout}>Logout</li></Link>
                     </>)
                 }
