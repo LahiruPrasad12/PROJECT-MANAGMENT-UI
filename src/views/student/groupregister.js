@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import studentAPI from '../../apis/modules/student'
 import AuthContext from "../../context/AuthContext";
 import WarningAlert from '../../alerts/warnings'
+import Info from '../../alerts/info'
 
 export default function GroupRegister() {
     const [show, setShow] = useState(true);
@@ -143,6 +144,7 @@ export default function GroupRegister() {
                                     marginBottom: '15px'
                                 }}
                                      className="card">
+                                    <Info message='You can group member here or later'/>
                                     <h4 style={{textAlign: 'center', fontWeight: 'bold'}}>Members Register</h4>
                                     <br/><br/>
                                     <form>
