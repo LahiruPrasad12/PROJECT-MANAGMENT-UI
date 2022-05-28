@@ -29,7 +29,6 @@ export default function TransitionAlerts(props) {
                     }
                     sx={{mb: 2}}
                 >
-                    <AlertTitle>Warning</AlertTitle>
                     {props.message}
                 </Alert>
             </Collapse>

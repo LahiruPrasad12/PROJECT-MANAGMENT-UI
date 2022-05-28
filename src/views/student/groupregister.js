@@ -7,7 +7,10 @@ import Button from "@mui/material/Button";
 import studentAPI from '../../apis/modules/student'
 import AuthContext from "../../context/AuthContext";
 import WarningAlert from '../../alerts/warnings'
-import Info from '../../alerts/info'
+import InfoAlert from '../../alerts/info'
+import {Tooltip} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 
 export default function GroupRegister() {
     const [show, setShow] = useState(true);
@@ -16,6 +19,9 @@ export default function GroupRegister() {
     const [name, setName] = useState('');
     const {loggedIn} = useContext(AuthContext);
 
+    let [showColumns, setShowColumns] = useState(1);
+
+    //create group
     const createGroup = async () => {
         try {
             let payload = {
@@ -26,9 +32,46 @@ export default function GroupRegister() {
             setMemberRegisterState(false)
             setBtnLoading(false)
         } catch (e) {
-
+            alert('error')
         }
     }
+
+    const Column = () => {
+        let array = []
+        for (let x = 1; x < showColumns; x++) {
+            array.push(
+                <div className="row form-group">
+                    <div class="col-md-12">
+                        <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Member {x+1} Email </label>
+                        <input type="email" className="form-control" id=""
+                               placeholder="Enter Member Email"
+                               required/>
+                    </div>
+                    {/*<div class="col-md-2">*/}
+                    {/*    <IconButton aria-label="delete"  sx={{*/}
+                    {/*        marginTop: '30px',*/}
+                    {/*    }}>*/}
+                    {/*        <AutoDeleteIcon/>*/}
+                    {/*    </IconButton>*/}
+                    {/*</div>*/}
+
+                </div>
+            )
+        }
+        return array
+    }
+
+    const increment = () => {
+        if (showColumns < 4) {
+            setShowColumns(++showColumns)
+        }
+    }
+
+   const decrement = ()=>{
+       setShowColumns(--showColumns)
+   }
+
+    //expand column
 
 
     return (
@@ -42,7 +85,8 @@ export default function GroupRegister() {
                         <p>
                             Aww yeah, you successfully read this important alert message. This example
                             text is going to run a bit longer so that you can see how spacing within an
-                        </p><hr/>
+                        </p>
+                        <hr/>
                         <div className="d-flex justify-content-end">
                             <Button onClick={() => setShow(false)} variant="outline-success">
                                 Close me y'all!
@@ -65,7 +109,6 @@ export default function GroupRegister() {
                     </Button>
                 </div>
                 <div style={{marginTop: '10%'}} class="row">
-
 
                 </div>
             </div>
@@ -144,31 +187,35 @@ export default function GroupRegister() {
                                     marginBottom: '15px'
                                 }}
                                      className="card">
-                                    <Info message='You can group member here or later'/>
+                                    <InfoAlert message='You can group member here or later. maximum number is 4'/>
+
+
                                     <h4 style={{textAlign: 'center', fontWeight: 'bold'}}>Members Register</h4>
-                                    <br/><br/>
+                                    <br/>
                                     <form>
                                         <div className="form-group">
-                                            <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Member 2
+                                            <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Member 1
                                                 Email</label>
                                             <input type="email" className="form-control" id=""
-                                                   placeholder="Enter Member 2 Email"
+                                                   placeholder="Enter Member Email"
                                                    required/>
                                         </div>
-                                        <div className="form-group">
-                                            <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Member 3
-                                                Email</label>
-                                            <input type="email" className="form-control" id=""
-                                                   placeholder="Enter Member 3 Email"
-                                                   required/>
+                                        <Column/>
+
+                                        <Tooltip title="ADD MORE MEMBERS" placement="top-start">
+                                            <Button onClick={increment}>
+                                                ADD MORE
+                                            </Button>
+                                        </Tooltip>
+                                        <Tooltip hidden={showColumns===1} title="UNDO MEMBERS" placement="top-start">
+                                            <Button onClick={decrement}>
+                                                UNDO
+                                            </Button>
+                                        </Tooltip>
+                                        <div hidden={showColumns<4}>
+                                            <WarningAlert message='You can add maximum group member is 4'/>
                                         </div>
-                                        <div className="form-group">
-                                            <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Member 4
-                                                Email</label>
-                                            <input type="email" className="form-control" id=""
-                                                   placeholder="Enter Member 4 Email"
-                                                   required/>
-                                        </div>
+                                        <hr/>
                                         <div>
                                             <Button variant="contained" disabled={btnLoading} sx={{
                                                 float: 'right',
