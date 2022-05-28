@@ -33,12 +33,11 @@ export default function GroupRegister() {
     return (
         <>
             <Header/>
-
             <img src="https://i.postimg.cc/BbrzhpXf/services-left-dec.png" alt="" class="shape"/>
             <div class="container">
                 <div>
                     <Alert show={show} variant="success">
-                        <Alert.Heading>How's it going?!</Alert.Heading>
+                        <Alert.Heading>Hey {loggedIn.name}!</Alert.Heading>
                         <p>
                             Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
                             lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
@@ -52,9 +51,16 @@ export default function GroupRegister() {
                         </div>
                     </Alert>
 
-                    <Button data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
+                    <Button hidden={show} data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
                             sx={{
-                                float: 'right'
+                                float: 'right',
+                                marginTop:'-120px'
+                            }} disableElevation>
+                        Create a new group
+                    </Button>
+                    <Button hidden={!show} data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
+                            sx={{
+                                float: 'right',
                             }} disableElevation>
                         Create a new group
                     </Button>
