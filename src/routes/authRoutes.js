@@ -2,6 +2,7 @@ import React from 'react';
 import LandingPage from "../landing_page/landingPage"
 import Login from "../views/auth/login"
 import Register from "../views/auth/userRegister"
+import Test from '../test'
 import {
     BrowserRouter as Router,
     Route,
@@ -13,6 +14,7 @@ const UserRoutes = () => {
             <Route exact path="/" component={LandingPage} />
             <Route exact path = "/login"><Login/></Route>
             <Route exact path = "/register"><Register/></Route>
+            <Route exact path = "/test"><Test/></Route>
         </Router>
     );
 };

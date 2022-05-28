@@ -10,5 +10,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="a81368914c" level="application" />
     <orderEntry type="library" name="a81368914c" level="application" />
+    <orderEntry type="library" name="@tabler/core" level="application" />
+    <orderEntry type="library" name="semantic-ui" level="application" />
+    <orderEntry type="library" name="semantic-ui-react" level="application" />
+    <orderEntry type="library" name="jquery-3.1.1" level="application" />
+    <orderEntry type="library" name="react" level="application" />
+    <orderEntry type="library" name="react-bootstrap" level="application" />
+    <orderEntry type="library" name="react-dom" level="application" />
   </component>
 </module>
