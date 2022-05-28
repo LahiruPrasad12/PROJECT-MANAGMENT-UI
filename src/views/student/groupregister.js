@@ -6,16 +6,22 @@ import {Alert} from "react-bootstrap";
 import Button from "@mui/material/Button";
 import studentAPI from '../../apis/modules/student'
 import AuthContext from "../../context/AuthContext";
+import WarningAlert from '../../alerts/warnings'
 
 export default function GroupRegister() {
+    const [show, setShow] = useState(true);
     const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
+    const [name, setName] = useState('');
     const { loggedIn } = useContext(AuthContext);
 
     const createGroup = async () => {
         try {
+            let payload = {
+                name
+            }
             setBtnLoading(true)
-            const respond = await studentAPI.createGroup()
+            const respond = await studentAPI.createGroup(payload)
             setMemberRegisterState(false)
             setBtnLoading(false)
         } catch (e) {
@@ -27,23 +33,26 @@ export default function GroupRegister() {
     return (
         <>
             <Header/>
+
             <img src="https://i.postimg.cc/BbrzhpXf/services-left-dec.png" alt="" class="shape"/>
             <div class="container">
                 <div>
-                    <Alert variant="primary">
-                        <Alert.Heading>Hey {loggedIn.name}, nice to see you</Alert.Heading>
+                    <Alert show={show} variant="success">
+                        <Alert.Heading>How's it going?!</Alert.Heading>
                         <p>
-                            Aww yeah, you successfully read this important alert message. This example
-                            text is going to run a bit longer so that you can see how spacing within an
-                            alert works with this kind of content.
+                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+                            lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
+                            fermentum.
                         </p>
-                        <hr/>
-                        <p className="mb-0">
-                            Whenever you need to, be sure to use margin utilities to keep things nice
-                            and tidy.
-                        </p>
+                        <hr />
+                        <div className="d-flex justify-content-end">
+                            <Button onClick={() => setShow(false)} variant="outline-success">
+                                Close me y'all!
+                            </Button>
+                        </div>
                     </Alert>
-                    <Button className='aa' data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
+
+                    <Button data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
                             sx={{
                                 float: 'right'
                             }} disableElevation>
@@ -70,6 +79,7 @@ export default function GroupRegister() {
                                     marginTop: '15px',
                                     marginBottom: '15px'
                                 }} className="card">
+                                    <WarningAlert message='This group name will not be changes'/>
                                     <h4 style={{
                                         textAlign: 'center',
                                         fontWeight: 'bold',
@@ -81,10 +91,10 @@ export default function GroupRegister() {
                                             <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Name</label>
                                             <input type="text" className="form-control" id=""
                                                    placeholder="Enter Your Group Name"
-                                                   required/>
+                                                   required onChange={(e)=>{setName(e.target.value)}}/>
                                         </div>
                                         <div>
-                                            <Button variant="contained" disabled={btnLoading} sx={{
+                                            <Button variant="contained" disabled={btnLoading || name.length===0} sx={{
                                                 float: 'right',
                                                 marginBottom: '10px',
                                                 marginLeft: '5px',
