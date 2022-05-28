@@ -13,7 +13,7 @@ export default function GroupRegister() {
     const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [name, setName] = useState('');
-    const { loggedIn } = useContext(AuthContext);
+    const {loggedIn} = useContext(AuthContext);
 
     const createGroup = async () => {
         try {
@@ -37,13 +37,11 @@ export default function GroupRegister() {
             <div class="container">
                 <div>
                     <Alert show={show} variant="success">
-                        <Alert.Heading>Hey {loggedIn.name}!</Alert.Heading>
+                        <Alert.Heading>Hey {loggedIn.name}, nice to see you</Alert.Heading>
                         <p>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-                            lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
-                            fermentum.
-                        </p>
-                        <hr />
+                            Aww yeah, you successfully read this important alert message. This example
+                            text is going to run a bit longer so that you can see how spacing within an
+                        </p><hr/>
                         <div className="d-flex justify-content-end">
                             <Button onClick={() => setShow(false)} variant="outline-success">
                                 Close me y'all!
@@ -54,7 +52,7 @@ export default function GroupRegister() {
                     <Button hidden={show} data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
                             sx={{
                                 float: 'right',
-                                marginTop:'-120px'
+                                marginTop: '-120px'
                             }} disableElevation>
                         Create a new group
                     </Button>
@@ -97,10 +95,12 @@ export default function GroupRegister() {
                                             <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group Name</label>
                                             <input type="text" className="form-control" id=""
                                                    placeholder="Enter Your Group Name"
-                                                   required onChange={(e)=>{setName(e.target.value)}}/>
+                                                   required onChange={(e) => {
+                                                setName(e.target.value)
+                                            }}/>
                                         </div>
                                         <div>
-                                            <Button variant="contained" disabled={btnLoading || name.length===0} sx={{
+                                            <Button variant="contained" disabled={btnLoading || name.length === 0} sx={{
                                                 float: 'right',
                                                 marginBottom: '10px',
                                                 marginLeft: '5px',
