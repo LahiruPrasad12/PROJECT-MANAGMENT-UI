@@ -1,21 +1,26 @@
 import React, {useContext, useState} from "react";
 import '../../landing_page/landingPagestyle.css';
-import {Link} from 'react-router-dom';
 import Header from "../../layouts/header";
 import Footer from "../../layouts/footer";
 import {Alert} from "react-bootstrap";
 import Button from "@mui/material/Button";
+import studentAPI from '../../apis/modules/student'
+import AuthContext from "../../context/AuthContext";
 
-export default function Groupregister() {
+export default function GroupRegister() {
     const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
-    const createGroup = () => {
-        setBtnLoading(true)
-        setTimeout(() => {
-            console.log("Delayed for 1 second.");
+    const { loggedIn } = useContext(AuthContext);
+
+    const createGroup = async () => {
+        try {
+            setBtnLoading(true)
+            const respond = await studentAPI.createGroup()
             setMemberRegisterState(false)
             setBtnLoading(false)
-        }, "5000")
+        } catch (e) {
+
+        }
     }
 
 
@@ -26,7 +31,7 @@ export default function Groupregister() {
             <div class="container">
                 <div>
                     <Alert variant="primary">
-                        <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                        <Alert.Heading>Hey {loggedIn.name}, nice to see you</Alert.Heading>
                         <p>
                             Aww yeah, you successfully read this important alert message. This example
                             text is going to run a bit longer so that you can see how spacing within an
@@ -165,7 +170,9 @@ export default function Groupregister() {
                                                 marginBottom: '10px',
                                                 marginTop: '5px'
 
-                                            }} onClick={(e)=>{window.location = '/student/home'}}>
+                                            }} onClick={(e) => {
+                                                window.location = '/student/home'
+                                            }}>
                                                 Skip
                                             </Button>
 
