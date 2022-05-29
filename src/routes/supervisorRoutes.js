@@ -7,7 +7,7 @@ const AuthRoutes = () => {
   return (
     <Router>
       <Route exact path="/supervisor/home">
-        <StudentHome />
+        <SupervisorHome />
       </Route>
     </Router>
   );
