@@ -4,5 +4,9 @@ import Sidenav from "../../layouts/sidenavsupervisor";
 import "./supervisorHome.css";
 
 export default function SupervisorHome() {
-  return <></>;
+  return (
+    <>
+      <Sidenav />
+    </>
+  );
 }
