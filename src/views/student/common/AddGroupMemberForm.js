@@ -18,13 +18,6 @@ const AddGroupMemberForm = () => {
                                placeholder="Enter Member Email"
                                required/>
                     </div>
-                    {/*<div class="col-md-2">*/}
-                    {/*    <IconButton aria-label="delete"  sx={{*/}
-                    {/*        marginTop: '30px',*/}
-                    {/*    }}>*/}
-                    {/*        <AutoDeleteIcon/>*/}
-                    {/*    </IconButton>*/}
-                    {/*</div>*/}
 
                 </div>
             )
