@@ -74,7 +74,8 @@ export default function StaffRegister() {
                 name: data.name,
                 email: data.email,
                 password: data.password, passwordConfirm: data.passwordConfirm,
-                researchFileId: selectedCategory[0]
+                researchFileId: selectedCategory[0],
+                role:'staff'
             }
             await auth.register(payload)
             window.location = '/login'
