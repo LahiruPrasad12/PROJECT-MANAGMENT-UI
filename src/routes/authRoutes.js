@@ -1,7 +1,7 @@
 import React from 'react';
 import LandingPage from "../landing_page/landingPage"
 import Login from "../views/auth/login"
-import Register from "../views/auth/userRegister"
+import Register from "../views/auth/studentRegister"
 import Test from '../test'
 import {
     BrowserRouter as Router,
