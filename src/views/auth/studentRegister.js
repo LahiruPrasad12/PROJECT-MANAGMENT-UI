@@ -5,7 +5,7 @@ import {Field, Form, Formik} from "formik";
 import {SignupSchema} from "../../validations";
 import auth from "../../apis/modules/auth";
 
-export default function UserRegister(){
+export default function StudentRegister(){
     const [error, setError] = useState("");
 
     const register = async (data)=>{
