@@ -34,10 +34,9 @@ const AddGroupMemberForm = () => {
                 email: arr
             }
             const respond = await assignMemberAPI.assignMembers(payload)
-            // console.log(respond.response.data)
+            window.location = '/student/home'
         } catch (error) {
             if (error.response.data.status === 400) {
-                console.log(error.response.data.error)
                 setErrors(error.response.data.error)
                 setOpen(true)
             } else {
