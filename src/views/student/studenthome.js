@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect} from "react";
 import { Link } from 'react-router-dom';
 import Sidenav from "../../layouts/sidenav";
 import './studenthome.css';
+import groupAPI from '../../apis/modules/group'
 
 export default function Studenthome() {
+
+  useEffect(()=>{
+
+  })
 
   return (
     <>

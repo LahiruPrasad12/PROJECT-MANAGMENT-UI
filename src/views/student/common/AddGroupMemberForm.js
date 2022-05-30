@@ -3,7 +3,7 @@ import InfoAlert from "../../../alerts/info";
 import {Snackbar, Tooltip} from "@mui/material";
 import Button from "@mui/material/Button";
 import WarningAlert from "../../../alerts/warnings";
-import assignMemberAPI from '../../../apis/modules/group'
+import groupAPI from '../../../apis/modules/group'
 import Alert from "@mui/material/Alert";
 import UndoIcon from '@mui/icons-material/Undo';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -41,7 +41,7 @@ const AddGroupMemberForm = () => {
             const payload = {
                 email: arr
             }
-            const respond = await assignMemberAPI.assignMembers(payload)
+            const respond = await groupAPI.assignMembers(payload)
             // window.location = '/student/home'
         } catch (error) {
             if (error.response.data.status === 400) {
