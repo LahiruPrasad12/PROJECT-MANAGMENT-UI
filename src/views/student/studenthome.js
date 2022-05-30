@@ -1,18 +1,15 @@
-import React, {useContext, useEffect} from "react";
-import { Link } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from "react";
 import Sidenav from "../../layouts/sidenav";
 import './studenthome.css';
 import groupAPI from '../../apis/modules/group'
 
 export default function Studenthome() {
 
-  useEffect(()=>{
 
-  })
 
   return (
     <>
-      <Sidenav />
+      {/*<Sidenav />*/}
       <div class="content">
         <div class="container">
           <center>
