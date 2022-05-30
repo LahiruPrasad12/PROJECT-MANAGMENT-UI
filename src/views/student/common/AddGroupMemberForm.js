@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import InfoAlert from "../../../alerts/info";
 import {Snackbar, Tooltip} from "@mui/material";
 import Button from "@mui/material/Button";
@@ -7,8 +7,16 @@ import assignMemberAPI from '../../../apis/modules/group'
 import Alert from "@mui/material/Alert";
 import UndoIcon from '@mui/icons-material/Undo';
 import CancelIcon from '@mui/icons-material/Cancel';
+import AuthContext from "../../../context/AuthContext";
 
 const AddGroupMemberForm = () => {
+    const {loggedIn} = useContext(AuthContext);
+
+    useEffect(()=>{
+        if(loggedIn.groupID){
+            window.location = '/student/home'
+        }
+    })
     const [open, setOpen] = useState(false);
     const [errors, setErrors] = useState([]);
     let [showColumns, setShowColumns] = useState(1);
@@ -34,7 +42,7 @@ const AddGroupMemberForm = () => {
                 email: arr
             }
             const respond = await assignMemberAPI.assignMembers(payload)
-            window.location = '/student/home'
+            // window.location = '/student/home'
         } catch (error) {
             if (error.response.data.status === 400) {
                 setErrors(error.response.data.error)
