@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "../views/student/studenthome.css";
+import "../views/dashboard/student-dashboard/studenthome.css";
 
 export default function Sidenav() {
   return (

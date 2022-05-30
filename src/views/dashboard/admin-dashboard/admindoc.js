@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
-import Sidenav from "../../layouts/sidenavadmin";
-import '../student/studenthome.css';
+import Sidenav from "../../../layouts/sidenavadmin";
+import '../student-dashboard/studenthome.css';
 
 export default function Admindoc(){
 

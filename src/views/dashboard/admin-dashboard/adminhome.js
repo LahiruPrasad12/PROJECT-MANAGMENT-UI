@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
-import Sidenavadmin from "../../layouts/sidenavadmin";
-import '../dashboard/student-dashboard/studenthome.css';
+import Sidenavadmin from "../../../layouts/sidenavadmin";
+import '../student-dashboard/studenthome.css';
 
 export default function Adminhome() {
 
@@ -16,7 +16,7 @@ export default function Adminhome() {
                         <p>Admin</p>
                         <div style={{marginTop: '4%'}} class="row">
                             <div class="col">
-                            <form action="#" method="get" id="searchForm" class="input-group">
+                            <form action="src/views/dashboard/admin-dashboard/adminhome#" method="get" id="searchForm" class="input-group">
                                 <input type="search" class="form-control" name="search" placeholder="Search Users..." 
                                     />
                                         <select className="btn btn-light dropdown-toggle">
