@@ -11,7 +11,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
-import categoryAPI from '../../apis/modules/ropicCategory'
+import categoryAPI from '../../apis/modules/topicCategory'
 
 
 const ITEM_HEIGHT = 58;

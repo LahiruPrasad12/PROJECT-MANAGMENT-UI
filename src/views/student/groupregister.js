@@ -31,10 +31,11 @@ export default function GroupRegister() {
             setBtnLoading(true)
             const respond = await studentAPI.createGroup(payload)
             setMemberRegisterState(false)
-            setBtnLoading(false)
+
         } catch (e) {
             alert('error')
         }
+        setBtnLoading(false)
     }
 
 
