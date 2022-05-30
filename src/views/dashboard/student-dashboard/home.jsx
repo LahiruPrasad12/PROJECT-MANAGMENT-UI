@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Sidenav from "../../../layouts/sidenav";
 import './studenthome.css';
 import groupAPI from "../../../apis/modules/group";
+import Button from "@mui/material/Button";
 
 export default function Studenthome() {
 
@@ -26,8 +27,17 @@ export default function Studenthome() {
                     <center>
                         <h1>GROUP DETAILS</h1>
                         <p>Student</p>
+                        <Button data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
+                                sx={{
+                                    float: 'right',
+                                    marginRight:15
+                                }} disableElevation>
+                            Add members
+                        </Button>
                         <div style={{marginTop: '7%'}} class="row">
+
                             <div class="col">
+
                                 <table style={{width: '80%', height: '110%'}} class="table">
                                     <thead class="thead-dark">
                                     <tr style={{textAlign: 'center'}}>
@@ -36,33 +46,19 @@ export default function Studenthome() {
                                         <th scope="col">Email</th>
                                     </tr>
                                     </thead>
-                                    <br/>
                                     <tbody style={{textAlign: 'center'}}>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Kavindu Lakshan</td>
-                                        <td>kavindulakshan@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Kavindu Lakshan</td>
-                                        <td>kavindulakshan@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Kavindu Lakshan</td>
-                                        <td>kavindulakshan@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>Kavindu Lakshan</td>
-                                        <td>kavindulakshan@gmail.com</td>
-                                    </tr>
+                                    {
+                                        members.map((student, index) => {
+                                            return <tr>
+                                                <td>{index + 1}</td>
+                                                <td>{student.name}</td>
+                                                <td>{student.email}</td>
+                                            </tr>
+                                        })
+                                    }
+
                                     </tbody>
                                 </table>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">Add Member
-                                </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
