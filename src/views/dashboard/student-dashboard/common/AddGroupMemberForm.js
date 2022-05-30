@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
-import InfoAlert from "../../../alerts/info";
+import InfoAlert from "../../../../alerts/info";
 import {Snackbar, Tooltip} from "@mui/material";
 import Button from "@mui/material/Button";
-import WarningAlert from "../../../alerts/warnings";
-import groupAPI from '../../../apis/modules/group'
+import WarningAlert from "../../../../alerts/warnings";
+import groupAPI from '../../../../apis/modules/group'
 import Alert from "@mui/material/Alert";
 import UndoIcon from '@mui/icons-material/Undo';
 import CancelIcon from '@mui/icons-material/Cancel';
-import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../../../context/AuthContext";
 
 const AddGroupMemberForm = () => {
     const {loggedIn} = useContext(AuthContext);

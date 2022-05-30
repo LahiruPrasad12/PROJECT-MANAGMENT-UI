@@ -1,18 +1,18 @@
 import React, {useContext, useState} from "react";
-import '../../landing_page/landingPagestyle.css';
-import Header from "../../layouts/header";
-import Footer from "../../layouts/footer";
+import '../../../landing_page/landingPagestyle.css';
+import Header from "../../../layouts/header";
+import Footer from "../../../layouts/footer";
 import {Alert} from "react-bootstrap";
 import Button from "@mui/material/Button";
-import studentAPI from '../../apis/modules/student'
-import AuthContext from "../../context/AuthContext";
-import WarningAlert from '../../alerts/warnings'
-import InfoAlert from '../../alerts/info'
+import studentAPI from '../../../apis/modules/student'
+import AuthContext from "../../../context/AuthContext";
+import WarningAlert from '../../../alerts/warnings'
+import InfoAlert from '../../../alerts/info'
 import {Snackbar, Tooltip} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
-import AddGroupMember from '../student/common/AddGroupMemberForm'
-import ErrorToast from '../../toast/error'
+import AddGroupMember from './common/AddGroupMemberForm'
+import ErrorToast from '../../../toast/error'
 
 export default function GroupRegister() {
 

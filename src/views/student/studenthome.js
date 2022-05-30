@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import Sidenav from "../../layouts/sidenav";
-import './studenthome.css';
+import '../dashboard/student-dashboard/studenthome.css';
 import groupAPI from '../../apis/modules/group'
 
 export default function Studenthome() {
