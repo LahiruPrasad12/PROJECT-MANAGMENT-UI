@@ -39,6 +39,9 @@ const AddGroupMemberForm = () => {
             if (error.response.data.status === 400) {
                 setErrors(error.response.data.error)
                 setOpen(true)
+            } else if (error.response.data.status === 406) {
+                setErrors('Your group already have maximum number of members')
+                window.location = '/student/home'
             } else {
                 setErrors('something went wrong.. please try again later')
             }
@@ -91,11 +94,11 @@ const AddGroupMemberForm = () => {
                                 </div>
                                 <div class="col-md-2">
                                     <Tooltip hidden={showColumns === 1} title="UNDO MEMBERS" placement="top-start">
-                                        <CancelIcon  onClick={() => decrement(index)} sx={{
+                                        <CancelIcon onClick={() => decrement(index)} sx={{
                                             marginTop: '36px'
                                         }}>
                                             <UndoIcon/>
-                                        </CancelIcon >
+                                        </CancelIcon>
                                     </Tooltip>
                                 </div>
                             </div>
@@ -140,6 +143,8 @@ const AddGroupMemberForm = () => {
                 </form>
                 <br/>
             </div>
+
+            {/*This will show errors*/}
             <Snackbar open={open} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
                     {errors.map((element) => {

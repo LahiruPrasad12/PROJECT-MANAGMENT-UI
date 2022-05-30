@@ -1,35 +1,78 @@
-import React, {useState} from 'react';
-import Button from "@mui/material/Button";
-import {Snackbar} from "@mui/material";
-import Alert from "@mui/material/Alert";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const Test = () => {
-    const [open, setOpen] = useState(false);
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
-    const handleClick = ()=>{
-        setOpen(true);
-    }
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
+function createData(
+    name: string,
+    calories: number,
+    fat: number,
+    carbs: number,
+    protein: number,
+) {
+    return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+];
+
+export default function CustomizedTables() {
     return (
-        <div>
-            <Button variant="outlined" onClick={handleClick}>
-                Open success snackbar
-            </Button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    This is a success message!
-                </Alert>
-            </Snackbar>
-            <Alert severity="error">This is an error message!</Alert>
-            <Alert severity="warning">This is a warning message!</Alert>
-            <Alert severity="info">This is an information message!</Alert>
-            <Alert severity="success">This is a success message!</Alert>
-        </div>
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                    <TableRow>
+                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                        <StyledTableCell align="right">Calories</StyledTableCell>
+                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
+                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
+                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map((row) => (
+                        <StyledTableRow key={row.name}>
+                            <StyledTableCell component="th" scope="row">
+                                {row.name}
+                            </StyledTableCell>
+                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                        </StyledTableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
-};
-
-export default Test;
+}
