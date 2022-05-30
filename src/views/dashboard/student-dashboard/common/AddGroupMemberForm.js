@@ -9,14 +9,8 @@ import UndoIcon from '@mui/icons-material/Undo';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AuthContext from "../../../../context/AuthContext";
 
-const AddGroupMemberForm = () => {
-    const {loggedIn} = useContext(AuthContext);
+const AddGroupMemberForm = (props) => {
 
-    useEffect(()=>{
-        if(loggedIn.groupID){
-            window.location = '/student/home'
-        }
-    })
     const [open, setOpen] = useState(false);
     const [errors, setErrors] = useState([]);
     let [showColumns, setShowColumns] = useState(1);
@@ -36,13 +30,14 @@ const AddGroupMemberForm = () => {
 
     const assignGroup = async () => {
         try {
+            setBtnLoading(true)
             const arr = []
             data.map(i => arr.push(i.email))
             const payload = {
                 email: arr
             }
             const respond = await groupAPI.assignMembers(payload)
-            // window.location = '/student/home'
+            window.location = '/student/home'
         } catch (error) {
             if (error.response.data.status === 400) {
                 setErrors(error.response.data.error)
@@ -54,10 +49,11 @@ const AddGroupMemberForm = () => {
                 setErrors('something went wrong.. please try again later')
             }
         }
+        setBtnLoading(false)
     }
 
     const increment = () => {
-        if (showColumns < 4) {
+        if (showColumns < props.rowNumber) {
             setData([...data, {email: ''}])
             setShowColumns(++showColumns)
         }
@@ -116,13 +112,13 @@ const AddGroupMemberForm = () => {
 
                     ))}
 
-                    <Tooltip title="ADD MORE MEMBERS" placement="top-start">
+                    <Tooltip hidden={props.rowNumber === showColumns} title="ADD MORE MEMBERS" placement="top-start">
                         <Button onClick={() => increment()}>
                             ADD MORE
                         </Button>
                     </Tooltip>
 
-                    <div hidden={showColumns < 4}>
+                    <div hidden={showColumns < props.rowNumber}>
                         <WarningAlert message='You can add maximum group member is 4'/>
                     </div>
                     <hr/>

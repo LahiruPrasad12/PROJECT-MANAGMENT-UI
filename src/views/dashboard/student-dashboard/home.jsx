@@ -4,6 +4,7 @@ import Sidenav from "../../../layouts/sidenav";
 import './studenthome.css';
 import groupAPI from "../../../apis/modules/group";
 import Button from "@mui/material/Button";
+import AddGroupMember from "./common/AddGroupMemberForm";
 
 export default function Studenthome() {
 
@@ -27,7 +28,7 @@ export default function Studenthome() {
                     <center>
                         <h1>GROUP DETAILS</h1>
                         <p>Student</p>
-                        <Button data-bs-toggle="modal" data-bs-target="#createGroup" variant="contained"
+                        <Button hidden={members.length === 4} data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained"
                                 sx={{
                                     float: 'right',
                                     marginRight:15
@@ -86,7 +87,20 @@ export default function Studenthome() {
                             </div>
 
                         </div>
+                        {/*student add model*/}
+
                     </center>
+                </div>
+                <div className="modal fade" id="addStudent" tabIndex="-1"
+                     aria-labelledby="exampleModalLabel">
+                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div className="modal-content">
+                            <div className="modal-body">
+                                <AddGroupMember rowNumber={4 - members.length}/>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

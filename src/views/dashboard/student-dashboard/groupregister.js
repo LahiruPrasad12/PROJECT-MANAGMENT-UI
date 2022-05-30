@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import '../../../landing_page/landingPagestyle.css';
 import Header from "../../../layouts/header";
 import Footer from "../../../layouts/footer";
@@ -16,12 +16,18 @@ import ErrorToast from '../../../toast/error'
 
 export default function GroupRegister() {
 
+    const {loggedIn} = useContext(AuthContext);
+
+    useEffect(() => {
+        if (loggedIn.groupID) {
+            window.location = '/student/home'
+        }
+    })
     const [showToast, setShowToast] = useState(false);
     const [show, setShow] = useState(true);
     const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [name, setName] = useState('');
-    const {loggedIn} = useContext(AuthContext);
 
 
     //create group
@@ -140,17 +146,17 @@ export default function GroupRegister() {
             </div>
 
             {/*student add model*/}
-              <div hidden={memberRegisterState} className="modal fade" id="addStudent" tabIndex="-1"
-                             aria-labelledby="exampleModalLabel">
-                            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                <div className="modal-content">
-                                    <div className="modal-body">
-                                        <AddGroupMember/>
-                                    </div>
-
-                                </div>
-                            </div>
+            <div hidden={memberRegisterState} className="modal fade" id="addStudent" tabIndex="-1"
+                 aria-labelledby="exampleModalLabel">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            <AddGroupMember rowNumber={4}/>
                         </div>
+
+                    </div>
+                </div>
+            </div>
 
 
             {
