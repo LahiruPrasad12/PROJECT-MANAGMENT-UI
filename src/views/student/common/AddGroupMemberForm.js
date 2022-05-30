@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import WarningAlert from "../../../alerts/warnings";
 import assignMemberAPI from '../../../apis/modules/group'
 import Alert from "@mui/material/Alert";
+import UndoIcon from '@mui/icons-material/Undo';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const AddGroupMemberForm = () => {
     const [open, setOpen] = useState(false);
@@ -31,14 +33,14 @@ const AddGroupMemberForm = () => {
             const payload = {
                 email: arr
             }
-           const respond = await assignMemberAPI.assignMembers(payload)
+            const respond = await assignMemberAPI.assignMembers(payload)
             // console.log(respond.response.data)
         } catch (error) {
-            if(error.response.data.status === 400){
+            if (error.response.data.status === 400) {
                 console.log(error.response.data.error)
                 setErrors(error.response.data.error)
                 setOpen(true)
-            }else {
+            } else {
                 setErrors('something went wrong.. please try again later')
             }
         }
@@ -78,18 +80,28 @@ const AddGroupMemberForm = () => {
                 <form>
                     {data.map((inputField, index) => (
                         <div className="form-group" key={index}>
-                            <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group
-                                Member {index === 0 ? '' : index} Email</label>
-                            <input type="email" className="form-control" id=""
-                                   name="email"
-                                   placeholder="Enter Member Email"
-                                   onChange={(event) => handleInput(index, event)}
-                                   required/>
-                            <Tooltip hidden={showColumns === 1} title="UNDO MEMBERS" placement="top-start">
-                                <Button onClick={() => decrement(index)}>
-                                    UNDO
-                                </Button>
-                            </Tooltip>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Group
+                                        Member {index === 0 ? '' : index} Email</label>
+                                    <input type="email" className="form-control" id=""
+                                           name="email"
+                                           placeholder="Enter Member Email"
+                                           onChange={(event) => handleInput(index, event)}
+                                           required/>
+                                </div>
+                                <div class="col-md-2">
+                                    <Tooltip hidden={showColumns === 1} title="UNDO MEMBERS" placement="top-start">
+                                        <CancelIcon  onClick={() => decrement(index)} sx={{
+                                            marginTop: '36px'
+                                        }}>
+                                            <UndoIcon/>
+                                        </CancelIcon >
+                                    </Tooltip>
+                                </div>
+                            </div>
+
+
                         </div>
 
                     ))}
@@ -130,8 +142,8 @@ const AddGroupMemberForm = () => {
                 <br/>
             </div>
             <Snackbar open={open} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    {errors.map((element)=>{
+                <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
+                    {errors.map((element) => {
                         return <div>
                             {element}
                         </div>

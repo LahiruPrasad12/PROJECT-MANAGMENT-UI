@@ -18,7 +18,7 @@ export default function GroupRegister() {
 
     const [showToast, setShowToast] = useState(false);
     const [show, setShow] = useState(true);
-    const [memberRegisterState, setMemberRegisterState] = useState(false);
+    const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [name, setName] = useState('');
     const {loggedIn} = useContext(AuthContext);
@@ -31,24 +31,14 @@ export default function GroupRegister() {
                 name
             }
             setBtnLoading(true)
-            const respond = await studentAPI.createGroup(payload)
-            setMemberRegisterState(true)
+            await studentAPI.createGroup(payload)
+            setMemberRegisterState(false)
 
         } catch (e) {
             setShowToast(true)
-            errorToast()
         }
         setBtnLoading(false)
     }
-
-
-    const errorToast = () => {
-        return (
-            <ErrorToast/>
-        )
-    }
-
-
     return (
         <>
             <Header/>
@@ -150,21 +140,18 @@ export default function GroupRegister() {
             </div>
 
             {/*student add model*/}
-            {
-                memberRegisterState && (
-                    <div className="modal fade" id="addStudent" tabIndex="-1"
-                         aria-labelledby="exampleModalLabel">
-                        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div className="modal-content">
-                                <div className="modal-body">
-                                    <AddGroupMember/>
-                                </div>
+              <div hidden={memberRegisterState} className="modal fade" id="addStudent" tabIndex="-1"
+                             aria-labelledby="exampleModalLabel">
+                            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div className="modal-content">
+                                    <div className="modal-body">
+                                        <AddGroupMember/>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )
-            }
+
 
             {
                 showToast && (<>
