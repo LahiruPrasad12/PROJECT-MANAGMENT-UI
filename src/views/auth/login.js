@@ -5,6 +5,7 @@ import {SigningForm} from "../../validations";
 import {Field, Form, Formik} from "formik";
 import auth from "../../apis/modules/auth";
 import LoadingButton from "@mui/lab/LoadingButton";
+import ErrorToast from "../../toast/error";
 
 
 export default function Login() {
@@ -14,12 +15,14 @@ export default function Login() {
 
     })
 
+    const [showToast, setShowToast] = useState(false);
     const [error, setError] = useState("");
     const [btnLoading, setBtnLoading] = useState(false);
 
     const login = async (data) => {
         try {
             setBtnLoading(true)
+            setShowToast(false)
             let payload = {
                 email: data.email,
                 password: data.password
@@ -40,6 +43,7 @@ export default function Login() {
         } catch (e) {
             localStorage.clear();
             setError('Your user name or password is incorrect')
+            setShowToast(true)
         }
         setBtnLoading(false)
     }
@@ -96,8 +100,6 @@ export default function Login() {
                                                            class="form-control" placeholder="Password"/>
                                                     {errors.password && touched.password ? <p id={"login-error"}
                                                                                               class="text-danger">{errors.password}</p> : null}
-                                                    {error ?
-                                                        <p id={"login-error"} class="text-danger">{error}</p> : null}
 
                                                 </div>
 
@@ -114,6 +116,12 @@ export default function Login() {
                             </div>
                         </div>
                     </div>
+                    {
+                        showToast && (<>
+                                <ErrorToast message={error}/>
+                            </>
+                        )
+                    }
                 </div>
             </main>
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
