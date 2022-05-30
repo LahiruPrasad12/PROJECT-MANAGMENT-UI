@@ -28,11 +28,9 @@ export default function Sidenavadmin(){
         <h4>Welcome</h4>
         <h5>Kavindu Lakshan</h5>
     </div>
-    <Link to='/student/home'><div className="menusb"><i class="fas fa-user-friends"></i><span>Group Details</span></div></Link>
-    <Link to='/student/topicregister'><div className="menusb"><i class="fas fa-book"></i><span>Topic Register</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div></Link>
-    <Link to=''><div className="menusb"><i class="fas fa-th"></i><span>Co-Supervisor</span></div></Link>
-    <Link to='/student/document'><div className="menusb"><i class="fas fa-file-alt"></i><span>Documents</span></div></Link>
+    <Link to='/admin/home'><div className="menusb"><i class="fas fa-user-friends"></i><span>User Details</span></div></Link>
+    <Link to='/admin/allocatepm'><div className="menusb"><i class="fas fa-user-alt"></i><span>Allocate Panel Members</span></div></Link>
+    <Link to='/admin/doc'><div className="menusb"><i class="fas fa-cloud-upload-alt"></i><span>Documents Upload</span></div></Link>
 </div>
   </>
     )
