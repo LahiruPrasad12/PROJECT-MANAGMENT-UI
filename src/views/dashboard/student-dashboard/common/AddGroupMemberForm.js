@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
-import InfoAlert from "../../../alerts/info";
+import React, {useContext, useEffect, useState} from 'react';
+import InfoAlert from "../../../../alerts/info";
 import {Snackbar, Tooltip} from "@mui/material";
 import Button from "@mui/material/Button";
-import WarningAlert from "../../../alerts/warnings";
-import assignMemberAPI from '../../../apis/modules/group'
+import WarningAlert from "../../../../alerts/warnings";
+import groupAPI from '../../../../apis/modules/group'
 import Alert from "@mui/material/Alert";
 import UndoIcon from '@mui/icons-material/Undo';
 import CancelIcon from '@mui/icons-material/Cancel';
+import AuthContext from "../../../../context/AuthContext";
 
-const AddGroupMemberForm = () => {
+const AddGroupMemberForm = (props) => {
+
     const [open, setOpen] = useState(false);
     const [errors, setErrors] = useState([]);
     let [showColumns, setShowColumns] = useState(1);
@@ -28,25 +30,30 @@ const AddGroupMemberForm = () => {
 
     const assignGroup = async () => {
         try {
+            setBtnLoading(true)
             const arr = []
             data.map(i => arr.push(i.email))
             const payload = {
                 email: arr
             }
-            const respond = await assignMemberAPI.assignMembers(payload)
+            const respond = await groupAPI.assignMembers(payload)
             window.location = '/student/home'
         } catch (error) {
             if (error.response.data.status === 400) {
                 setErrors(error.response.data.error)
                 setOpen(true)
+            } else if (error.response.data.status === 406) {
+                setErrors('Your group already have maximum number of members')
+                window.location = '/student/home'
             } else {
                 setErrors('something went wrong.. please try again later')
             }
         }
+        setBtnLoading(false)
     }
 
     const increment = () => {
-        if (showColumns < 4) {
+        if (showColumns < props.rowNumber) {
             setData([...data, {email: ''}])
             setShowColumns(++showColumns)
         }
@@ -91,11 +98,11 @@ const AddGroupMemberForm = () => {
                                 </div>
                                 <div class="col-md-2">
                                     <Tooltip hidden={showColumns === 1} title="UNDO MEMBERS" placement="top-start">
-                                        <CancelIcon  onClick={() => decrement(index)} sx={{
+                                        <CancelIcon onClick={() => decrement(index)} sx={{
                                             marginTop: '36px'
                                         }}>
                                             <UndoIcon/>
-                                        </CancelIcon >
+                                        </CancelIcon>
                                     </Tooltip>
                                 </div>
                             </div>
@@ -105,13 +112,13 @@ const AddGroupMemberForm = () => {
 
                     ))}
 
-                    <Tooltip title="ADD MORE MEMBERS" placement="top-start">
+                    <Tooltip hidden={props.rowNumber === showColumns} title="ADD MORE MEMBERS" placement="top-start">
                         <Button onClick={() => increment()}>
                             ADD MORE
                         </Button>
                     </Tooltip>
 
-                    <div hidden={showColumns < 4}>
+                    <div hidden={showColumns < props.rowNumber}>
                         <WarningAlert message='You can add maximum group member is 4'/>
                     </div>
                     <hr/>
@@ -140,6 +147,8 @@ const AddGroupMemberForm = () => {
                 </form>
                 <br/>
             </div>
+
+            {/*This will show errors*/}
             <Snackbar open={open} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
                     {errors.map((element) => {

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
-import Sidenav from "../../layouts/sidenav";
+import Sidenav from "../../../layouts/sidenav";
 import './studenthome.css';
 
 export default function Topicregister(){

@@ -2,7 +2,7 @@ import api from "../axios";
 const resource = '/api/groups';
 
 export default {
-    getCategories: () => api.get(`${resource}`),
+    myGroupMember: () => api.get(`${resource}/group-members`),
     assignMembers: (payload) => api.patch(`${resource}`, payload),
     getProduct: (id) => api.get(`${resource}/${id}`),
     updateProduct: (id, payload) => api.patch(`${resource}/${id}`, payload),

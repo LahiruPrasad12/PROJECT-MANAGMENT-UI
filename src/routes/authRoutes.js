@@ -15,7 +15,7 @@ const UserRoutes = () => {
             <Route exact path="/" component={LandingPage} />
             <Route exact path = "/login"><Login/></Route>
             <Route exact path = "/register"><StudentRegister/></Route>
-            <Route exact path = "/staff/register"><StaffRegister/></Route>
+            <Route exact path = "/staff-register"><StaffRegister/></Route>
             <Route exact path = "/test"><Test/></Route>
         </Router>
     );
