@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -8,8 +8,16 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import {Select} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import {useEffect, useState} from "react";
+import categoryAPI from "../../../../../apis/modules/topicCategory";
+import topicAPI from "../../../../../apis/modules/topic";
+import {Spinner} from "react-bootstrap";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
     },
@@ -25,10 +33,10 @@ export interface DialogTitleProps {
 }
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
-    const { children, onClose, ...other } = props;
+    const {children, onClose, ...other} = props;
 
     return (
-        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        <DialogTitle sx={{m: 0, p: 2}} {...other}>
             {children}
             {onClose ? (
                 <IconButton
@@ -41,7 +49,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             ) : null}
         </DialogTitle>
@@ -50,7 +58,19 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 export default function RegisterTopicToSupervisor() {
     const [open, setOpen] = React.useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedSupervisor, setSelectedSupervisor] = useState('');
 
+    const [category, setCategory] = useState([]);
+    const [supervisors, setSupervisors] = useState([]);
+
+    useEffect(() => {
+        const getDetails = async () => {
+            const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
+            setCategory(categoryRespond)
+        }
+        getDetails()
+    }, [])
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -58,9 +78,26 @@ export default function RegisterTopicToSupervisor() {
         setOpen(false);
     };
 
+    const selectSupervisor = (event: setSelectedSupervisor) => {
+        setSelectedSupervisor(event.target.value);
+        console.log(selectedCategory)
+    };
+
+    const selectCategory = async (event: selectedCategory) => {
+        setSelectedCategory(event.target.value);
+        const payload = {
+            category_id: event.target.value
+        }
+        let supervisorsRespond = (await topicAPI.getStaff(payload, 'supervisor')).data.data.filteredData
+        setSupervisors(supervisorsRespond)
+
+    };
+
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" sx={{
+                float: 'right',
+            }} onClick={handleClickOpen}>
                 Register My Topic
             </Button>
             <BootstrapDialog
@@ -68,24 +105,77 @@ export default function RegisterTopicToSupervisor() {
                 aria-labelledby="customized-dialog-title"
                 disableEscapeKeyDown={true}
                 open={open}
+
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
+                    REGISTER OUR TOPIC TO SUPERVISOR
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
                         <form>
-                            <div className="form-group">
-                                <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+
+                                    <FormControl loading fullWidth>
+                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                            category</InputLabel>
+                                        <Select
+                                            size="small"
+                                            outlined
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={selectedCategory}
+                                            label="Age"
+                                            onChange={selectCategory}
+
+                                        >
+                                            {
+                                                category.map((element) => {
+                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                })
+                                            }
+
+                                            {/*<MenuItem value={20}>Twenty</MenuItem>*/}
+                                            {/*<MenuItem value={30}>Thirty</MenuItem>*/}
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                                <div class="col-md-6">
+                                    <FormControl fullWidth disabled={!supervisors}>
+                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                            professor</InputLabel>
+                                        <Select
+                                            size="small"
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={selectedSupervisor}
+                                            label="Age"
+                                            onChange={selectSupervisor}
+                                        >
+
+                                            {
+                                                supervisors.map((element) => {
+                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                })
+                                            }
+
+                                            {/*<MenuItem value={100}>Ten</MenuItem>*/}
+                                            {/*<MenuItem value={200}>Twenty</MenuItem>*/}
+                                            {/*<MenuItem value={300}>Thirty</MenuItem>*/}
+
+                                        </Select>
+
+                                    </FormControl>
+                                </div>
+
+                            </div>
+                            <div className="form-group mt-2">
+                                <label class="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>
                                 <textarea className="form-control" id=""
-                                          placeholder="Enter Your Topic Name" required/>
+                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}/>
                             </div>
                             <br/>
                         </form>
-                    </Typography>
-                    <Typography gutterBottom>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
                     </Typography>
                     <Typography gutterBottom>
                         Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
