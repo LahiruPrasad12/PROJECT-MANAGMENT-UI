@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {Snackbar} from "@mui/material";
 import Alert from "@mui/material/Alert";
 
-const Error = (props) => {
+const Success = (props) => {
     const [open, setOpen] = useState(true);
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -20,4 +20,4 @@ const Error = (props) => {
     );
 };
 
-export default Error;
+export default Success;

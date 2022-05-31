@@ -16,6 +16,10 @@ import {useEffect, useState} from "react";
 import categoryAPI from "../../../../../apis/modules/topicCategory";
 import topicAPI from "../../../../../apis/modules/topic";
 import {Spinner} from "react-bootstrap";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SendIcon from '@mui/icons-material/Send';
+import ErrorToast from "../../../../../toast/error";
+import Success from "../../../../../toast/success";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -60,9 +64,15 @@ export default function RegisterTopicToSupervisor() {
     const [open, setOpen] = React.useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSupervisor, setSelectedSupervisor] = useState('');
+    const [name, setName] = useState('');
+    const [btnLoading, setBtnLoading] = useState(false);
+
+    const [showSuccessToast, setSuccessShowToast] = useState(false);
+    const [showErrorToast, setErrorShowToast] = useState(false);
 
     const [category, setCategory] = useState([]);
     const [supervisors, setSupervisors] = useState([]);
+
 
     useEffect(() => {
         const getDetails = async () => {
@@ -92,6 +102,23 @@ export default function RegisterTopicToSupervisor() {
         setSupervisors(supervisorsRespond)
 
     };
+
+    const submitTopic = async () => {
+        try {
+            setBtnLoading(true)
+            let payload = {
+                category_id: selectedCategory,
+                supervisorID: selectedSupervisor,
+                name: name
+            }
+            await topicAPI.submitTopicToSupervisor(payload)
+            setSuccessShowToast(true)
+            setOpen(false);
+        } catch (e) {
+            setErrorShowToast(true)
+        }
+        setBtnLoading(false)
+    }
 
     return (
         <div>
@@ -134,9 +161,6 @@ export default function RegisterTopicToSupervisor() {
                                                     return <MenuItem value={element._id}>{element.name}</MenuItem>
                                                 })
                                             }
-
-                                            {/*<MenuItem value={20}>Twenty</MenuItem>*/}
-                                            {/*<MenuItem value={30}>Thirty</MenuItem>*/}
                                         </Select>
                                     </FormControl>
                                 </div>
@@ -159,10 +183,6 @@ export default function RegisterTopicToSupervisor() {
                                                 })
                                             }
 
-                                            {/*<MenuItem value={100}>Ten</MenuItem>*/}
-                                            {/*<MenuItem value={200}>Twenty</MenuItem>*/}
-                                            {/*<MenuItem value={300}>Thirty</MenuItem>*/}
-
                                         </Select>
 
                                     </FormControl>
@@ -172,7 +192,10 @@ export default function RegisterTopicToSupervisor() {
                             <div className="form-group mt-2">
                                 <label class="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>
                                 <textarea className="form-control" id=""
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}/>
+                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}
+                                          onChange={(e) => {
+                                              setName(e.target.value)
+                                          }}/>
                             </div>
                             <br/>
                         </form>
@@ -184,11 +207,33 @@ export default function RegisterTopicToSupervisor() {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Save changes
-                    </Button>
+                    {/*<Button autoFocus disabled={!selectedCategory || !selectedSupervisor || !name} onClick={submitTopic}>*/}
+                    {/*    Save changes*/}
+                    {/*</Button>*/}
+                    <LoadingButton
+                        onClick={submitTopic}
+                        endIcon={<SendIcon/>}
+                        loading={btnLoading}
+                        loadingPosition="end"
+                        variant="contained"
+                    >
+                        Send
+                    </LoadingButton>
                 </DialogActions>
             </BootstrapDialog>
+
+            {
+                showErrorToast && (<>
+                        <ErrorToast message="There have some error. Please try again later"/>
+                    </>
+                )
+            }
+            {
+                showSuccessToast && (<>
+                        <Success message="Your topic submit to supervisor successfully"/>
+                    </>
+                )
+            }
         </div>
     );
 }
