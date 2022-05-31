@@ -3,6 +3,7 @@ import AdminRoutes from "./routes/adminRouters";
 import AuthRoutes from "./routes/authRoutes";
 import StudentRoutes from "./routes/studentRoutes";
 import SupervisorRoutes from "./routes/supervisorRoutes";
+import CoSupervisorRoutes from "./routes/cosupervisorRoutes";
 
 const Routers = () => {
   return (
@@ -11,6 +12,7 @@ const Routers = () => {
       <AdminRoutes />
       <StudentRoutes />
       <SupervisorRoutes />
+      <CoSupervisorRoutes />
     </div>
   );
 };
