@@ -7,6 +7,11 @@ export default function SupervisorHome() {
   return (
     <>
       <Sidenav />
+      <div class="content">
+        <div class="container">
+          <center></center>
+        </div>
+      </div>
     </>
   );
 }
