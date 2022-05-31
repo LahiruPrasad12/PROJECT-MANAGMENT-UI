@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import SupervisorHome from "../views/dashboard/supervisor-dashboard/supervisorHome";
+import CoSupervisorHome from "../views/dashboard/co-supervisor-dashboard/co-supervisorHome";
 
 const AuthRoutes = () => {
   return (
     <Router>
-      <Route exact path="/supervisor/home">
-        <SupervisorHome />
+      <Route exact path="/cosupervisor/home">
+        <CoSupervisorHome />
       </Route>
     </Router>
   );

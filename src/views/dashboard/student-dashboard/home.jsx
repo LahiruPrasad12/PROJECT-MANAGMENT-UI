@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import Sidenav from "../../../layouts/sidenav";
 import './studenthome.css';
 import groupAPI from "../../../apis/modules/group";
-import Button from "@mui/material/Button";
 import AddGroupMember from "./common/AddGroupMemberForm";
+import Footerdashboard from "../../../layouts/footerdashboard";
 
 export default function Studenthome() {
 
@@ -28,18 +28,10 @@ export default function Studenthome() {
                     <center>
                         <h1>GROUP DETAILS</h1>
                         <p>Student</p>
-                        <Button hidden={members.length === 4} data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained"
-                                sx={{
-                                    float: 'right',
-                                    marginRight:15
-                                }} disableElevation>
-                            Add members
-                        </Button>
-                        <div style={{marginTop: '7%'}} class="row">
-
+                        <button style={{marginTop: '3%'}} className="btn btn-primary" hidden={members.length === 4} data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained" disableElevation>Add members</button>
+                        <div style={{marginTop: '3%'}} class="row">
                             <div class="col">
-
-                                <table style={{width: '80%', height: '110%'}} class="table">
+                                <table class="table">
                                     <thead class="thead-dark">
                                     <tr style={{textAlign: 'center'}}>
                                         <th scope="col">#</th>
@@ -102,6 +94,7 @@ export default function Studenthome() {
                         </div>
                     </div>
                 </div>
+                <Footerdashboard/>
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import '../views/dashboard/student-dashboard/studenthome.css';
+import "../views/dashboard/student-dashboard/studenthome.css";
 
 export default function Sidenav() {
   return (
@@ -31,7 +31,7 @@ export default function Sidenav() {
           <h4>Welcome</h4>
           <h5>Kavindu Lakshan</h5>
         </div>
-        <Link to="/supervisor/home">
+        <Link to="/cosupervisor/home">
           <div className="menusb">
             <i class="fas fa-user-friends"></i>
             <span>Pending List</span>
