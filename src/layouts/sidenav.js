@@ -41,7 +41,7 @@ export default function Sidenav() {
 
             <div class="sidebar">
               <div className="sideh"></div>
-              <div class="profile_info">
+              <div class="profile_info" style={{marginTop: '-40%'}}>
                 <h4>Welcome</h4>
                 <h5>{loggedIn.name}</h5>
             </div>
