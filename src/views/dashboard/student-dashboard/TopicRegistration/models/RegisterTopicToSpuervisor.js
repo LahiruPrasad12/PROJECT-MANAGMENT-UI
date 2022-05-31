@@ -122,6 +122,19 @@ export default function RegisterTopicToSupervisor() {
 
     return (
         <div>
+            {
+                showSuccessToast && (<>
+                        <Success message="Your topic submit to supervisor successfully"/>
+                    </>
+                )
+            }
+
+            {
+                showErrorToast && (<>
+                        <ErrorToast message="There have some error. Please try again later"/>
+                    </>
+                )
+            }
             <Button variant="outlined" sx={{
                 float: 'right',
             }} onClick={handleClickOpen}>
@@ -220,20 +233,9 @@ export default function RegisterTopicToSupervisor() {
                         Send
                     </LoadingButton>
                 </DialogActions>
+
             </BootstrapDialog>
 
-            {
-                showErrorToast && (<>
-                        <ErrorToast message="There have some error. Please try again later"/>
-                    </>
-                )
-            }
-            {
-                showSuccessToast && (<>
-                        <Success message="Your topic submit to supervisor successfully"/>
-                    </>
-                )
-            }
         </div>
     );
 }
