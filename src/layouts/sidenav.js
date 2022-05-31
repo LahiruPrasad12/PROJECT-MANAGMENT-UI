@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Image from "../assets/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.webp";
 
 export default function Sidenav() {
-    const {loggedIn} = useContext(AuthContext);
+    const {loggedIn,loggedInGroup} = useContext(AuthContext);
 
     const logout = async () => {
         await auth.logout();
@@ -55,10 +55,10 @@ export default function Sidenav() {
 
             <div class="sidebar">
                 <div className="sideh"></div>
-                {/*<div class="profile_info" style={{marginTop: '-40%'}}>*/}
-                {/*    <h4>Welcome</h4>*/}
-                {/*    <h5>{loggedIn.name}</h5>*/}
-                {/*</div>*/}
+                <div class="profile_info" style={{marginTop: '-40%'}}>
+                    <h4>Welcome</h4>
+                    <h5>{loggedInGroup.name}</h5>
+                </div>
                 <div style={{marginTop: '-30px'}}>
                     <Link to='/student/home'>
                         <div className="menusb"><i class="fas fa-user-friends"></i><span>Group Details</span></div>

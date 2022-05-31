@@ -6,11 +6,15 @@ const AuthContext = createContext(undefined);
 
 function AuthContextProvider(props) {
     const [loggedIn, setloggedIn] = useState({});
+    const [loggedInGroup, setloggedInGroup] = useState({});
 
     async function getLogged(){
        try{
            const loggedInRes = await auth.currentUser();
-           setloggedIn(loggedInRes.data.data);
+           setloggedInGroup(loggedInRes.data.data[1]);
+           setloggedIn(loggedInRes.data.data[0]);
+
+           console.log(loggedInRes.data.data[1])
        }catch (error){
            setloggedIn(null)
        }
@@ -20,7 +24,7 @@ function AuthContextProvider(props) {
         getLogged();
     }, [])
 
-    return <AuthContext.Provider value={{loggedIn, getLogged}}>
+    return <AuthContext.Provider value={{loggedIn,loggedInGroup}}>
         {props.children}
     </AuthContext.Provider>
 }
