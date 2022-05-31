@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
+import Footerdashboard from "../../../layouts/footerdashboard";
 import Sidenav from "../../../layouts/sidenav";
 import './studenthome.css';
 
@@ -26,6 +27,7 @@ export default function Documents(){
   </div>
 </center>
 </div>
+<Footerdashboard/>
 </div>
   </>
     )

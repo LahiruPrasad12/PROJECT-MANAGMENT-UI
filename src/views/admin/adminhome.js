@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
 import Sidenavadmin from "../../layouts/sidenavadmin";
 import '../dashboard/student-dashboard/studenthome.css';
+import Footerdashboard from "../../layouts/footerdashboard";
 
 export default function Adminhome() {
 
@@ -89,6 +90,7 @@ export default function Adminhome() {
                         </div>
                     </center>
                 </div>
+                <Footerdashboard/>
             </div>
         </>
     )
