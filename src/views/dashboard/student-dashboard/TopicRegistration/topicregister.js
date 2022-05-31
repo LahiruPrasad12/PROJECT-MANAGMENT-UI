@@ -1,11 +1,12 @@
 import React, {useContext, useState} from "react";
 import {Link} from 'react-router-dom';
-import Footerdashboard from "../../../layouts/footerdashboard";
-import Sidenav from "../../../layouts/sidenav";
-import './studenthome.css';
+import Footerdashboard from "../../../../layouts/footerdashboard";
+import Sidenav from "../../../../layouts/sidenav";
+import '../studenthome.css';
 import {Alert} from "react-bootstrap";
 import Button from "@mui/material/Button";
-import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../../../context/AuthContext";
+import RegisterTopicToSupervisor from "./models/RegisterTopicToSpuervisor";
 
 export default function Topicregister() {
     const [show, setShow] = useState(true);
@@ -59,6 +60,8 @@ export default function Topicregister() {
                             </div>
                         </Alert>
                     </div>
+
+                    <RegisterTopicToSupervisor/>
 
 
 
