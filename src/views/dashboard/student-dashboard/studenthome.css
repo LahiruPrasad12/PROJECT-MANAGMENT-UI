@@ -212,10 +212,7 @@ label #sidebar_btn:hover {
   
 }
 
-* {
-    box-sizing: border-box;
-    transition: 0.3s cubic-bezier(0.75, 0, 0.2, 1), color 0.3s ease;
-  }
+
   .rela-block {
     display: block;
     position: relative;
@@ -525,14 +522,6 @@ label #sidebar_btn:hover {
   .menu-links.sign-links {
     height: 0px;
   }
-  .container {
-    z-index: 1;
-    width: 92%;
-    max-width: 1126px;
-    background-color: #f4f4f4;
-    margin: 70px auto;
-    padding: 70px 0;
-  }
   .profile-card {
     width: calc(100% - 40px);
     padding-top: 100px;
@@ -721,7 +710,7 @@ label #sidebar_btn:hover {
     }
     .menu-content .sign-links {
       height: 64px;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid rgb(235, 0, 0);
     }
     .menu-card {
       height: 425px;
