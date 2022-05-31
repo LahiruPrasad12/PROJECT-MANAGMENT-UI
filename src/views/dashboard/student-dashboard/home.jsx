@@ -11,7 +11,6 @@ export default function Studenthome() {
 
     const [members, setMembers] = useState([]);
     useEffect(() => {
-        console.log('ava')
         const getMyGroup = async () => {
             const respond = (await groupAPI.myGroupMember()).data.data.filteredData
             console.log(respond)
