@@ -3,9 +3,9 @@ import {
     BrowserRouter as Router, Route,
 } from "react-router-dom";
 import StudentHome from '../views/dashboard/student-dashboard/home'
-import Documents from '../views/student/documents';
-import Groupregister from '../views/student/groupregister';
-import Topicregister from '../views/student/topicregister';
+import Documents from '../views/dashboard/student-dashboard/documents';
+import Groupregister from '../views/dashboard/student-dashboard/groupregister';
+import Topicregister from '../views/dashboard/student-dashboard/topicregister';
 // import SdentHome from '../views/student/studenthome'
 
 const AuthRoutes = () => {

@@ -1,25 +1,33 @@
-import React, {useContext, useState} from "react";
-import '../../landing_page/landingPagestyle.css';
-import Header from "../../layouts/header";
-import Footer from "../../layouts/footer";
+import React, {useContext, useEffect, useState} from "react";
+import '../../../landing_page/landingPagestyle.css';
+import Header from "../../../layouts/header";
+import Footer from "../../../layouts/footer";
 import {Alert} from "react-bootstrap";
 import Button from "@mui/material/Button";
-import studentAPI from '../../apis/modules/student'
-import AuthContext from "../../context/AuthContext";
-import WarningAlert from '../../alerts/warnings'
-import InfoAlert from '../../alerts/info'
-import {Tooltip} from "@mui/material";
+import studentAPI from '../../../apis/modules/student'
+import AuthContext from "../../../context/AuthContext";
+import WarningAlert from '../../../alerts/warnings'
+import InfoAlert from '../../../alerts/info'
+import {Snackbar, Tooltip} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
-import AddGroupMember from '../student/common/AddGroupMemberForm'
+import AddGroupMember from './common/AddGroupMemberForm'
+import ErrorToast from '../../../toast/error'
 
 export default function GroupRegister() {
+
+    const {loggedIn} = useContext(AuthContext);
+
+    useEffect(() => {
+        if (loggedIn.groupID) {
+            window.location = '/student/home'
+        }
+    })
+    const [showToast, setShowToast] = useState(false);
     const [show, setShow] = useState(true);
     const [memberRegisterState, setMemberRegisterState] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [name, setName] = useState('');
-    const {loggedIn} = useContext(AuthContext);
-
 
 
     //create group
@@ -29,19 +37,14 @@ export default function GroupRegister() {
                 name
             }
             setBtnLoading(true)
-            const respond = await studentAPI.createGroup(payload)
+            await studentAPI.createGroup(payload)
             setMemberRegisterState(false)
-            setBtnLoading(false)
+
         } catch (e) {
-            alert('error')
+            setShowToast(true)
         }
+        setBtnLoading(false)
     }
-
-
-
-    //expand column
-
-
     return (
         <>
             <Header/>
@@ -117,7 +120,7 @@ export default function GroupRegister() {
                                                 marginBottom: '10px',
                                                 marginLeft: '5px',
                                                 marginTop: '5px'
-                                            }} className='aa' data-bs-toggle="modal" data-bs-target="#addStudent"
+                                            }} data-bs-toggle="modal" data-bs-target="#addStudent"
                                                     onClick={createGroup}>
                                                 {btnLoading ? 'Registering...' : 'next'}
                                             </Button>
@@ -144,17 +147,24 @@ export default function GroupRegister() {
 
             {/*student add model*/}
             <div hidden={memberRegisterState} className="modal fade" id="addStudent" tabIndex="-1"
-                 aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+                 aria-labelledby="exampleModalLabel">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-body">
-                            <AddGroupMember/>
+                            <AddGroupMember rowNumber={4}/>
                         </div>
 
                     </div>
                 </div>
             </div>
+
+
+            {
+                showToast && (<>
+                        <ErrorToast message="This group name is already exists"/>
+                    </>
+                )
+            }
             <Footer/>
         </>
     )
