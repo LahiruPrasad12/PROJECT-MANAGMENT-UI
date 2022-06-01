@@ -13,7 +13,7 @@
   footer {
     background: white;
     display: table;
-    width: 100vw;
+    width: auto;
     padding-top: 5rem;
     min-height: calc(20vh - 0px);
     font-family: 'Arial', sans-serif;

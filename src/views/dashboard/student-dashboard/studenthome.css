@@ -65,7 +65,7 @@
 }
 
 .sideh{
-    margin-top: 60%
+    margin-top: 70%
 }
 
 .menusb {
@@ -121,7 +121,6 @@ label #sidebar_btn:hover {
 .content {
     width: auto;
     margin-top: 5%;
-    padding: 20px;
     margin-left: 250px;
     background: white;
     background-position: center;
@@ -351,10 +350,6 @@ label #sidebar_btn:hover {
   }
   .nav-div li:hover {
     color: #ec7c24;
-  }
-  .nav-links {
-    margin: 0;
-    width: 50px;
   }
   .sign-div {
     margin: 0px;

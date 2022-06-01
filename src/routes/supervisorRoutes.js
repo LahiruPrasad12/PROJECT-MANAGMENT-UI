@@ -6,9 +6,7 @@ import SupervisorHome from "../views/dashboard/supervisor-dashboard/supervisorHo
 const AuthRoutes = () => {
   return (
     <Router>
-      <Route exact path="/supervisor/home">
-        <SupervisorHome />
-      </Route>
+      <Route exact path="/supervisor/home"><SupervisorHome /></Route>
     </Router>
   );
 };
