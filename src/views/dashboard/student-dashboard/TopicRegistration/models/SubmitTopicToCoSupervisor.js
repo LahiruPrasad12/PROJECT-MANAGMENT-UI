@@ -60,27 +60,29 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function RegisterTopicToSupervisor() {
+export default function SubmitTopicToCoSupervisor(props) {
     const [open, setOpen] = React.useState(false);
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedSupervisor, setSelectedSupervisor] = useState('');
-    const [name, setName] = useState('');
+    const [selectedCoSupervisor, setSelectedCoSupervisor] = useState('');
     const [btnLoading, setBtnLoading] = useState(false);
 
     const [showSuccessToast, setSuccessShowToast] = useState(false);
     const [showErrorToast, setErrorShowToast] = useState(false);
 
-    const [category, setCategory] = useState([]);
-    const [supervisors, setSupervisors] = useState([]);
+    const [coSuperVisor, setCoSupervisor] = useState([]);
+
 
 
     useEffect(() => {
         const getDetails = async () => {
-            const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
-            setCategory(categoryRespond)
+            let payload = {
+                category_id: props.topic.category_id
+            }
+            let supervisorsRespond = (await topicAPI.getStaff(payload, 'Co-supervisor')).data.data.filteredData
+            setCoSupervisor(supervisorsRespond)
         }
         getDetails()
     }, [])
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -88,32 +90,24 @@ export default function RegisterTopicToSupervisor() {
         setOpen(false);
     };
 
-    const selectSupervisor = (event: setSelectedSupervisor) => {
-        setSelectedSupervisor(event.target.value);
-        console.log(selectedCategory)
+    const selectSupervisor = (event: selectedCoSupervisor) => {
+        setSelectedCoSupervisor(event.target.value);
+        console.log(selectedCoSupervisor)
     };
 
-    const selectCategory = async (event: selectedCategory) => {
-        setSelectedCategory(event.target.value);
-        const payload = {
-            category_id: event.target.value
-        }
-        let supervisorsRespond = (await topicAPI.getStaff(payload, 'supervisor')).data.data.filteredData
-        setSupervisors(supervisorsRespond)
 
-    };
-
-    const submitTopic = async () => {
+    const submitTopicToCoSupervisor = async () => {
         try {
             setBtnLoading(true)
             let payload = {
-                category_id: selectedCategory,
-                supervisorID: selectedSupervisor,
-                name: name
+                topic_id: props.topic._id,
+                co_supervisorID: selectedCoSupervisor,
             }
-            await topicAPI.submitTopicToSupervisor(payload)
+            await topicAPI.submitTopicToCoSupervisor(payload)
             setSuccessShowToast(true)
             setOpen(false);
+            window.location.reload(false);
+
         } catch (e) {
             setErrorShowToast(true)
         }
@@ -138,7 +132,7 @@ export default function RegisterTopicToSupervisor() {
             <Button variant="outlined" sx={{
                 float: 'right',
             }} onClick={handleClickOpen}>
-                Register My Topic
+                Submit My Topic to Co-supervisor
             </Button>
             <BootstrapDialog
                 onClose={handleClose}
@@ -148,50 +142,50 @@ export default function RegisterTopicToSupervisor() {
 
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    REGISTER OUR TOPIC TO SUPERVISOR
+                    SUBMIT OUR TOPIC TO CO-SUPERVISOR
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
                         <form>
                             <div class="row mt-2">
-                                <div class="col-md-6">
+                                {/*<div class="col-md-6">*/}
 
-                                    <FormControl loading fullWidth>
-                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
-                                            category</InputLabel>
-                                        <Select
-                                            size="small"
-                                            outlined
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={selectedCategory}
-                                            label="Age"
-                                            onChange={selectCategory}
+                                {/*    <FormControl loading fullWidth>*/}
+                                {/*        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your*/}
+                                {/*            category</InputLabel>*/}
+                                {/*        <Select*/}
+                                {/*            size="small"*/}
+                                {/*            outlined*/}
+                                {/*            labelId="demo-simple-select-label"*/}
+                                {/*            id="demo-simple-select"*/}
+                                {/*            value={selectedCategory}*/}
+                                {/*            label="Age"*/}
+                                {/*            onChange={selectCategory}*/}
 
-                                        >
-                                            {
-                                                category.map((element) => {
-                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
-                                                })
-                                            }
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                                <div class="col-md-6">
-                                    <FormControl fullWidth disabled={!supervisors}>
+                                {/*        >*/}
+                                {/*            {*/}
+                                {/*                category.map((element) => {*/}
+                                {/*                    return <MenuItem value={element._id}>{element.name}</MenuItem>*/}
+                                {/*                })*/}
+                                {/*            }*/}
+                                {/*        </Select>*/}
+                                {/*    </FormControl>*/}
+                                {/*</div>*/}
+                                <div class="col-md-12">
+                                    <FormControl fullWidth>
                                         <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
                                             professor</InputLabel>
                                         <Select
                                             size="small"
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={selectedSupervisor}
+                                            value={selectedCoSupervisor}
                                             label="Age"
                                             onChange={selectSupervisor}
                                         >
 
                                             {
-                                                supervisors.map((element) => {
+                                                coSuperVisor.map((element) => {
                                                     return <MenuItem value={element._id}>{element.name}</MenuItem>
                                                 })
                                             }
@@ -201,14 +195,6 @@ export default function RegisterTopicToSupervisor() {
                                     </FormControl>
                                 </div>
 
-                            </div>
-                            <div className="form-group mt-2">
-                                <label class="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>
-                                <textarea className="form-control" id=""
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}
-                                          onChange={(e) => {
-                                              setName(e.target.value)
-                                          }}/>
                             </div>
                             <br/>
                         </form>
@@ -220,11 +206,9 @@ export default function RegisterTopicToSupervisor() {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    {/*<Button autoFocus disabled={!selectedCategory || !selectedSupervisor || !name} onClick={submitTopic}>*/}
-                    {/*    Save changes*/}
-                    {/*</Button>*/}
                     <LoadingButton
-                        onClick={submitTopic}
+                        disabled={!selectedCoSupervisor}
+                        onClick={submitTopicToCoSupervisor}
                         endIcon={<SendIcon/>}
                         loading={btnLoading}
                         loadingPosition="end"
