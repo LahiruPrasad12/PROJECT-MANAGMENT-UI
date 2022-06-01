@@ -75,15 +75,18 @@ export default function RegisterTopicToSupervisor(props) {
     const [topic, setTopic] = useState([]);
 
 
-    useEffect(() => {
-        const getDetails = async () => {
-            const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
-            setCategory(categoryRespond)
-        }
-        getDetails()
-    }, [])
-    const handleClickOpen = () => {
+    // useEffect(() => {
+    //     const getDetails = async () => {
+    //         const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
+    //         setCategory(categoryRespond)
+    //     }
+    //     getDetails()
+    // }, [])
+
+    const handleClickOpen = async () => {
         setOpen(true);
+        const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
+        setCategory(categoryRespond)
     };
     const handleClose = () => {
         setOpen(false);
@@ -151,7 +154,7 @@ export default function RegisterTopicToSupervisor(props) {
 
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    REGISTER OUR TOPIC TO SUPERVISOR
+                    SUBMIT OUR TOPIC TO SUPERVISOR
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
@@ -227,6 +230,7 @@ export default function RegisterTopicToSupervisor(props) {
                     {/*    Save changes*/}
                     {/*</Button>*/}
                     <LoadingButton
+                        disabled={!name || !selectedSupervisor || !selectedCategory}
                         onClick={submitTopic}
                         endIcon={<SendIcon/>}
                         loading={btnLoading}

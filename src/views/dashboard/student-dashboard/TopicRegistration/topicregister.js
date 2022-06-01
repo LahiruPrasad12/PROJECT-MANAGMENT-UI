@@ -134,7 +134,7 @@ export default function Topicregister() {
                     {
                         topic && topic.state === 'supervisorAccept' && (
                             <div>
-                                <SetSupervisorTopicPendingWarning/>
+                                <SetSupervisorTopicAcceptSuccess/>
                                 <SubmitTopicToCoSupervisor topic={topic}/>
                             </div>
                         )

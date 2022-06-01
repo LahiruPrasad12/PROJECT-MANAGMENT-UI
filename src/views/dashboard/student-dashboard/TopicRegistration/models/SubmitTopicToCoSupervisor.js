@@ -70,21 +70,13 @@ export default function SubmitTopicToCoSupervisor(props) {
 
     const [coSuperVisor, setCoSupervisor] = useState([]);
 
-
-
-    useEffect(() => {
-        const getDetails = async () => {
-            let payload = {
-                category_id: props.topic.category_id
-            }
-            let supervisorsRespond = (await topicAPI.getStaff(payload, 'Co-supervisor')).data.data.filteredData
-            setCoSupervisor(supervisorsRespond)
-        }
-        getDetails()
-    }, [])
-
-    const handleClickOpen = () => {
+    const handleClickOpen = async () => {
         setOpen(true);
+        let payload = {
+            category_id: props.topic.category_id
+        }
+        let supervisorsRespond = (await topicAPI.getStaff(payload, 'Co-supervisor')).data.data.filteredData
+        setCoSupervisor(supervisorsRespond)
     };
     const handleClose = () => {
         setOpen(false);
