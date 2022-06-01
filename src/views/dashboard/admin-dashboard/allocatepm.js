@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
-import Sidenavadmin from "../../layouts/sidenavadmin";
-import '../dashboard/student-dashboard/studenthome.css';
-import Footerdashboard from "../../layouts/footerdashboard";
+import Sidenavadmin from "../../../layouts/sidenavadmin";
+import '../student-dashboard/studenthome.css';
+import Footerdashboard from "../../../layouts/footerdashboard";
 
 export default function Allocatepm() {
 
@@ -17,7 +17,7 @@ export default function Allocatepm() {
                         <p><Link to='/admin/home'>Admin</Link> / Allocate Panel Members</p>
                         <div style={{paddingTop: '5%'}} class="row">
                             <div class="col">
-                            <form action="#" method="get" id="searchForm" class="input-group">
+                            <form action="src/views/dashboard/admin-dashboard/allocatepm#" method="get" id="searchForm" class="input-group">
                                 <input type="search" class="form-control" name="search" placeholder="Search Groups..." 
                                     />
                                 <button type="button" style={{ borderRadius: '0px' }} class="btn btn-primary">

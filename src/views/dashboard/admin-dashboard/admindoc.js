@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
-import Footerdashboard from "../../layouts/footerdashboard";
-import Sidenav from "../../layouts/sidenavadmin";
-import '../dashboard/student-dashboard/studenthome.css';
+import Footerdashboard from "../../../layouts/footerdashboard";
+import Sidenav from "../../../layouts/sidenavadmin";
+import '../student-dashboard/studenthome.css';
 
 export default function Admindoc(){
 

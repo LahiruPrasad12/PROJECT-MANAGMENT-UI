@@ -5,12 +5,12 @@ import './studenthome.css';
 import groupAPI from "../../../apis/modules/group";
 import AddGroupMember from "./common/AddGroupMemberForm";
 import Footerdashboard from "../../../layouts/footerdashboard";
+import Button from "@mui/material/Button";
 
 export default function Studenthome() {
 
     const [members, setMembers] = useState([]);
     useEffect(() => {
-        console.log('ava')
         const getMyGroup = async () => {
             const respond = (await groupAPI.myGroupMember()).data.data.filteredData
             console.log(respond)
@@ -28,7 +28,12 @@ export default function Studenthome() {
                     <center>
                         <h1>GROUP DETAILS</h1>
                         <p>Student</p>
-                        <button style={{marginTop: '3%'}} className="btn btn-primary" hidden={members.length === 4} data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained" disableElevation>Add members</button>
+                        <Button className="btn btn-primary" hidden={members.length === 4} sx={{
+                            float: 'right',
+                            marginLeft:10,
+                            marginTop:-5
+                        }} data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained" disableElevation>Add
+                            members</Button>
                         <div style={{marginTop: '3%'}} class="row">
                             <div class="col">
                                 <table class="table">
