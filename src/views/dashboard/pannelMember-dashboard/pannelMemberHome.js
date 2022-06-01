@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Sidenav from "../../../layouts/sidenavcosupervisor";
-import "./co-supervisorHome.css";
+import PannelMemberSidenav from "../../../layouts/sidenavpannelmember";
+import "./pannelMemberHome.css";
 
 export default function SupervisorHome() {
   return (
     <>
-      <Sidenav />
+      <PannelMemberSidenav />
       <div class="content">
         <div class="container">
           <center>
             <h1>TOPIC STATUS UPDATE</h1>
-            <p>Co-Supervisor</p>
+            <p>Pannel-Member</p>
             <div style={{ marginTop: "4%" }} class="row">
               <form action="#" method="get" id="searchForm" class="input-group">
                 <input

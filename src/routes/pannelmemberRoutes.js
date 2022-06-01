@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import SupervisorHome from "../views/dashboard/supervisor-dashboard/supervisorHome";
+import PannelMemberHome from "../views/dashboard/pannelMember-dashboard/pannelMemberHome";
 
 const AuthRoutes = () => {
   return (
     <Router>
-      <Route exact path="/supervisor/home"><SupervisorHome /></Route>
+      <Route exact path="/pannelmember/home">
+        <PannelMemberHome />
+      </Route>
     </Router>
   );
 };

@@ -8,6 +8,7 @@ import {
     BrowserRouter as Router,
     Route,
 } from "react-router-dom";
+import Profile from '../layouts/profile';
 
 const UserRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const UserRoutes = () => {
             <Route exact path = "/login"><Login/></Route>
             <Route exact path = "/register"><StudentRegister/></Route>
             <Route exact path = "/staff-register"><StaffRegister/></Route>
+            <Route exact path = "/profile"><Profile/></Route>
             <Route exact path = "/test"><Test/></Route>
         </Router>
     );
