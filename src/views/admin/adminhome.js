@@ -32,6 +32,7 @@ export default function Adminhome() {
         { field: 'email', headerName: 'Email', width: 300 },
         { field: 'role', headerName: 'Role', width: 150 },
         { field: 'active', headerName: 'Active', width: 90 },
+        { field: 'action', headerName: 'Action', width: 150 },
 
     ];
 
