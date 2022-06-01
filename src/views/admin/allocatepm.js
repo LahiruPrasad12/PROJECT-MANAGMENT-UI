@@ -15,7 +15,7 @@ export default function Allocatepm() {
                     <center>
                         <h1>ALLOCATE PANEL MEMBERS</h1>
                         <p><Link to='/admin/home'>Admin</Link> / Allocate Panel Members</p>
-                        <div style={{marginTop: '4%'}} class="row">
+                        <div style={{paddingTop: '5%'}} class="row">
                             <div class="col">
                             <form action="#" method="get" id="searchForm" class="input-group">
                                 <input type="search" class="form-control" name="search" placeholder="Search Groups..." 

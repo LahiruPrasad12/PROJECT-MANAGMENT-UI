@@ -120,7 +120,7 @@ label #sidebar_btn:hover {
 
 .content {
     width: auto;
-    margin-top: 5%;
+    padding-top: 80px;
     margin-left: 250px;
     background: white;
     background-position: center;
