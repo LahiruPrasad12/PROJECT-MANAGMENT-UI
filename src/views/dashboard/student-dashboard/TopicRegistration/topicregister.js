@@ -13,11 +13,12 @@ import topicAPI from "../../../../apis/modules/topic";
 import Alert from "@mui/material/Alert";
 import {AlertTitle} from "@mui/lab";
 import SuccessAlert from '../../../../alerts/success'
-
+import ErrorAlerts from '../../../../alerts/error'
 export default function TopicRegister() {
 
     const {loggedIn, loggedInGroup} = useContext(AuthContext);
     const [topic, setTopic] = useState([]);
+    const [rejectTopic, setReject] = useState([]);
 
     // const getMyTopic = async () => {
     //     const ourTopicRespond = (await topicAPI.getOurTopic()).data.data.filteredData
@@ -27,8 +28,17 @@ export default function TopicRegister() {
     useEffect(() => {
         const getDetails = async () => {
             const ourTopicRespond = (await topicAPI.getOurTopic()).data.data.filteredData
-            setTopic(ourTopicRespond[0])
-            console.log(ourTopicRespond)
+            let result = ourTopicRespond.filter((e)=>e.state !== 'decline')
+            let rejectResult = ourTopicRespond.filter((e)=>e.state === 'decline')
+            console.log(rejectResult)
+
+            if(rejectResult.length>0){
+                let index = rejectResult.length-1
+                setReject(rejectResult[index])
+            }
+
+            setTopic(result[0])
+
         }
         getDetails()
     }, [])
@@ -98,6 +108,17 @@ export default function TopicRegister() {
             </div>
         )
     }
+    const SetPanelTopicAcceptSuccess = () => {
+        return (
+            <div>
+                <Alert severity="success">
+                    <AlertTitle>Hey, nice to see you {loggedInGroup.name}</AlertTitle>
+                    Congrats!! your topic is accept by co panel. Now you can continue your research. Good luck {loggedInGroup.name}
+                </Alert>
+                <hr/>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -105,8 +126,12 @@ export default function TopicRegister() {
             <div class="contents">
                 <div class="container">
 
-                    <div hidden={topic} style={{marginTop: '-12px'}}>
+                    {rejectTopic}
+                    <div hidden={topic || rejectTopic} style={{marginTop: '-12px'}}>
                         <SuccessAlert/>
+                    </div>
+                    <div hidden={!rejectTopic.name} style={{marginTop: '-12px'}}>
+                        <ErrorAlerts groupName={loggedInGroup.name} topicName={rejectTopic.name}/>
                     </div>
 
                     {
@@ -160,6 +185,16 @@ export default function TopicRegister() {
                                 <SetSupervisorTopicAcceptSuccess/>
                                 <SetCoSupervisorTopicAcceptSuccess/>
                                 <SetPanelTopicPendingWarning/>
+
+                            </div>
+                        )
+                    }
+                    {
+                        topic && topic.state === 'approved' && (
+                            <div>
+                                <SetSupervisorTopicAcceptSuccess/>
+                                <SetCoSupervisorTopicAcceptSuccess/>
+                                <SetPanelTopicAcceptSuccess/>
 
                             </div>
                         )
