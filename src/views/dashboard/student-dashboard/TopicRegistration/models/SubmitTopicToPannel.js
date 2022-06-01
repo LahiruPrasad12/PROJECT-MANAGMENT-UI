@@ -8,12 +8,13 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import topicAPI from "../../../../../apis/modules/topic";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from '@mui/icons-material/Send';
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
+import {useDropzone} from "react-dropzone";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -55,12 +56,73 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function SubmitTopicToPanel(props) {
-    const [open, setOpen] = React.useState(false);
+    const [openned, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = useState(false);
 
     const [showSuccessToast, setSuccessShowToast] = useState(false);
     const [showErrorToast, setErrorShowToast] = useState(false);
 
+
+    const [files, setFiles] = useState([]);
+
+    const baseStyle = {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "90px",
+        borderWidth: 2,
+        borderRadius: 2,
+        borderColor: "#A9A9B0",
+        borderStyle: "dashed",
+        marginBottom: "20px",
+        backgroundColor: "#ffffff",
+        color: "default",
+        outline: "none",
+        transition: "border .24s ease-in-out",
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const activeStyle = {
+        borderColor: "#2196f3",
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const acceptStyle = {
+        borderColor: "#00e676",
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const rejectStyle = {
+        borderColor: "#ff1744",
+    };
+
+    //This is used to drag and drop image
+    const {acceptedFiles, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, open} = useDropzone({
+        onDrop: (acceptedFiles) => {
+            setFiles(
+                acceptedFiles.map((file) =>
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file),
+                    })
+                )
+            );
+        },
+    });
+
+
+    //This is used style drag and drop image
+    const style = useMemo(
+        () => ({
+            ...baseStyle,
+            ...(isDragActive ? activeStyle : {}),
+            ...(isDragAccept ? acceptStyle : {}),
+            ...(isDragReject ? rejectStyle : {}),
+        }),
+        [baseStyle, isDragActive, activeStyle, isDragAccept, acceptStyle, isDragReject, rejectStyle]
+    );
+    const filepath = acceptedFiles.map((file) => (
+        <li key={file.name}>
+            {file.name} - {file.size} bytes
+        </li>
+    ));
 
 
     const handleClose = () => {
@@ -70,10 +132,12 @@ export default function SubmitTopicToPanel(props) {
     const submitTopicToPanel = async () => {
         try {
             setBtnLoading(true)
-            let payload = {
-                topic_id: props.topic._id,
-            }
-            await topicAPI.submitTopicToCoSupervisor(payload)
+
+            let formdata = new FormData();
+            formdata.append("doc", acceptedFiles[0]);
+            formdata.append("topic_id", props.topic._id);
+            formdata.append("panel_member_id", '6297a8beced0c6081c2fa759');
+            await topicAPI.submitTopicToPanel(formdata)
             setSuccessShowToast(true)
             setOpen(false);
             window.location.reload(false);
@@ -84,7 +148,7 @@ export default function SubmitTopicToPanel(props) {
         setBtnLoading(false)
     }
 
-    const handleClickOpen = ()=>{
+    const handleClickOpen = () => {
         setOpen(true)
     }
 
@@ -112,7 +176,7 @@ export default function SubmitTopicToPanel(props) {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 disableEscapeKeyDown={true}
-                open={open}
+                open={openned}
 
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
@@ -122,13 +186,26 @@ export default function SubmitTopicToPanel(props) {
                     <Typography gutterBottom>
                         <form>
                             <div className="form-group mt-2">
+                                <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Panel
+                                    member</label>
+                                <input className="form-control" id="" disabled={true}
+                                       placeholder="Enter Your Topic Name" required value={props.topic.name}/>
+                            </div>
+                            <div className="form-group mt-2">
                                 <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic
                                     Name</label>
                                 <textarea className="form-control" id="" disabled={true}
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}} value={props.topic.name}/>
+                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}
+                                          value={props.topic.name}/>
                             </div>
                             <div className="form-group mt-2">
+                                <div hidden={filepath.length > 0} {...getRootProps({style})}>
+                                    <input {...getInputProps()} />
+                                    <p>Drag 'n' drop your image file here, or click to select files</p>
+                                </div>
 
+                                <h4>File Details</h4>
+                                <ul>{filepath}</ul>
                             </div>
                             <br/>
                         </form>
