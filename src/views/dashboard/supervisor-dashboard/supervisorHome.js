@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-
-import Sidenav from "../../../layouts/sidenavsupervisor";
-import "./supervisorHome.css";
-
-
-export default function SupervisorHome() {
-  return (
-    <>
-      <Sidenav />
-      <div class="content">
-        <div class="container">
-          <center></center>
-        </div>
-      </div>
-    </>
-  );
-}
-=======
 import React, {useContext} from "react";
 import {Link} from 'react-router-dom';
 import Sidenavsupervisor from "../../../layouts/sidenavsupervisor";
@@ -122,4 +101,3 @@ export default function Supervisorhome() {
         </>
     )
 }
->>>>>>> 96e96b130964e2b54b861a70c74ee6fcca5c76e4

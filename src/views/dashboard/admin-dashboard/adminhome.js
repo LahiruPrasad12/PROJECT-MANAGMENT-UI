@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import Sidenavadmin from "../../layouts/sidenavadmin";
-import '../dashboard/student-dashboard/studenthome.css';
-import Footerdashboard from "../../layouts/footerdashboard";
-import admin from '../../apis/modules/admin'
+import Sidenavadmin from "../../../layouts/sidenavadmin";
+import '../../dashboard/student-dashboard/studenthome.css';
+import Footerdashboard from "../../../layouts/footerdashboard";
+import admin from '../../../apis/modules/admin'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 
