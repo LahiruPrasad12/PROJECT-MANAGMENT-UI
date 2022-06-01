@@ -11,7 +11,7 @@ import SubmitTopicToCoSupervisor from "./models/SubmitTopicToCoSupervisor";
 import categoryAPI from "../../../../apis/modules/topicCategory";
 import topicAPI from "../../../../apis/modules/topic";
 
-export default function Topicregister() {
+export default function TopicRegister() {
     const [show, setShow] = useState(true);
     const {loggedIn, loggedInGroup} = useContext(AuthContext);
     const [topic, setTopic] = useState([]);
@@ -39,6 +39,20 @@ export default function Topicregister() {
                     <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
                     <p>
                         Your submission is still pending on your supervisor. Please be a good patient until respond your
+                        supervisor
+                    </p>
+                </Alert>
+                <hr/>
+            </div>
+        )
+    }
+    const SetCoSupervisorTopicPendingWarning = () => {
+        return (
+            <div>
+                <Alert variant="warning">
+                    <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
+                    <p>
+                        Your submission is accept by supervisor. But it still pending on your co-supervisor. Please be a good patient until respond your
                         supervisor
                     </p>
                 </Alert>
@@ -136,6 +150,15 @@ export default function Topicregister() {
                             <div>
                                 <SetSupervisorTopicAcceptSuccess/>
                                 <SubmitTopicToCoSupervisor topic={topic}/>
+                            </div>
+                        )
+                    }
+
+                    {
+                        topic && topic.state === 'co_supervisorPending' && (
+                            <div>
+                                <SetSupervisorTopicAcceptSuccess/>
+                                <SetCoSupervisorTopicPendingWarning/>
                             </div>
                         )
                     }
