@@ -32,29 +32,43 @@ export default function TopicRegister() {
     }, [])
 
 
-    const SetSupervisorTopicPendingWarning = () => {
+    // const SetSupervisorTopicPendingWarning = () => {
+    //     return (
+    //         <div>
+    //             <hr/>
+    //             <Alert variant="warning">
+    //                 <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
+    //                 <p>
+    //                     Your submission is still pending on your supervisor. Please be a good patient until respond your
+    //                     supervisor
+    //                 </p>
+    //             </Alert>
+    //             <hr/>
+    //         </div>
+    //     )
+    // }
+    // const SetCoSupervisorTopicPendingWarning = () => {
+    //     return (
+    //         <div>
+    //             <Alert variant="warning">
+    //                 <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
+    //                 <p>
+    //                     Your submission is accept by supervisor. But it still pending on your co-supervisor. Please be a good patient until respond your
+    //                     supervisor
+    //                 </p>
+    //             </Alert>
+    //             <hr/>
+    //         </div>
+    //     )
+    // }
+    const SetPanelTopicPendingWarning = () => {
         return (
             <div>
-                <hr/>
                 <Alert variant="warning">
                     <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
                     <p>
-                        Your submission is still pending on your supervisor. Please be a good patient until respond your
-                        supervisor
-                    </p>
-                </Alert>
-                <hr/>
-            </div>
-        )
-    }
-    const SetCoSupervisorTopicPendingWarning = () => {
-        return (
-            <div>
-                <Alert variant="warning">
-                    <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
-                    <p>
-                        Your submission is accept by supervisor. But it still pending on your co-supervisor. Please be a good patient until respond your
-                        supervisor
+                        Your submission is accept by cor supervisor. But it still pending on your panel. Please be a good patient until respond your
+                        panel
                     </p>
                 </Alert>
                 <hr/>
@@ -80,7 +94,6 @@ export default function TopicRegister() {
     const SetCoSupervisorTopicAcceptSuccess = () => {
         return (
             <div>
-                <hr/>
                 <Alert variant="success">
                     <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
                     <p>
@@ -98,34 +111,6 @@ export default function TopicRegister() {
             <Sidenav/>
             <div class="contents">
                 <div class="container">
-                    {/*<center>*/}
-                    {/*    <h1>TOPIC REGISTER</h1>*/}
-                    {/*    <p><Link to='/student/home'>Student</Link> / Topic Register</p></center>*/}
-                    {/*<div style={{marginTop: '5%'}} class="row">*/}
-                    {/*    <div class="col">*/}
-                    {/*        <div style={{paddingTop: '5%', paddingLeft: '5%', paddingRight: '5%', paddingBottom: '3%'}}*/}
-                    {/*             className="card">*/}
-                    {/*            <h4 style={{textAlign: 'center', fontWeight: 'bold'}}>Register Your Topic</h4>*/}
-                    {/*            <br/>*/}
-                    {/*            <form>*/}
-                    {/*                <div class="form-group">*/}
-                    {/*                    <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>*/}
-                    {/*                    <input type="text" class="form-control" id=""*/}
-                    {/*                           placeholder="Enter Your Topic Name" required/>*/}
-                    {/*                </div>*/}
-                    {/*                <div class="form-group">*/}
-                    {/*                    <label style={{fontWeight: 'bold', color: '#5A5A5A'}}>Document Upload</label>*/}
-                    {/*                    <input style={{width: '50%'}} type="file" class="form-control" id=""*/}
-                    {/*                           placeholder="Enter Your Topic Name" required/>*/}
-                    {/*                </div>*/}
-                    {/*                <br/>*/}
-                    {/*                <center>*/}
-                    {/*                    <button type="submit" class="btn btn-primary">Register Topic</button>*/}
-                    {/*                </center>*/}
-                    {/*            </form>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
 
                     <div hidden={topic} style={{marginTop: '-12px'}}>
                         <Alert variant="success">
@@ -185,6 +170,16 @@ export default function TopicRegister() {
                                 <SetSupervisorTopicAcceptSuccess/>
                                 <SetCoSupervisorTopicAcceptSuccess/>
                                 <SubmitTopicToPanel topic={topic}/>
+                            </div>
+                        )
+                    }
+                    {
+                        topic && topic.state === 'pane_member_pending' && (
+                            <div>
+                                <SetSupervisorTopicAcceptSuccess/>
+                                <SetCoSupervisorTopicAcceptSuccess/>
+                                <SetPanelTopicPendingWarning/>
+
                             </div>
                         )
                     }
