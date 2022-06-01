@@ -84,6 +84,10 @@ export default function SubmitTopicToPanel(props) {
         setBtnLoading(false)
     }
 
+    const handleClickOpen = ()=>{
+        setOpen(true)
+    }
+
     return (
         <div>
             {
