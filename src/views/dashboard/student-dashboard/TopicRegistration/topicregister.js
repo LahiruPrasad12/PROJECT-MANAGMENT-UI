@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import AuthContext from "../../../../context/AuthContext";
 import SubmitTopicToSupervisor from "./models/SubmitTopicToSpuervisor";
 import SubmitTopicToCoSupervisor from "./models/SubmitTopicToCoSupervisor";
+import SubmitTopicToPanel from "./models/SubmitTopicToPannel";
 import categoryAPI from "../../../../apis/modules/topicCategory";
 import topicAPI from "../../../../apis/modules/topic";
 
@@ -69,6 +70,21 @@ export default function TopicRegister() {
                     <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
                     <p>
                         Congrats!! your topic is accept by supervisor. now submit it to ce-supervisor by clicking below
+                        button
+                    </p>
+                </Alert>
+                <hr/>
+            </div>
+        )
+    }
+    const SetCoSupervisorTopicAcceptSuccess = () => {
+        return (
+            <div>
+                <hr/>
+                <Alert variant="success">
+                    <Alert.Heading>Hey, nice to see you {loggedInGroup.name}</Alert.Heading>
+                    <p>
+                        Congrats!! your topic is accept by co supervisor. now submit it to panel members by clicking below
                         button
                     </p>
                 </Alert>
@@ -159,6 +175,16 @@ export default function TopicRegister() {
                             <div>
                                 <SetSupervisorTopicAcceptSuccess/>
                                 <SetCoSupervisorTopicPendingWarning/>
+                            </div>
+                        )
+                    }
+
+                    {
+                        topic && topic.state === 'co_supervisorAccept' && (
+                            <div>
+                                <SetSupervisorTopicAcceptSuccess/>
+                                <SetCoSupervisorTopicAcceptSuccess/>
+                                <SubmitTopicToPanel topic={topic}/>
                             </div>
                         )
                     }

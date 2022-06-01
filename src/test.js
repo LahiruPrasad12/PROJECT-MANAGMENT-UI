@@ -12,8 +12,7 @@ export default function DataGridProDemo() {
     return (
         <div style={{ height: 520, width: '100%' }}>
             <DataGridPro
-                {...data}
-                loading={data.rows.length === 0}
+                loading={true}
                 rowHeight={38}
                 checkboxSelection
                 disableSelectionOnClick
