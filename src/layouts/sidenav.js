@@ -66,12 +66,12 @@ export default function Sidenav() {
                     <Link to='/student/topicregister'>
                         <div className="menusb"><i class="fas fa-book"></i><span>Topic Register</span></div>
                     </Link>
-                    <Link to=''>
-                        <div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div>
-                    </Link>
-                    <Link to=''>
-                        <div className="menusb"><i class="fas fa-th"></i><span>Co-Supervisor</span></div>
-                    </Link>
+                    {/*<Link to=''>*/}
+                    {/*    <div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div>*/}
+                    {/*</Link>*/}
+                    {/*<Link to=''>*/}
+                    {/*    <div className="menusb"><i class="fas fa-th"></i><span>Co-Supervisor</span></div>*/}
+                    {/*</Link>*/}
                     <Link to='/student/document'>
                         <div className="menusb"><i class="fas fa-file-alt"></i><span>Documents</span></div>
                     </Link>
