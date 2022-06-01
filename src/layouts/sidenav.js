@@ -17,7 +17,7 @@ export default function Sidenav() {
 
     return (
         <>
-        <div class="row" style={{marginTop: '2%'}}>
+        <div class="row" style={{marginLeft: '0%', marginRight: '0%', marginTop: '2%'}}>
         <div className="col-6 col-md-2">
         </div>
         <div className="col-12 col-md-9">
