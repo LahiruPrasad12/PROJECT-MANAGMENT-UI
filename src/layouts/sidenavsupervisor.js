@@ -27,9 +27,9 @@ export default function Sidenavsupervisor(){
                 </div>
                 <ul class="floated right nav-div sign-div">
                     <li class="rela-inline">
-                    <IconButton >
+                    <Link to='/profile'><IconButton >
                       <Avatar alt="Remy Sharp" src="" />
-                    </IconButton>
+                    </IconButton></Link>
                   </li>
                     <li class="rela-inline" onClick={logout}>Logout</li>
                 </ul>
