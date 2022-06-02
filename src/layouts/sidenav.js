@@ -18,46 +18,33 @@ export default function Sidenav() {
 
     return (
         <>
-            <div class="row" style={{marginTop: '2%'}}>
-                <div className="col-6 col-md-2">
+            <div class="row" style={{marginLeft: '0%', marginRight: '0%', marginTop: '2%'}}>
+        <div className="col-6 col-md-2">
+        </div>
+        <div className="col-12 col-md-9">
+            <div class="nav-bar">
+            <div class="horz-center nav-container">
+                <div class="floated left nav-div sign-div" >
+                  <Link to='/'><img style={{width: 'auto', height: '55%'}} src="https://i.postimg.cc/B6N12sKm/SLIIT.pnghttps://i.postimg.cc/B6N12sKm/SLIIT.png"></img></Link>
                 </div>
-                <div className="col-12 col-md-9">
-                    <div class="nav-bar">
-                        <div class="horz-center nav-container">
-                            <div class="floated left nav-div sign-div">
-                                <Link to='/'><img style={{width: 'auto', height: '58%'}}
-                                                  src="https://i.postimg.cc/B6N12sKm/SLIIT.pnghttps://i.postimg.cc/B6N12sKm/SLIIT.png"></img></Link>
-                            </div>
-                            <ul class="floated right nav-div sign-div">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h6 style={{
-                                            marginTop: '15px',
-                                            fontSize: '18px',
-                                            color: 'black'
-                                        }}>{loggedIn.name}</h6>
-                                        <h6 style={{marginTop: '-8px', fontSize: '12px'}}>{loggedIn.role}</h6>
-                                    </div>
-                                    <div className="col-md-5" style={{marginTop: '10px'}}>
-
-                                        <Avatar alt="Travis Howard" src={Image}/>
-
-                                    </div>
-                                    {/*<div className="col-md-2">*/}
-                                    {/*    <li className="rela-inline" onClick={logout}>Logout</li>*/}
-                                    {/*</div>*/}
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <ul class="floated right nav-div sign-div">
+                    <li class="rela-inline">
+                    <Link to='/profile'><IconButton >
+                      <Avatar alt="Remy Sharp" src="" />
+                    </IconButton></Link>
+                  </li>
+                    <li class="rela-inline" onClick={logout}>Logout</li>
+                </ul>
             </div>
+          </div>
+          </div>
+          </div>
 
             <div class="sidebar">
-                <div className="sideh"></div>
-                <div class="profile_info" style={{marginTop: '-40%'}}>
-                    <h4>Welcome</h4>
-                    <h5>{loggedInGroup.name}</h5>
+              <div className="sideh"></div>
+              <div class="profile_info">
+                <h4>Welcome</h4>
+                <h5>{loggedIn.name}</h5>
                 </div>
                 <div style={{marginTop: '-30px'}}>
                     <Link to='/student/home'>

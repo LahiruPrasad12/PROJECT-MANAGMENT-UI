@@ -13,18 +13,51 @@ export default function Submissionsst(){
 <div  class="container">
 <center>
     <h1>SUBMISSIONS</h1>
-    <p><Link to='/student/home'>Student</Link> / Documents</p>
-  <div style={{marginTop: '12%'}} class="row">
-    <div class="col">
-    <div style={{paddingTop: '3%', paddingLeft: '5%', paddingRight: '5%', paddingBottom: '3%'}} className="card">
-      <h4>Download Template</h4>
-      <label style={{paddingBottom: '3%'}} class="form-label">(Click to download template)</label>
-      <button style={{borderRadius: '0'}} type="button" class="btn btn-primary btn-lg">Download</button>
-      <br/>
-    </div>
-    </div>
-   
-  </div>
+    <p><Link to='/student/home'>Student</Link> / Submissions</p>
+    <div class="row" style={{paddingTop: '5%'}}>
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="card-counter primary" style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
+                <p class="numbers" style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Report Submission</p>
+                <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                <button type="button" class="btn btn-outline-light">View</button>
+            </div>
+        </div> 
+    </div> 
 </center>
 </div>
 <Footerdashboard/>
