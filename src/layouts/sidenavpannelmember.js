@@ -37,7 +37,7 @@ export default function Sidenav() {
             <span>Topic Submissions</span>
           </div>
         </Link>
-        <Link to="">
+        <Link to="/pannelmember/presentationsEvaluation">
           <div className="menusb">
             <i class="fas fa-book"></i>
             <span>Presentations</span>
