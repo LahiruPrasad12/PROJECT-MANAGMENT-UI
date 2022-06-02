@@ -1,9 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CosupervisorAPI from "../../../apis/modules/cosupervisor";
 import Sidenav from "../../../layouts/sidenavcosupervisor";
 import "./co-supervisorHome.css";
 
-export default function SupervisorHome() {
+export default function CoSupervisorHome() {
+  const [request, setRequest] = useState([]);
+  useEffect(() => {
+    const getMyRequest = async () => {
+      const respond = (await CosupervisorAPI.getmyRequest()).data.data.Respond;
+      setRequest(respond);
+      console.log(respond);
+    };
+    getMyRequest();
+  }, []);
+  const Updatestatus = (event, element) => {
+    console.log(element);
+    if (event.target.value == 1) {
+      let payload = {
+        topic_id: element._id,
+        status: "approved",
+      };
+      CosupervisorAPI.acceptRequest(payload);
+    } else {
+      let payload = {
+        topic_id: element._id,
+        status: "decline",
+      };
+      CosupervisorAPI.declineRequest(payload);
+    }
+  };
   return (
     <>
       <Sidenav />
@@ -52,134 +78,62 @@ export default function SupervisorHome() {
                   </thead>
                   <br />
                   <tbody style={{ textAlign: "center" }}>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    {request.map((element, index) => {
+                      return (
+                        <tr>
+                          <th scope="row">{index + 1}</th>
+                          <td>{element.groupID}</td>
+                          <td>{element.name}</td>
+                          <td>
+                            <select
+                              className="btn btn-light dropdown-toggle"
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                              onChange={(e) => {
+                                Updatestatus(e, element);
+                              }}
+                            >
+                              <option
+                                style={{
+                                  color: "orange",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                Pending
+                              </option>
+                              <option
+                                style={{
+                                  color: "green",
+                                  fontWeight: "bold",
+                                }}
+                                value={1}
+                              >
+                                Accept
+                              </option>
+                              <option
+                                style={{
+                                  color: "red",
+                                  fontWeight: "bold",
+                                }}
+                                value={2}
+                              >
+                                Reject
+                              </option>
+                            </select>
+                            <button
+                              style={{
+                                marginLeft: "3%",
+                              }}
+                              type="button"
+                              class="btn btn-success btn-sm"
+                            >
+                              <i class="fas fa-sync"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
                 <br />

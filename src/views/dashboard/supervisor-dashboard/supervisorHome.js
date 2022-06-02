@@ -80,10 +80,10 @@ export default function Supervisorhome() {
                   </thead>
                   <br />
                   <tbody style={{ textAlign: "center" }}>
-                    {request.map((element) => {
+                    {request.map((element, index) => {
                       return (
                         <tr>
-                          <th scope="row">1</th>
+                          <th scope="row">{index + 1}</th>
                           <td>{element.groupID}</td>
                           <td>{element.name}</td>
                           <td>
