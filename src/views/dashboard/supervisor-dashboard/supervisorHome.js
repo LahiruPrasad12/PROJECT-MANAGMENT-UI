@@ -143,7 +143,6 @@ export default function Supervisorhome() {
             </div>
           </center>
         </div>
-        <Footerdashboard />
       </div>
     </>
   );

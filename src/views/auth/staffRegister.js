@@ -42,7 +42,7 @@ const names = [
 export default function StaffRegister() {
     const [error, setError] = useState("");
     const [btnLoading, setBtnLoading] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [category, setCategory] = useState([]);
 
 
@@ -57,14 +57,7 @@ export default function StaffRegister() {
 
 
     //get selected name to store in selectedCategory variable
-    const handleChange = (event: SelectChangeEvent<typeof selectedCategory>) => {
-        const {
-            target: {value},
-        } = event;
-        setSelectedCategory(
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
+
 
 
     const register = async (data) => {
@@ -74,7 +67,7 @@ export default function StaffRegister() {
                 name: data.name,
                 email: data.email,
                 password: data.password, passwordConfirm: data.passwordConfirm,
-                researchFileId: selectedCategory[0],
+                researchFileId: selectedCategory,
                 role:'staff'
             }
             await auth.register(payload)
@@ -86,6 +79,10 @@ export default function StaffRegister() {
         setBtnLoading(false)
     }
 
+    const selectCategory = (event: selectedCategory) => {
+        setSelectedCategory(event.target.value);
+        console.log(selectedCategory)
+    };
     return (
         <>
             <head>
@@ -137,37 +134,24 @@ export default function StaffRegister() {
                                                         <p id={"login-error"}
                                                            className="text-danger">{errors.name}</p> : null}
                                                 </div>
-                                                <FormControl sx={{width: 325, height: -5, marginBottom: 2}}>
-                                                    <InputLabel id="demo-multiple-chip-label">Select
-                                                        category</InputLabel>
+                                                <FormControl fullWidth>
+                                                    <InputLabel sx={{ marginTop: -1 }} id="demo-simple-select-label">Select your category</InputLabel>
                                                     <Select
-                                                        labelId="demo-multiple-chip-label"
-                                                        id="demo-multiple-chip"
+                                                        size="small"
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
                                                         value={selectedCategory}
-                                                        onChange={handleChange}
-                                                        input={<OutlinedInput label="Select category"/>}
-                                                        required={true}
-                                                        renderValue={(selected) => (
-                                                            <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-                                                                {selected.map((value) => (
-                                                                    <Chip key={value} label={value}/>
-                                                                ))}
-                                                            </Box>
-                                                        )}
-                                                        MenuProps={MenuProps}
+                                                        label="Age"
+                                                        onChange={selectCategory}
                                                     >
-                                                        {category.map((name) => (
-                                                            <MenuItem
-                                                                key={name._id}
-                                                                value={name.name}
-                                                                // style={getStyles(name, personName, theme)}
-                                                            >
-                                                                {name.name}
-                                                            </MenuItem>
-                                                        ))}
+                                                        {
+                                                            category.map((element)=>{
+                                                               return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                            })
+                                                        }
                                                     </Select>
                                                 </FormControl>
-                                                <div>
+                                                <div class="mt-4">
                                                     <Field type="email" name="email" id="email" class="form-control"
                                                            placeholder="Email address"/>
                                                     {errors.email && touched.email ? <p id={"login-error"}

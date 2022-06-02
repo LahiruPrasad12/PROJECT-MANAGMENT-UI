@@ -5,7 +5,7 @@ import {
 import StudentHome from '../views/dashboard/student-dashboard/home'
 import Documents from '../views/dashboard/student-dashboard/documents';
 import Groupregister from '../views/dashboard/student-dashboard/groupregister';
-import Topicregister from '../views/dashboard/student-dashboard/topicregister';
+import Topicregister from '../views/dashboard/student-dashboard/TopicRegistration/topicregister';
 // import SdentHome from '../views/student/studenthome'
 
 const AuthRoutes = () => {
