@@ -27,9 +27,9 @@ export default function Sidenavadmin(){
                 </div>
                 <ul class="floated right nav-div sign-div">
                     <li class="rela-inline">
-                    <IconButton >
+                    <Link to='/profile'><IconButton >
                       <Avatar alt="Remy Sharp" src="" />
-                    </IconButton>
+                    </IconButton></Link>
                   </li>
                     <li class="rela-inline" onClick={logout}>Logout</li>
                 </ul>
@@ -46,6 +46,7 @@ export default function Sidenavadmin(){
             </div>
     <Link to='/admin/home'><div className="menusb"><i class="fas fa-user-friends"></i><span>User Details</span></div></Link>
     <Link to='/admin/allocatepm'><div className="menusb"><i class="fas fa-user-alt"></i><span>Allocate Panel</span></div></Link>
+    <Link to='/admin/submissions'><div className="menusb"><i class="fas fa-calendar-check"></i><span>Submissions</span></div></Link>
     <Link to='/admin/doc'><div className="menusb"><i class="fas fa-cloud-upload-alt"></i><span>Documents</span></div></Link>
 </div>
   </>

@@ -66,6 +66,9 @@ export default function Sidenav() {
                     <Link to='/student/topicregister'>
                         <div className="menusb"><i class="fas fa-book"></i><span>Topic Register</span></div>
                     </Link>
+                    <Link to='/student/submissionst'>
+                        <div className="menusb"><i class="fas fa-calendar-check"></i><span>Submissions</span></div>
+                    </Link>
                     {/*<Link to=''>*/}
                     {/*    <div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div>*/}
                     {/*</Link>*/}

@@ -24,6 +24,7 @@ export default function Sidenavsupervisor() {
         <div className="col-12 col-md-9">
           <div class="nav-bar" style={{ width: "auto" }}>
             <div class="horz-center nav-container">
+
               <div class="floated left nav-div sign-div">
                 <Link to="/">
                   <img
