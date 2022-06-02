@@ -193,7 +193,7 @@ export default function Adminhome() {
                             onClick={handleModalOpen}
                             style={{ marginRight: "10px", borderRadius: "5px" }}
                         >
-                            EDIT
+                             <i class="fas fa-pen"></i>
                         </Button>
                         {/* <Modal
                             hideBackdrop
@@ -238,7 +238,7 @@ export default function Adminhome() {
                                             <form>
                                                 <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
                                                 <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                    <option name="supervisor">supervisor</option>
+                                                    <option name="supervisor">Supervisor</option>
                                                     <option name="Co-supervisor">Co-supervisor</option>
                                                     <option name="Panel-Member">Panel-Member</option>
                                                 </select>
@@ -258,7 +258,7 @@ export default function Adminhome() {
                             onClick={handleClickOpen}
                             style={{ borderRadius: "5px" }}
                         >
-                            DELETE
+                            <i class="fas fa-trash"></i>
                         </Button>
                         <Dialog
                             fullScreen={fullScreen}
@@ -309,7 +309,53 @@ export default function Adminhome() {
                         <h1>USERS DETAILS</h1>
                         <p>Admin</p>
 
-                        <Box sx={{ width: '100%' }}>
+                        <div class="row" style={{paddingTop: '1%'}}>
+                        <div class="col-md-2">
+                            <div class="card-counter primary">
+                                <i class="fa fa-users"></i>
+                                <span class="count-numbers">12</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>All</span>
+                            </div>
+                            </div>                        
+                            <div class="col-md-2">
+                            <div class="card-counter info">
+                                <i class="fas fa-user-graduate"></i>
+                                <span class="count-numbers">12</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Supervisors</span>
+                            </div>
+                            </div>
+                            <div class="col-md-2">
+                            <div class="card-counter danger">
+                                <i class="fas fa-user-md"></i>
+                                <span class="count-numbers">599</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Co-Supervisors</span>
+                            </div>
+                            </div>
+
+                            <div class="col-md-2">
+                            <div class="card-counter success">
+                                <i class="fas fa-user-shield"></i>
+                                <span class="count-numbers">6875</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Panel Members</span>
+                            </div>
+                            </div>
+
+                            <div class="col-md-2">
+                            <div class="card-counter success" style={{backgroundColor: '#ffbb33'}}>
+                                <i class="fa fa-users"></i>
+                                <span class="count-numbers">25</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Staff</span>
+                            </div>
+                            </div>
+                            <div class="col-md-2">
+                            <div class="card-counter info" style={{backgroundColor: '#2BBBAD'}}>
+                                <i class="fas fa-user-friends"></i>
+                                <span class="count-numbers">35</span>
+                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Students</span>
+                            </div>
+                            </div>
+                            </div>
+                        <Box sx={{ width: '100%', paddingTop: '5%'}}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                     <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
