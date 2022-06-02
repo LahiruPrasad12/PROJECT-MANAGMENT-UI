@@ -178,7 +178,7 @@ export default function Adminhome() {
         { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 70 },
         { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 230 },
         { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 300 },
-        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 150 },
+        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 230 },
         {
             field: "Print",
             headerAlign: 'center',
@@ -195,33 +195,6 @@ export default function Adminhome() {
                         >
                             EDIT
                         </Button>
-                        {/* <Modal
-                            hideBackdrop
-                            open={openModal}
-                            onClose={handleModalClose}
-                            aria-labelledby="child-modal-title"
-                            aria-describedby="child-modal-description"
-                        >
-                            <Box sx={{ ...style, width: 500 }}>
-                                <h4 id="child-modal-title" style={{ textAlign: "center" }}>Update User</h4>
-                                <p id="child-modal-description">
-                                    <div className="form-group">
-                                        <form>
-                                            <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
-                                            <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                <option name="supervisor">supervisor</option>
-                                                <option name="Co-supervisor">Co-supervisor</option>
-                                                <option name="Panel-Member">Panel-Member</option>
-                                            </select>
-                                        </form>
-                                    </div>
-                                </p>
-                                <Button
-                                    onClick={() => updateUser(cellValues.row._id)}
-                                    style={{ marginRight: "10px" }}>Update</Button>
-                                <Button onClick={handleModalClose}>Close</Button>
-                            </Box>
-                        </Modal> */}
                         <Modal
                             open={openModal}
                             onClose={handleModalClose}
@@ -294,10 +267,10 @@ export default function Adminhome() {
     ];
 
     const columnsStudent = [
-        { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 70 },
-        { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 230 },
-        { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 300 },
-        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 150 },
+        { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 200 },
+        { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 300 },
+        { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 330 },
+        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 200 },
     ];
 
     return (
@@ -307,8 +280,8 @@ export default function Adminhome() {
                 <div class="container">
                     <center>
                         <h1>USERS DETAILS</h1>
-                        <p>Admin</p>
-
+                        {/* <p>Admin</p> */}
+                        <br />
                         <Box sx={{ width: '100%' }}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
