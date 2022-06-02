@@ -1,0 +1,52 @@
+.presentation {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  background-color: #09274b;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  width: 280px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.presentation:hover {
+  background: #2d53ff;
+}
+
+.download {
+  text-align: center;
+  color: white;
+  background-color: #09274b;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 15px;
+  width: 40%;
+}
+
+.download:hover {
+  background: #2d53ff;
+}
+
+.upload {
+  text-align: center;
+  color: white;
+  background: #2d53ff;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 15px;
+  width: 40%;
+}
+
+.upload:hover {
+  background-color: #09274b;
+}
