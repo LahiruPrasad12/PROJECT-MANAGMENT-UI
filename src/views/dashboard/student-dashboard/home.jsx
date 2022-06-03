@@ -28,8 +28,10 @@ export default function Studenthome() {
                     <center>
                         <h1>GROUP DETAILS</h1>
                         <p>Student</p>
-                        <Button className="btn btn-primary" hidden={members.length === 4} 
-                        data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained" disableElevation>Add
+                        <Button className="btn btn-primary" hidden={members.length === 4} sx={{
+                            float: 'right'
+                        }}
+                            data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained" disableElevation>Add
                             members</Button>
                         <div style={{marginTop: '5%'}} class="row">
                             <div class="col">
