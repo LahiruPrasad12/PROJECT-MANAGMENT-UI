@@ -126,6 +126,7 @@ export default function StudentUploads() {
 
             await documentAPI.uploadDocument(formdata)
             setSuccessShowToast(true)
+            window.location.reload(false);
 
         } catch (e) {
             setErrorShowToast(true)
@@ -141,6 +142,22 @@ export default function StudentUploads() {
             formdata.append("doc", acceptedFiles[0]);
             await documentAPI.uploadPresentation(formdata)
             setSuccessShowToast(true)
+            window.location.reload(false);
+        } catch (e) {
+            setErrorShowToast(true)
+        }
+        setBtnLoading(false)
+    }
+
+    const uploadFinalThesis = async (e) => {
+        try {
+            e.preventDefault()
+            setBtnLoading(true)
+            let formdata = new FormData();
+            formdata.append("doc", acceptedFiles[0]);
+            await documentAPI.uploadFinalThesis(formdata)
+            setSuccessShowToast(true)
+            window.location.reload(false);
         } catch (e) {
             setErrorShowToast(true)
         }
@@ -266,18 +283,26 @@ export default function StudentUploads() {
                                     <h4>Upload Final Thesis</h4>
                                     <form>
                                         <center>
-                                            <input
-                                                style={{paddingBottom: "5%", paddingTop: "5%"}}
-                                                type="file"
-                                                class="form-label"
-                                            ></input>
+                                            <div className="form-group mt-2">
+                                                <div hidden={filepath.length > 0} {...getRootProps({style})}>
+                                                    <input {...getInputProps()} />
+                                                    <p>Drag 'n' drop your image file here, or click to select files</p>
+                                                </div>
+
+                                                <h4>File Details</h4>
+                                                <ul>{filepath}</ul>
+                                            </div>
                                         </center>
                                         <button
                                             style={{borderRadius: "0", width: "100%"}}
                                             type="submit"
-                                            class="btn btn-primary btn-lg"
+                                            className="btn btn-primary btn-lg"
+                                            onClick={(e) => {
+                                                uploadFinalThesis(e)
+                                            }}
+                                            disabled={btnLoading}
                                         >
-                                            Upload Final Thesis
+                                            {btnLoading ? 'Uploading...' : 'Upload Final thesis'}
                                         </button>
                                     </form>
                                     <br/>
