@@ -224,7 +224,7 @@ export default function StudentUploads() {
                                             type="submit"
                                             class="btn btn-primary btn-lg"
                                             onClick={uploadDocument}
-                                            disabled={btnLoading}
+                                            disabled={btnLoading || filepath.length === 0}
                                         >
                                             {btnLoading ? 'Uploading...' : 'Upload Documentation'}
                                         </button>
@@ -256,7 +256,7 @@ export default function StudentUploads() {
                                             </div>
                                         </center>
                                         <button
-                                            disabled={btnLoading}
+                                            disabled={btnLoading || filepath.length === 0}
                                             onClick={(e) => {
                                                 uploadPresentation(e)
                                             }}
@@ -300,7 +300,7 @@ export default function StudentUploads() {
                                             onClick={(e) => {
                                                 uploadFinalThesis(e)
                                             }}
-                                            disabled={btnLoading}
+                                            disabled={btnLoading || filepath.length === 0}
                                         >
                                             {btnLoading ? 'Uploading...' : 'Upload Final thesis'}
                                         </button>
