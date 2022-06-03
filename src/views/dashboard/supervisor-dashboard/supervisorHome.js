@@ -5,9 +5,11 @@ import Sidenavsupervisor from "../../../layouts/sidenavsupervisor";
 import "../../dashboard/student-dashboard/studenthome.css";
 import Footerdashboard from "../../../layouts/footerdashboard";
 import { element } from "prop-types";
+import Success from "../../../toast/success";
 
 export default function Supervisorhome() {
   const [request, setRequest] = useState([]);
+  const [showSuccessToast, setSuccessShowToast] = useState(false);
   useEffect(() => {
     const getMyRequest = async () => {
       const respond = (await supervisorAPI.getmyRequest()).data.data.Respond;
@@ -16,6 +18,12 @@ export default function Supervisorhome() {
     };
     getMyRequest();
   }, []);
+
+  const getMyRequest = async () => {
+    const respond = (await supervisorAPI.getmyRequest()).data.data.Respond;
+    setRequest(respond);
+  }
+
   const Updatestatus = (event, element) => {
     console.log(element);
     if (event.target.value == 1) {
@@ -24,6 +32,8 @@ export default function Supervisorhome() {
         status: "supervisorAccept",
       };
       supervisorAPI.acceptRequest(payload);
+      setSuccessShowToast(true)
+      getMyRequest()
     } else {
       let payload = {
         topic_id: element._id,
@@ -32,11 +42,22 @@ export default function Supervisorhome() {
       supervisorAPI.declineRequest(payload);
     }
   };
+
+
+  const getConfirmation=()=>{
+
+  }
   return (
     <>
       <Sidenavsupervisor />
       <div class="content">
         <div class="container">
+          {
+              showSuccessToast && (<>
+                    <Success message="Topic state update successfully"/>
+                  </>
+              )
+          }
           <center>
             <h1>TOPIC STATUS UPDATE</h1>
             <p>Supervisor</p>

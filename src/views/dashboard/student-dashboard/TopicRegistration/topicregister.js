@@ -126,10 +126,8 @@ export default function TopicRegister() {
             <Sidenav/>
             <div class="contents">
                 <div class="container">
-
-                    {rejectTopic}
                     {
-                        topic == null &&(
+                        topic == null&& rejectTopic==null &&(
                             <div style={{marginTop: '-12px'}}>
                                 <SuccessAlert/>
                             </div>

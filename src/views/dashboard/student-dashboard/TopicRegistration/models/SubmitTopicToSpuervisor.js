@@ -146,7 +146,7 @@ export default function RegisterTopicToSupervisor(props) {
             <Button variant="outlined" sx={{
                 float: 'right',
             }} onClick={handleClickOpen}>
-                Register My Topic
+                Register Our Topic
             </Button>
             <BootstrapDialog
                 onClose={handleClose}
