@@ -8,13 +8,14 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import topicAPI from "../../../../../apis/modules/topic";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from '@mui/icons-material/Send';
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
 import {useDropzone} from "react-dropzone";
+import panelAPI from '../../../../../apis/modules/panelmember'
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -62,7 +63,16 @@ export default function SubmitTopicToPanel(props) {
     const [showSuccessToast, setSuccessShowToast] = useState(false);
     const [showErrorToast, setErrorShowToast] = useState(false);
 
+    const [panel, setPanel] = useState([]);
 
+    useEffect(()=>{
+        const getOurPanel=async ()=>{
+            let result = (await panelAPI.getOurPanel()).data.results[0]
+            setPanel(result)
+            console.log(result)
+        }
+        getOurPanel()
+    },[])
     const [files, setFiles] = useState([]);
 
     const baseStyle = {
@@ -136,7 +146,7 @@ export default function SubmitTopicToPanel(props) {
             let formdata = new FormData();
             formdata.append("doc", acceptedFiles[0]);
             formdata.append("topic_id", props.topic._id);
-            formdata.append("panel_member_id", '6297a8beced0c6081c2fa759');
+            formdata.append("panel_member_id", panel._id);
             await topicAPI.submitTopicToPanel(formdata)
             setSuccessShowToast(true)
             setOpen(false);
@@ -189,7 +199,7 @@ export default function SubmitTopicToPanel(props) {
                                 <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Panel
                                     member</label>
                                 <input className="form-control" id="" disabled={true}
-                                       placeholder="Enter Your Topic Name" required value={props.topic.name}/>
+                                       placeholder="Enter Your Topic Name" required value={panel.name}/>
                             </div>
                             <div className="form-group mt-2">
                                 <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic

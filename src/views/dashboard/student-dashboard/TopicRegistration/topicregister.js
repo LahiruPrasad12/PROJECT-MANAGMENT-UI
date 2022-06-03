@@ -37,6 +37,7 @@ export default function TopicRegister() {
                 setReject(rejectResult[index])
             }
 
+            console.log(result[0])
             setTopic(result[0])
 
         }
@@ -125,11 +126,14 @@ export default function TopicRegister() {
             <Sidenav/>
             <div class="contents">
                 <div class="container">
+                    {
+                        topic == null&& rejectTopic==null &&(
+                            <div style={{marginTop: '-12px'}}>
+                                <SuccessAlert/>
+                            </div>
+                        )
+                    }
 
-                    {rejectTopic}
-                    <div hidden={topic || rejectTopic} style={{marginTop: '-12px'}}>
-                        <SuccessAlert/>
-                    </div>
                     <div hidden={!rejectTopic.name} style={{marginTop: '-12px'}}>
                         <ErrorAlerts groupName={loggedInGroup.name} topicName={rejectTopic.name}/>
                     </div>

@@ -11,7 +11,7 @@ const Error = (props) => {
             <Alert show={show} variant="danger">
                 <Alert.Heading>Hey , nice to see you {props.groupName}</Alert.Heading>
                 <p>
-                   You ast topic {props.topicName} is rejected. So try another one with your best
+                   You last topic {props.topicName} is rejected. So try another one with your best
                 </p>
                 <hr/>
                 <div className="d-flex justify-content-end">

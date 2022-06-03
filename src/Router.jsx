@@ -5,6 +5,7 @@ import StudentRoutes from "./routes/studentRoutes";
 import SupervisorRoutes from "./routes/supervisorRoutes";
 import CoSupervisorRoutes from "./routes/cosupervisorRoutes";
 import PannelMemberRoutes from "./routes/pannelmemberRoutes";
+import Chat from "./routes/chat";
 
 const Routers = () => {
   return (
@@ -15,6 +16,7 @@ const Routers = () => {
       <SupervisorRoutes />
       <CoSupervisorRoutes />
       <PannelMemberRoutes />
+        <Chat/>
     </div>
   );
 };
