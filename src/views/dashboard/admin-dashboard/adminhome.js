@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import Sidenavadmin from "../../../layouts/sidenavadmin";
 import '../../dashboard/student-dashboard/studenthome.css';
 import Footerdashboard from "../../../layouts/footerdashboard";
@@ -15,7 +14,6 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import { SettingsSystemDaydreamTwoTone } from "@mui/icons-material";
 
 const style = {
     position: 'absolute',
@@ -147,14 +145,6 @@ export default function Adminhome() {
 
         }
     }
-
-    const handleCellClick = (param, event) => {
-        event.stopPropagation();
-    };
-
-    const handleRowClick = (param, event) => {
-        event.stopPropagation();
-    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -315,14 +305,6 @@ export default function Adminhome() {
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Panel Members</span>
                                     </div>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <div class="card-counter success" style={{ backgroundColor: '#ffbb33' }}>
-                                        <i class="fa fa-users"></i>
-                                        <span class="count-numbers">25</span>
-                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Staff</span>
-                                    </div>
-                                </div>
                                 <div class="col-md-2">
                                     <div class="card-counter info" style={{ backgroundColor: '#2BBBAD' }}>
                                         <i class="fas fa-user-friends"></i>
@@ -330,78 +312,68 @@ export default function Adminhome() {
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Students</span>
                                     </div>
                                 </div>
-                            </div>
-                            <Box sx={{ width: '100%', paddingTop: '5%' }}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                        <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
-                                        <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
-                                        <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
-                                        <Tab label="Staff" name="staff" {...a11yProps(3)} />
-                                        <Tab label="Student" name="student" {...a11yProps(4)} />
-                                    </Tabs>
+                                <Box sx={{ width: '100%', paddingTop: '5%' }}>
+                                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                            <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
+                                            <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
+                                            <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
+                                            <Tab label="Staff" name="staff" {...a11yProps(3)} />
+                                            <Tab label="Student" name="student" {...a11yProps(4)} />
+                                        </Tabs>
+                                    </Box>
+                                    <TabPanel value={value} index={0}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={1}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={2}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={3}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={4}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columnsStudent}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
                                 </Box>
-                                <TabPanel value={value} index={0}>
-                                    <div style={{ height: 530, width: '100%' }}>
-                                        <DataGrid
-                                            rows={data}
-                                            columns={columns}
-                                            pageSize={8}
-                                            rowsPerPageOptions={[8]}
-                                            onRowClick={() => handleRowClick}
-                                            onCellClick={() => handleCellClick}
-                                        />
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={value} index={1}>
-                                    <div style={{ height: 530, width: '100%' }}>
-                                        <DataGrid
-                                            rows={data}
-                                            columns={columns}
-                                            pageSize={8}
-                                            rowsPerPageOptions={[8]}
-                                            onRowClick={() => handleRowClick}
-                                            onCellClick={() => handleCellClick}
-                                        />
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={value} index={2}>
-                                    <div style={{ height: 530, width: '100%' }}>
-                                        <DataGrid
-                                            rows={data}
-                                            columns={columns}
-                                            pageSize={8}
-                                            rowsPerPageOptions={[8]}
-                                            onRowClick={() => handleRowClick}
-                                            onCellClick={() => handleCellClick}
-                                        />
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={value} index={3}>
-                                    <div style={{ height: 530, width: '100%' }}>
-                                        <DataGrid
-                                            rows={data}
-                                            columns={columns}
-                                            pageSize={8}
-                                            rowsPerPageOptions={[8]}
-                                            onRowClick={() => handleRowClick}
-                                            onCellClick={() => handleCellClick}
-                                        />
-                                    </div>
-                                </TabPanel>
-                                <TabPanel value={value} index={4}>
-                                    <div style={{ height: 530, width: '100%' }}>
-                                        <DataGrid
-                                            rows={data}
-                                            columns={columnsStudent}
-                                            pageSize={8}
-                                            rowsPerPageOptions={[8]}
-                                            onRowClick={() => handleRowClick}
-                                            onCellClick={() => handleCellClick}
-                                        />
-                                    </div>
-                                </TabPanel>
-                            </Box>
+                            </div>
                         </Box>
                     </center>
                 </div>
