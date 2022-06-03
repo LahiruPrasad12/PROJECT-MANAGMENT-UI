@@ -10,6 +10,7 @@ import axios from '../../../apis/axios'
 import FileDownloader from 'js-file-download'
 import LoadingButton from "@mui/lab/LoadingButton";
 import DownloadIcon from '@mui/icons-material/Download';
+import {Tooltip} from "@mui/material";
 
 export default function PanelMemberHome() {
     const [request, setRequest] = useState([]);
@@ -35,7 +36,7 @@ export default function PanelMemberHome() {
             const result = (await downlaodAPI.downloadTopicDocByPanel()).data
             FileDownloader(result, 'download.pdf')
         } catch (e) {
-
+            alert('no such file')
         }
         setBtnLoad(false)
 
@@ -46,10 +47,10 @@ export default function PanelMemberHome() {
         if (event.target.value == 1) {
             let payload = {
                 topic_id: element._id,
-                status: "panel-approved",
+                status: "approved",
             };
             supervisorAPI.acceptRequest(payload);
-        } else {
+        } else if(event.target.value == 2) {
             let payload = {
                 topic_id: element._id,
                 status: "decline",
@@ -117,6 +118,9 @@ export default function PanelMemberHome() {
                                                     <select
                                                         className="btn btn-light dropdown-toggle"
                                                         style={{fontWeight: "bold"}}
+                                                        onChange={(e) => {
+                                                            Updatestatus(e, element);
+                                                        }}
                                                     >
                                                         <option
                                                             style={{color: "orange", fontWeight: "bold"}}
@@ -125,34 +129,28 @@ export default function PanelMemberHome() {
                                                         </option>
                                                         <option
                                                             style={{color: "green", fontWeight: "bold"}}
+                                                            value={1}
                                                         >
                                                             Accept
                                                         </option>
-                                                        <option style={{color: "red", fontWeight: "bold"}}>
+                                                        <option style={{color: "red", fontWeight: "bold"}} value={2}>
                                                             Reject
                                                         </option>
                                                     </select>
-                                                    {/*<button*/}
-                                                    {/*    style={{marginLeft: "3%"}}*/}
-                                                    {/*    type="button"*/}
-                                                    {/*    className="btn btn-success btn-sm"*/}
-                                                    {/*>*/}
-                                                    {/*    <i className="fas fa-sync"></i>*/}
-                                                    {/*</button>*/}
                                                 </td>
                                                 <td>
 
                                                     <Tooltip title="Download">
-                                                    <LoadingButton
-                                                        loading={btn}
-                                                        loadingPosition="start"
-                                                        variant="outlined"
-                                                        onClick={(e) => {
-                                                            downloadDocument(e)
-                                                        }}
-                                                    >
-                                                        <DownloadIcon/>
-                                                    </LoadingButton>
+                                                        <LoadingButton
+                                                            loading={btn}
+                                                            loadingPosition="start"
+                                                            variant="outlined"
+                                                            onClick={(e) => {
+                                                                downloadDocument(e)
+                                                            }}
+                                                        >
+                                                            <DownloadIcon/>
+                                                        </LoadingButton>
                                                     </Tooltip>
                                                 </td>
                                             </tr>
