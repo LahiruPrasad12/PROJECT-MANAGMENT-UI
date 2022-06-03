@@ -15,7 +15,7 @@ export default function Chat() {
     return (
         <>
 
-            <Sidenav/>
+            <Sidenav name="char"/>
             <div className="content">
                 <div className="container">
                     <MyChats fetchAgain={fetchAgain} />

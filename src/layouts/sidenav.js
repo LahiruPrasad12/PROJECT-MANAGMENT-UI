@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Image from "../assets/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.webp";
 
-export default function Sidenav() {
+export default function Sidenav(props) {
     const {loggedIn, loggedInGroup} = useContext(AuthContext);
 
     const logout = async () => {
