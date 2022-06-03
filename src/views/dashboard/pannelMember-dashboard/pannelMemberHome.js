@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import panelAPI from "../../../apis/modules/panelmember";
 import supervisorAPI from "../../../apis/modules/supervisor";
 import { Link } from "react-router-dom";
 import PannelMemberSidenav from "../../../layouts/sidenavpannelmember";
@@ -6,14 +7,18 @@ import "./pannelMemberHome.css";
 
 export default function PanelMemberHome() {
   const [request, setRequest] = useState([]);
+
+
   useEffect(() => {
     const getMyRequest = async () => {
-      const respond = (await supervisorAPI.getmyRequest()).data.data.Respond;
+      const respond = (await panelAPI.getMyRequest()).data.data.Respond;
       setRequest(respond);
       console.log(respond);
     };
     getMyRequest();
   }, []);
+
+
   const Updatestatus = (event, element) => {
     console.log(element);
     if (event.target.value == 1) {

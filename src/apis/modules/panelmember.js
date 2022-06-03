@@ -6,6 +6,6 @@ const resource = '/api/supervisors';
 export default  {
     getOurPanel: () => api.get(`${resource}`),
     register: (payload) => api.post(`/signup`,payload),
-    currentUser: () => api.get(`/current-user`),
+    getMyRequest: () => api.get(`${resource}/panel`),
     logout: () => api.get(`/logout`),
 }
