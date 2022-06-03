@@ -19,7 +19,7 @@ export default function CoSupervisorHome() {
     if (event.target.value == 1) {
       let payload = {
         topic_id: element._id,
-        status: "approved",
+        status: "co_supervisorAccept",
       };
       CosupervisorAPI.acceptRequest(payload);
     } else {
