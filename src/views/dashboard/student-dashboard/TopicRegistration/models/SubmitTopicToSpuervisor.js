@@ -20,6 +20,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from '@mui/icons-material/Send';
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
+import Loader from "../../../../../loader/loader";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -73,20 +74,20 @@ export default function RegisterTopicToSupervisor(props) {
     const [category, setCategory] = useState([]);
     const [supervisors, setSupervisors] = useState([]);
     const [topic, setTopic] = useState([]);
+    const [loading, setLoading] = useState(false);
 
 
-    // useEffect(() => {
-    //     const getDetails = async () => {
-    //         const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
-    //         setCategory(categoryRespond)
-    //     }
-    //     getDetails()
-    // }, [])
 
     const handleClickOpen = async () => {
-        setOpen(true);
-        const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
-        setCategory(categoryRespond)
+        try {
+            setLoading(true)
+            setOpen(true);
+            const categoryRespond = (await categoryAPI.getCategories()).data.data.filteredData
+            setCategory(categoryRespond)
+        } catch (e) {
+
+        }
+        setLoading(false)
     };
     const handleClose = () => {
         setOpen(false);
@@ -129,120 +130,134 @@ export default function RegisterTopicToSupervisor(props) {
     return (
         <div>
             {
-                showSuccessToast && (<>
-                        <Success message="Your topic submit to supervisor successfully"/>
-                    </>
+                loading && (
+                    <Loader/>
                 )
             }
-
             {
-                showErrorToast && (<>
-                        <ErrorToast message="There have some error. Please try again later"/>
-                    </>
+                !loading && (
+                    <div>
+                        {
+                            showSuccessToast && (<>
+                                    <Success message="Your topic submit to supervisor successfully"/>
+                                </>
+                            )
+                        }
+
+                        {
+                            showErrorToast && (<>
+                                    <ErrorToast message="There have some error. Please try again later"/>
+                                </>
+                            )
+                        }
+                        <Button variant="outlined" sx={{
+                            float: 'right',
+                        }} onClick={handleClickOpen}>
+                            Register Our Topic
+                        </Button>
+                        <BootstrapDialog
+                            onClose={handleClose}
+                            aria-labelledby="customized-dialog-title"
+                            disableEscapeKeyDown={true}
+                            open={open}
+
+                        >
+                            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                                SUBMIT OUR TOPIC TO SUPERVISOR
+                            </BootstrapDialogTitle>
+                            <DialogContent dividers>
+                                <Typography gutterBottom>
+                                    <form>
+                                        <div className="row mt-2">
+                                            <div className="col-md-6">
+
+                                                <FormControl loading fullWidth>
+                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                                        category</InputLabel>
+                                                    <Select
+                                                        size="small"
+                                                        outlined
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={selectedCategory}
+                                                        label="Age"
+                                                        onChange={selectCategory}
+
+                                                    >
+                                                        {
+                                                            category.map((element) => {
+                                                                return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                            })
+                                                        }
+                                                    </Select>
+                                                </FormControl>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <FormControl fullWidth disabled={!supervisors}>
+                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                                        professor</InputLabel>
+                                                    <Select
+                                                        size="small"
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={selectedSupervisor}
+                                                        label="Age"
+                                                        onChange={selectSupervisor}
+                                                    >
+
+                                                        {
+                                                            supervisors.map((element) => {
+                                                                return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                            })
+                                                        }
+
+                                                    </Select>
+
+                                                </FormControl>
+                                            </div>
+
+                                        </div>
+                                        <div className="form-group mt-2">
+                                            <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic
+                                                Name</label>
+                                            <textarea className="form-control" id=""
+                                                      placeholder="Enter Your Topic Name" required style={{height: '100px'}}
+                                                      onChange={(e) => {
+                                                          setName(e.target.value)
+                                                      }}/>
+                                        </div>
+                                        <br/>
+                                    </form>
+                                </Typography>
+                                <Typography gutterBottom>
+                                    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+                                    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+                                    ullamcorper nulla non metus auctor fringilla.
+                                </Typography>
+                            </DialogContent>
+                            <DialogActions>
+                                {/*<Button autoFocus disabled={!selectedCategory || !selectedSupervisor || !name} onClick={submitTopic}>*/}
+                                {/*    Save changes*/}
+                                {/*</Button>*/}
+                                <LoadingButton
+                                    disabled={!name || !selectedSupervisor || !selectedCategory}
+                                    onClick={submitTopic}
+                                    endIcon={<SendIcon/>}
+                                    loading={btnLoading}
+                                    loadingPosition="end"
+                                    variant="contained"
+                                >
+                                    Send
+                                </LoadingButton>
+                            </DialogActions>
+
+                        </BootstrapDialog>
+
+                    </div>
                 )
             }
-            <Button variant="outlined" sx={{
-                float: 'right',
-            }} onClick={handleClickOpen}>
-                Register Our Topic
-            </Button>
-            <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                disableEscapeKeyDown={true}
-                open={open}
-
-            >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    SUBMIT OUR TOPIC TO SUPERVISOR
-                </BootstrapDialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        <form>
-                            <div class="row mt-2">
-                                <div class="col-md-6">
-
-                                    <FormControl loading fullWidth>
-                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
-                                            category</InputLabel>
-                                        <Select
-                                            size="small"
-                                            outlined
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={selectedCategory}
-                                            label="Age"
-                                            onChange={selectCategory}
-
-                                        >
-                                            {
-                                                category.map((element) => {
-                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
-                                                })
-                                            }
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                                <div class="col-md-6">
-                                    <FormControl fullWidth disabled={!supervisors}>
-                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
-                                            professor</InputLabel>
-                                        <Select
-                                            size="small"
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={selectedSupervisor}
-                                            label="Age"
-                                            onChange={selectSupervisor}
-                                        >
-
-                                            {
-                                                supervisors.map((element) => {
-                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
-                                                })
-                                            }
-
-                                        </Select>
-
-                                    </FormControl>
-                                </div>
-
-                            </div>
-                            <div className="form-group mt-2">
-                                <label class="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic Name</label>
-                                <textarea className="form-control" id=""
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}
-                                          onChange={(e) => {
-                                              setName(e.target.value)
-                                          }}/>
-                            </div>
-                            <br/>
-                        </form>
-                    </Typography>
-                    <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-                        ullamcorper nulla non metus auctor fringilla.
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    {/*<Button autoFocus disabled={!selectedCategory || !selectedSupervisor || !name} onClick={submitTopic}>*/}
-                    {/*    Save changes*/}
-                    {/*</Button>*/}
-                    <LoadingButton
-                        disabled={!name || !selectedSupervisor || !selectedCategory}
-                        onClick={submitTopic}
-                        endIcon={<SendIcon/>}
-                        loading={btnLoading}
-                        loadingPosition="end"
-                        variant="contained"
-                    >
-                        Send
-                    </LoadingButton>
-                </DialogActions>
-
-            </BootstrapDialog>
 
         </div>
+
     );
 }

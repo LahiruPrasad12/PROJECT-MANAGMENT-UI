@@ -20,6 +20,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from '@mui/icons-material/Send';
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
+import Loader from '../../../../../loader/loader'
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -61,6 +62,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function SubmitTopicToCoSupervisor(props) {
+    const [loading, setLoading] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [selectedCoSupervisor, setSelectedCoSupervisor] = useState('');
     const [btnLoading, setBtnLoading] = useState(false);
@@ -107,117 +109,131 @@ export default function SubmitTopicToCoSupervisor(props) {
     }
 
     return (
-        <div>
-            {
-                showSuccessToast && (<>
-                        <Success message="Your topic submit to supervisor successfully"/>
-                    </>
-                )
-            }
+       <div>
+           {
+               loading && (
+                   <Loader/>
+               )
+           }
+           {
+               !loading && (
+                   <div>
+                       {
+                           showSuccessToast && (<>
+                                   <Success message="Your topic submit to supervisor successfully"/>
+                               </>
+                           )
+                       }
 
-            {
-                showErrorToast && (<>
-                        <ErrorToast message="There have some error. Please try again later"/>
-                    </>
-                )
-            }
-            <Button variant="outlined" sx={{
-                float: 'right',
-            }} onClick={handleClickOpen}>
-                Submit My Topic to Co-supervisor
-            </Button>
-            <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                disableEscapeKeyDown={true}
-                open={open}
+                       {
+                           showErrorToast && (<>
+                                   <ErrorToast message="There have some error. Please try again later"/>
+                               </>
+                           )
+                       }
+                       <Button variant="outlined" sx={{
+                           float: 'right',
+                       }} onClick={handleClickOpen}>
+                           Submit My Topic to Co-supervisor
+                       </Button>
+                       <BootstrapDialog
+                           onClose={handleClose}
+                           aria-labelledby="customized-dialog-title"
+                           disableEscapeKeyDown={true}
+                           open={open}
 
-            >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    SUBMIT OUR TOPIC TO CO-SUPERVISOR
-                </BootstrapDialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        <form>
-                            <div class="row mt-2">
-                                {/*<div class="col-md-6">*/}
+                       >
+                           <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                               SUBMIT OUR TOPIC TO CO-SUPERVISOR
+                           </BootstrapDialogTitle>
+                           <DialogContent dividers>
+                               <Typography gutterBottom>
+                                   <form>
+                                       <div className="row mt-2">
+                                           {/*<div class="col-md-6">*/}
 
-                                {/*    <FormControl loading fullWidth>*/}
-                                {/*        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your*/}
-                                {/*            category</InputLabel>*/}
-                                {/*        <Select*/}
-                                {/*            size="small"*/}
-                                {/*            outlined*/}
-                                {/*            labelId="demo-simple-select-label"*/}
-                                {/*            id="demo-simple-select"*/}
-                                {/*            value={selectedCategory}*/}
-                                {/*            label="Age"*/}
-                                {/*            onChange={selectCategory}*/}
+                                           {/*    <FormControl loading fullWidth>*/}
+                                           {/*        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your*/}
+                                           {/*            category</InputLabel>*/}
+                                           {/*        <Select*/}
+                                           {/*            size="small"*/}
+                                           {/*            outlined*/}
+                                           {/*            labelId="demo-simple-select-label"*/}
+                                           {/*            id="demo-simple-select"*/}
+                                           {/*            value={selectedCategory}*/}
+                                           {/*            label="Age"*/}
+                                           {/*            onChange={selectCategory}*/}
 
-                                {/*        >*/}
-                                {/*            {*/}
-                                {/*                category.map((element) => {*/}
-                                {/*                    return <MenuItem value={element._id}>{element.name}</MenuItem>*/}
-                                {/*                })*/}
-                                {/*            }*/}
-                                {/*        </Select>*/}
-                                {/*    </FormControl>*/}
-                                {/*</div>*/}
-                                <div class="col-md-12">
-                                    <FormControl fullWidth>
-                                        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
-                                            professor</InputLabel>
-                                        <Select
-                                            size="small"
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={selectedCoSupervisor}
-                                            label="Age"
-                                            onChange={selectSupervisor}
-                                        >
+                                           {/*        >*/}
+                                           {/*            {*/}
+                                           {/*                category.map((element) => {*/}
+                                           {/*                    return <MenuItem value={element._id}>{element.name}</MenuItem>*/}
+                                           {/*                })*/}
+                                           {/*            }*/}
+                                           {/*        </Select>*/}
+                                           {/*    </FormControl>*/}
+                                           {/*</div>*/}
+                                           <div className="col-md-12">
+                                               <FormControl fullWidth>
+                                                   <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                                       professor</InputLabel>
+                                                   <Select
+                                                       size="small"
+                                                       labelId="demo-simple-select-label"
+                                                       id="demo-simple-select"
+                                                       value={selectedCoSupervisor}
+                                                       label="Age"
+                                                       onChange={selectSupervisor}
+                                                   >
 
-                                            {
-                                                coSuperVisor.map((element) => {
-                                                    return <MenuItem value={element._id}>{element.name}</MenuItem>
-                                                })
-                                            }
+                                                       {
+                                                           coSuperVisor.map((element) => {
+                                                               return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                           })
+                                                       }
 
-                                        </Select>
+                                                   </Select>
 
-                                    </FormControl>
-                                </div>
+                                               </FormControl>
+                                           </div>
 
-                            </div>
-                            <div className="form-group mt-2">
-                                <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic
-                                    Name</label>
-                                <textarea className="form-control" id="" disabled={true}
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}} value={props.topic.name}/>
-                            </div>
-                            <br/>
-                        </form>
-                    </Typography>
-                    <Typography gutterBottom>
-                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-                        ullamcorper nulla non metus auctor fringilla.
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    <LoadingButton
-                        disabled={!selectedCoSupervisor}
-                        onClick={submitTopicToCoSupervisor}
-                        endIcon={<SendIcon/>}
-                        loading={btnLoading}
-                        loadingPosition="end"
-                        variant="contained"
-                    >
-                        Send
-                    </LoadingButton>
-                </DialogActions>
+                                       </div>
+                                       <div className="form-group mt-2">
+                                           <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic
+                                               Name</label>
+                                           <textarea className="form-control" id="" disabled={true}
+                                                     placeholder="Enter Your Topic Name" required style={{height: '100px'}}
+                                                     value={props.topic.name}/>
+                                       </div>
+                                       <br/>
+                                   </form>
+                               </Typography>
+                               <Typography gutterBottom>
+                                   Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+                                   magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+                                   ullamcorper nulla non metus auctor fringilla.
+                               </Typography>
+                           </DialogContent>
+                           <DialogActions>
+                               <LoadingButton
+                                   disabled={!selectedCoSupervisor}
+                                   onClick={submitTopicToCoSupervisor}
+                                   endIcon={<SendIcon/>}
+                                   loading={btnLoading}
+                                   loadingPosition="end"
+                                   variant="contained"
+                               >
+                                   Send
+                               </LoadingButton>
+                           </DialogActions>
 
-            </BootstrapDialog>
+                       </BootstrapDialog>
 
-        </div>
+                   </div>
+               )
+           }
+
+       </div>
+
     );
 }
