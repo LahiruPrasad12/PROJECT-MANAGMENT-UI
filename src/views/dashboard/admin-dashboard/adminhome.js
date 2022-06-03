@@ -193,7 +193,7 @@ export default function Adminhome() {
                             onClick={handleModalOpen}
                             style={{ marginRight: "10px", borderRadius: "5px" }}
                         >
-                            EDIT
+                            <i class="fas fa-pen"></i>
                         </Button>
                         <Modal
                             open={openModal}
@@ -211,7 +211,7 @@ export default function Adminhome() {
                                             <form>
                                                 <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
                                                 <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                    <option name="supervisor">supervisor</option>
+                                                    <option name="supervisor">Supervisor</option>
                                                     <option name="Co-supervisor">Co-supervisor</option>
                                                     <option name="Panel-Member">Panel-Member</option>
                                                 </select>
@@ -231,7 +231,7 @@ export default function Adminhome() {
                             onClick={handleClickOpen}
                             style={{ borderRadius: "5px" }}
                         >
-                            DELETE
+                            <i class="fas fa-trash"></i>
                         </Button>
                         <Dialog
                             fullScreen={fullScreen}
@@ -283,77 +283,126 @@ export default function Adminhome() {
                         {/* <p>Admin</p> */}
                         <br />
                         <Box sx={{ width: '100%' }}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
-                                    <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
-                                    <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
-                                    <Tab label="Staff" name="staff" {...a11yProps(3)} />
-                                    <Tab label="Student" name="student" {...a11yProps(4)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={value} index={0}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={2}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={3}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={4}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columnsStudent}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                        </Box>
+                            <p>Admin</p>
 
+                            <div class="row" style={{ paddingTop: '1%' }}>
+                                <div class="col-md-2">
+                                    <div class="card-counter primary">
+                                        <i class="fa fa-users"></i>
+                                        <span class="count-numbers">12</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>All</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card-counter info">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <span class="count-numbers">12</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Supervisors</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card-counter danger">
+                                        <i class="fas fa-user-md"></i>
+                                        <span class="count-numbers">599</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Co-Supervisors</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="card-counter success">
+                                        <i class="fas fa-user-shield"></i>
+                                        <span class="count-numbers">6875</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Panel Members</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="card-counter success" style={{ backgroundColor: '#ffbb33' }}>
+                                        <i class="fa fa-users"></i>
+                                        <span class="count-numbers">25</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Staff</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card-counter info" style={{ backgroundColor: '#2BBBAD' }}>
+                                        <i class="fas fa-user-friends"></i>
+                                        <span class="count-numbers">35</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Students</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <Box sx={{ width: '100%', paddingTop: '5%' }}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                        <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
+                                        <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
+                                        <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
+                                        <Tab label="Staff" name="staff" {...a11yProps(3)} />
+                                        <Tab label="Student" name="student" {...a11yProps(4)} />
+                                    </Tabs>
+                                </Box>
+                                <TabPanel value={value} index={0}>
+                                    <div style={{ height: 530, width: '100%' }}>
+                                        <DataGrid
+                                            rows={data}
+                                            columns={columns}
+                                            pageSize={8}
+                                            rowsPerPageOptions={[8]}
+                                            onRowClick={() => handleRowClick}
+                                            onCellClick={() => handleCellClick}
+                                        />
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={value} index={1}>
+                                    <div style={{ height: 530, width: '100%' }}>
+                                        <DataGrid
+                                            rows={data}
+                                            columns={columns}
+                                            pageSize={8}
+                                            rowsPerPageOptions={[8]}
+                                            onRowClick={() => handleRowClick}
+                                            onCellClick={() => handleCellClick}
+                                        />
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={value} index={2}>
+                                    <div style={{ height: 530, width: '100%' }}>
+                                        <DataGrid
+                                            rows={data}
+                                            columns={columns}
+                                            pageSize={8}
+                                            rowsPerPageOptions={[8]}
+                                            onRowClick={() => handleRowClick}
+                                            onCellClick={() => handleCellClick}
+                                        />
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={value} index={3}>
+                                    <div style={{ height: 530, width: '100%' }}>
+                                        <DataGrid
+                                            rows={data}
+                                            columns={columns}
+                                            pageSize={8}
+                                            rowsPerPageOptions={[8]}
+                                            onRowClick={() => handleRowClick}
+                                            onCellClick={() => handleCellClick}
+                                        />
+                                    </div>
+                                </TabPanel>
+                                <TabPanel value={value} index={4}>
+                                    <div style={{ height: 530, width: '100%' }}>
+                                        <DataGrid
+                                            rows={data}
+                                            columns={columnsStudent}
+                                            pageSize={8}
+                                            rowsPerPageOptions={[8]}
+                                            onRowClick={() => handleRowClick}
+                                            onCellClick={() => handleCellClick}
+                                        />
+                                    </div>
+                                </TabPanel>
+                            </Box>
+                        </Box>
                     </center>
                 </div>
                 <Footerdashboard />
