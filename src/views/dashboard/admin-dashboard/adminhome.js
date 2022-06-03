@@ -65,23 +65,18 @@ function a11yProps(index) {
 export default function Adminhome() {
     const [users, setUsers] = useState([]);
     const [data, setData] = useState([]);
-    // const [student, setStudent] = useState([]);
-    // const [supervisor, setSupervisor] = useState([]);
-    // const [coSupervisor, setCoSupervisor] = useState([]);
-    // const [staff, setStaff] = useState([]);
-    // const [panelMember, setPanelMember] = useState([]);
     const [showToast, setShowToast] = useState(false);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [role, setRole] = useState('')
+    const [counts, setCounts] = useState([])
     const [value, setValue] = React.useState(0);
 
-    console.log(role)
+    var newArr = []
 
     const handleChange = (event, newValue) => {
-        console.log(event.target.name)
         var arr = []
         users.map((obj) => {
             return (
@@ -115,7 +110,6 @@ export default function Adminhome() {
                 setData(arr)
                 setUsers(respond)
             }
-
             getUsersData()
         } catch {
             setUsers(null)
@@ -174,7 +168,6 @@ export default function Adminhome() {
             headerAlign: 'center',
             align: "center",
             renderCell: (cellValues) => {
-                console.log(cellValues)
                 return (
                     <ButtonGroup>
                         <Button
@@ -201,9 +194,9 @@ export default function Adminhome() {
                                             <form>
                                                 <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
                                                 <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                    <option name="supervisor">Supervisor</option>
-                                                    <option name="Co-supervisor">Co-supervisor</option>
-                                                    <option name="Panel-Member">Panel-Member</option>
+                                                    <option name="supervisor" value="supervisor">Supervisor</option>
+                                                    <option name="Co-supervisor" value="Co-supervisor">Co-supervisor</option>
+                                                    <option name="Panel-Member" value="Panel-Member">Panel-Member</option>
                                                 </select>
                                             </form>
                                         </div>
