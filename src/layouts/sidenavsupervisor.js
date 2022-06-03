@@ -24,7 +24,6 @@ export default function Sidenavsupervisor() {
         <div className="col-12 col-md-9">
           <div class="nav-bar" style={{ width: "auto" }}>
             <div class="horz-center nav-container">
-
               <div class="floated left nav-div sign-div">
                 <Link to="/">
                   <img
@@ -63,13 +62,19 @@ export default function Sidenavsupervisor() {
         <Link to="/supervisor/home">
           <div className="menusb">
             <i class="fas fa-comment"></i>
-            <span>Chat With Groups</span>
+            <span>Chat</span>
           </div>
         </Link>
-        <Link to="/supervisor/home">
+        <Link to="/supervisor/documents">
           <div className="menusb">
             <i class="fas fa-edit"></i>
-            <span>Evaluate</span>
+            <span>Documnet</span>
+          </div>
+        </Link>
+        <Link to="">
+          <div className="menusb">
+            <i class="fas fa-file-alt"></i>
+            <span>Final Thesis</span>
           </div>
         </Link>
       </div>

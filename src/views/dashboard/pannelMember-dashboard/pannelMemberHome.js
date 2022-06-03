@@ -1,9 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import supervisorAPI from "../../../apis/modules/supervisor";
 import { Link } from "react-router-dom";
 import PannelMemberSidenav from "../../../layouts/sidenavpannelmember";
 import "./pannelMemberHome.css";
 
-export default function SupervisorHome() {
+export default function PanelMemberHome() {
+  const [request, setRequest] = useState([]);
+  useEffect(() => {
+    const getMyRequest = async () => {
+      const respond = (await supervisorAPI.getmyRequest()).data.data.Respond;
+      setRequest(respond);
+      console.log(respond);
+    };
+    getMyRequest();
+  }, []);
+  const Updatestatus = (event, element) => {
+    console.log(element);
+    if (event.target.value == 1) {
+      let payload = {
+        topic_id: element._id,
+        status: "panel-approved",
+      };
+      supervisorAPI.acceptRequest(payload);
+    } else {
+      let payload = {
+        topic_id: element._id,
+        status: "decline",
+      };
+      supervisorAPI.declineRequest(payload);
+    }
+  };
   return (
     <>
       <PannelMemberSidenav />
@@ -48,6 +74,7 @@ export default function SupervisorHome() {
                       <th scope="col">Group Name</th>
                       <th scope="col">Topic</th>
                       <th scope="col">Topic Status</th>
+                      <th scope="col">Document</th>
                     </tr>
                   </thead>
                   <br />
@@ -83,100 +110,9 @@ export default function SupervisorHome() {
                           <i class="fas fa-sync"></i>
                         </button>
                       </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
                       <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>REG 2022/14</td>
-                      <td>Artificial Interligence</td>
-                      <td>
-                        <select
-                          className="btn btn-light dropdown-toggle"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          <option
-                            style={{ color: "orange", fontWeight: "bold" }}
-                          >
-                            Pending
-                          </option>
-                          <option
-                            style={{ color: "green", fontWeight: "bold" }}
-                          >
-                            Accept
-                          </option>
-                          <option style={{ color: "red", fontWeight: "bold" }}>
-                            Reject
-                          </option>
-                        </select>
-                        <button
-                          style={{ marginLeft: "3%" }}
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
-                          <i class="fas fa-sync"></i>
+                        <button type="button" class="download">
+                          Download
                         </button>
                       </td>
                     </tr>

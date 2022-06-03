@@ -7,10 +7,10 @@ import Presentations from "../views/dashboard/pannelMember-dashboard/presentatio
 const AuthRoutes = () => {
   return (
     <Router>
-      <Route exact path="/pannelmember/home">
+      <Route exact path="/panelmember/home">
         <PannelMemberHome />
       </Route>
-      <Route exact path="/pannelmember/presentationsEvaluation">
+      <Route exact path="/panelmember/presentationsEvaluation">
         <Presentations />
       </Route>
     </Router>

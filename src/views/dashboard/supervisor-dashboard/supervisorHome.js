@@ -21,7 +21,7 @@ export default function Supervisorhome() {
     if (event.target.value == 1) {
       let payload = {
         topic_id: element._id,
-        status: "approved",
+        status: "supervisorAccept",
       };
       supervisorAPI.acceptRequest(payload);
     } else {
