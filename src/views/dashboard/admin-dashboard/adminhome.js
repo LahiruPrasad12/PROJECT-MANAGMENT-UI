@@ -3,6 +3,7 @@ import Sidenavadmin from "../../../layouts/sidenavadmin";
 import '../../dashboard/student-dashboard/studenthome.css';
 import Footerdashboard from "../../../layouts/footerdashboard";
 import admin from '../../../apis/modules/admin'
+import SoloAlert from 'soloalert'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
@@ -14,6 +15,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+import SoloAlert from 'soloalert'
 
 const style = {
     position: 'absolute',
@@ -65,16 +67,17 @@ function a11yProps(index) {
 export default function Adminhome() {
     const [users, setUsers] = useState([]);
     const [data, setData] = useState([]);
-    const [showToast, setShowToast] = useState(false);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [role, setRole] = useState('')
-    const [counts, setCounts] = useState([])
     const [value, setValue] = React.useState(0);
-
-    var newArr = []
+    // const [supervisorData, setSupervisor] = useState('')
+    // const [coSupervisorData, setCoSupervisor] = useState('')
+    // const [staffData, setStaff] = useState('')
+    // const [panelMemberData, setPanelMember] = useState('')
+    // const [studentData, setStudent] = useState('')
 
     const handleChange = (event, newValue) => {
         var arr = []
@@ -90,16 +93,28 @@ export default function Adminhome() {
         setValue(newValue);
     };
 
+    const getRole = (respond, name) => {
+        var set = respond.filter(obj => {
+            return obj.role === name
+        })
+
+        return set;
+    }
+
     useEffect(() => {
         try {
             const getUsersData = async () => {
                 var arr = []
                 const respond = (await admin.getRoles()).data.data.group
-                var set = respond.filter(obj => {
-                    return obj.role === 'supervisor'
-                })
 
-                set.map((obj) => {
+
+                // var staff = getRole(respond, 'staff')
+                // var coSupervisor = getRole(respond, 'Co-supervisor')
+                // var panelMember = getRole(respond, 'Panel-Member')
+                // var student = getRole(respond, 'student')
+                var supervisor = getRole(respond, 'supervisor')
+
+                supervisor.map((obj) => {
                     return (
                         obj.items.map((e, index) => {
                             arr.push({ ...e, id: index })
@@ -107,8 +122,19 @@ export default function Adminhome() {
                     )
                 })
 
+                // console.log(supervisor)
+
+                // setSupervisor(supervisor[0].items.length)
+                // setCoSupervisor(coSupervisor[0].items.length)
+                // setStaff(staff[0].items.length)
+                // setPanelMember(panelMember[0].items.length)
+                // setStudent(student[0].items.length)
+
+
                 setData(arr)
                 setUsers(respond)
+
+                // console.log(supervisor[0].items.length)
             }
             getUsersData()
         } catch {
@@ -122,7 +148,6 @@ export default function Adminhome() {
             await admin.deleteUser(id)
             window.location = "/admin/home"
         } catch {
-            setShowToast(true)
         }
     }
 
@@ -134,6 +159,17 @@ export default function Adminhome() {
             }
 
             await admin.updateUser(payload)
+            SoloAlert.alert({
+                title: "Title Here",
+                body: "Alert With An Icon",
+                icon: "success",
+                theme: "dark",
+                onOk: function () {
+                    window.location = "admin/home"
+                }
+            });
+
+
             window.location = "/admin/home"
         } catch {
 
