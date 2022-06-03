@@ -51,9 +51,10 @@ export default function GroupRegister() {
         class="shape"
       />
       <div class="container">
+      
         <div>
           <Alert show={show} variant="success">
-            <Alert.Heading>Hey {loggedIn.name}, nice to see you</Alert.Heading>
+            <Alert.Heading>Hey {loggedIn.name}, Nice to see you</Alert.Heading>
             <p>
               Aww yeah, you successfully read this important alert message. This
               example text is going to run a bit longer so that you can see how
@@ -66,16 +67,12 @@ export default function GroupRegister() {
               </Button>
             </div>
           </Alert>
-
+        <center style={{ paddingTop: "1%" }}>
           <Button
             hidden={show}
             data-bs-toggle="modal"
             data-bs-target="#createGroup"
             variant="contained"
-            sx={{
-              float: "right",
-              marginTop: "-120px",
-            }}
             disableElevation
           >
             Create a new group
@@ -85,17 +82,16 @@ export default function GroupRegister() {
             data-bs-toggle="modal"
             data-bs-target="#createGroup"
             variant="contained"
-            sx={{
-              float: "right",
-            }}
             disableElevation
           >
             Create a new group
           </Button>
+          <img style={{ paddingTop: "3%" }} src="https://i.postimg.cc/MppMHjXS/ezgif-com-gif-maker-1.gif" />
+        </center>
         </div>
-        <div style={{ marginTop: "10%" }} class="row"></div>
+        
       </div>
-
+              
       {/*group create model*/}
       <div
         className="modal fade"
