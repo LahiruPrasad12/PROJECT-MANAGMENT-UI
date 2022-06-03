@@ -71,7 +71,7 @@ export default function Sidenavsupervisor() {
             <span>Documnet</span>
           </div>
         </Link>
-        <Link to="">
+        <Link to="/supervisor/finalThesis">
           <div className="menusb">
             <i class="fas fa-file-alt"></i>
             <span>Final Thesis</span>

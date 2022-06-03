@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import PannelMemberSidenav from "../../../layouts/sidenavpannelmember";
 import "./pannelMemberHome.css";
 
-export default function PannelMemberHome() {
+export default function PannelMemberPresentation() {
   return (
     <>
       <PannelMemberSidenav />
       <div class="content">
         <div class="container">
           <center>
-            <h1>Presentations Evaluation</h1>
+            <h1>PRESENTATION EVALUATION</h1>
             <p>Pannel - Member</p>
             <button type="button" class="presentation">
               Download Marking Scheme
