@@ -141,11 +141,14 @@ export default function RegisterTopicToSupervisor(props) {
                     </>
                 )
             }
-            <Button variant="outlined" sx={{
-                float: 'right',
-            }} onClick={handleClickOpen}>
+            <center>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Register My Topic
             </Button>
+            </center>
+            <center>
+            <img style={{ paddingTop: "3%", width: '70%', height: '70%' }} src="https://i.postimg.cc/MppMHjXS/ezgif-com-gif-maker-1.gif" />
+            </center>
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
