@@ -57,7 +57,12 @@ export default function Sidenav() {
                 <div className="sideh"></div>
                 <div class="profile_info" style={{marginTop: '-40%'}}>
                     <h4>Welcome</h4>
-                    <h5>{loggedInGroup.name}</h5>
+                    {
+                        loggedInGroup && (
+                            <h5>{loggedInGroup.name}</h5>
+                        )
+                    }
+
                 </div>
                 <div style={{marginTop: '-30px'}}>
                     <Link to='/student/home'>

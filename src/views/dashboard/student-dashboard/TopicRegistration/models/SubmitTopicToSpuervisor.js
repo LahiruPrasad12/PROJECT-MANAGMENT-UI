@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import {useEffect, useState} from "react";
 import categoryAPI from "../../../../../apis/modules/topicCategory";
 import topicAPI from "../../../../../apis/modules/topic";
+import chatAPI from "../../../../../apis/modules/chat";
 import {Spinner} from "react-bootstrap";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from '@mui/icons-material/Send';
@@ -116,6 +117,7 @@ export default function RegisterTopicToSupervisor(props) {
                 name: name
             }
             await topicAPI.submitTopicToSupervisor(payload)
+            await chatAPI.createChat(payload)
             setSuccessShowToast(true)
             setOpen(false);
             window.location.reload(false);
