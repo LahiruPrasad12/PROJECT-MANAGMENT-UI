@@ -6,6 +6,7 @@ import groupAPI from "../../../apis/modules/group";
 import AddGroupMember from "./common/AddGroupMemberForm";
 import Footerdashboard from "../../../layouts/footerdashboard";
 import Button from "@mui/material/Button";
+import Loader from '../../../loader/loader'
 
 export default function Studenthome() {
 
@@ -23,7 +24,9 @@ export default function Studenthome() {
         <>
 
             <Sidenav/>
+            <Loader/>
             <div class="content">
+
                 <div class="container">
                     <center>
                         <h1>GROUP DETAILS</h1>
@@ -87,6 +90,7 @@ export default function Studenthome() {
 
                     </center>
                 </div>
+
                 <div className="modal fade" id="addStudent" tabIndex="-1"
                      aria-labelledby="exampleModalLabel">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">

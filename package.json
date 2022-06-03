@@ -20,6 +20,7 @@
     "framer-motion": "^4.1.17",
     "js-file-download": "^0.4.12",
     "jwt-decode": "^2.2.0",
+    "node-sass": "^7.0.1",
     "notistack": "^2.0.5",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
