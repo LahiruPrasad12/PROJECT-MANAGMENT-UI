@@ -16,6 +16,10 @@ export default function Sidenav() {
         window.location = '/login'
     }
 
+    const moveToChat = () => {
+        window.location = '/chat'
+    }
+
     return (
         <>
             <div class="row" style={{marginLeft: '0%', marginRight: '0%', marginTop: '2%'}}>
@@ -43,11 +47,11 @@ export default function Sidenav() {
 
             <div class="sidebar">
                 <div className="sideh"></div>
-                <div class="profile_info">
+                <div class="profile_info" style={{marginTop: "-30%"}}>
                     <h4>Welcome</h4>
                     <h5>{loggedIn.name}</h5>
                 </div>
-                <div style={{marginTop: "-30px"}}>
+                <div >
                     <Link to="/student/home">
                         <div className="menusb">
                             <i class="fas fa-user-friends"></i>
@@ -66,12 +70,12 @@ export default function Sidenav() {
                             <span>Submissions</span>
                         </div>
                     </Link>
-                    {/*<Link to=''>*/}
-                    {/*    <div className="menusb"><i class="fas fa-table"></i><span>Supervisor</span></div>*/}
-                    {/*</Link>*/}
-                    {/*<Link to=''>*/}
-                    {/*    <div className="menusb"><i class="fas fa-th"></i><span>Co-Supervisor</span></div>*/}
-                    {/*</Link>*/}
+                    <Link to="#">
+                        <div onClick={moveToChat} className="menusb">
+                            <i class="fas fa-comment"></i>
+                            <span>Chat</span>
+                        </div>
+                    </Link>
                     <Link to="/student/document">
                         <div className="menusb">
                             <i class="fas fa-file-alt"></i>
