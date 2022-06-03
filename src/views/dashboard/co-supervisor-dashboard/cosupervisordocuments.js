@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Sidenav from "../../../layouts/sidenavcosupervisor";
 import "./co-supervisorHome.css";
 
-export default function CoSupervisorMemberHome() {
+export default function CoSupervisorDocument() {
   return (
     <>
       <Sidenav />

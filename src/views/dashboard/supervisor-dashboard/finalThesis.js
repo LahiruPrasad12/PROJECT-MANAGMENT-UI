@@ -4,14 +4,14 @@ import Sidenavsupervisor from "../../../layouts/sidenavsupervisor";
 import "../../dashboard/student-dashboard/studenthome.css";
 import "./supervisorHome.css";
 
-export default function SupervisorDocument() {
+export default function SupervisorMemberHome() {
   return (
     <>
       <Sidenavsupervisor />
       <div class="content">
         <div class="container">
           <center>
-            <h1>DOCUMENTATION EVALUATION</h1>
+            <h1>FINAL THESIS EVALUATION</h1>
             <p>Supervisor</p>
             <button type="button" class="presentation">
               Download Marking Scheme
@@ -51,7 +51,7 @@ export default function SupervisorDocument() {
                       <th scope="col">#</th>
                       <th scope="col">Group Name</th>
                       <th scope="col">Topic</th>
-                      <th scope="col">Document</th>
+                      <th scope="col">Final Thesis</th>
                     </tr>
                   </thead>
                   <br />
