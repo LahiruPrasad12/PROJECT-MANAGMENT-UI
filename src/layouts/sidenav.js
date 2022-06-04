@@ -93,12 +93,12 @@ export default function Sidenav(props) {
               <span class="ml-1">Download</span>
             </div>
           </Link>
-          <Link to="/student/uploads">
-            <div className="menusb">
-              <i class="fas fa-cloud-upload-alt"></i>
-              <span>Uploads</span>
-            </div>
-          </Link>
+          {/*<Link to="/student/uploads">*/}
+          {/*  <div className="menusb">*/}
+          {/*    <i class="fas fa-cloud-upload-alt"></i>*/}
+          {/*    <span>Uploads</span>*/}
+          {/*  </div>*/}
+          {/*</Link>*/}
         </div>
       </div>
     </>
