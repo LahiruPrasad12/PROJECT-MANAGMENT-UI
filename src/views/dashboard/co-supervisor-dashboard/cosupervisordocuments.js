@@ -11,7 +11,7 @@ export default function CoSupervisorDocument() {
         <div class="container">
           <center>
             <h1>Documentations Evaluation</h1>
-            <p>Pannel - Member</p>
+            <p>Co-Supervisor</p>
             <button type="button" class="presentation">
               Download Marking Scheme
             </button>
