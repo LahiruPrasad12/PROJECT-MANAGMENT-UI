@@ -3,7 +3,6 @@ import Sidenavadmin from "../../../layouts/sidenavadmin";
 import '../../dashboard/student-dashboard/studenthome.css';
 import Footerdashboard from "../../../layouts/footerdashboard";
 import admin from '../../../apis/modules/admin'
-import SoloAlert from 'soloalert'
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import { ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
@@ -15,7 +14,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import SoloAlert from 'soloalert'
+import SoloAlert from 'soloalert';
 
 const style = {
     position: 'absolute',
@@ -160,19 +159,24 @@ export default function Adminhome() {
 
             await admin.updateUser(payload)
             SoloAlert.alert({
-                title: "Title Here",
-                body: "Alert With An Icon",
+                title: "Success",
+                body: "User updated successfully",
                 icon: "success",
                 theme: "dark",
                 onOk: function () {
-                    window.location = "admin/home"
+                    window.location = "/admin/home"
                 }
             });
-
-
-            window.location = "/admin/home"
         } catch {
-
+            SoloAlert.alert({
+                title: "Error",
+                body: "Sorry! User update Failed",
+                icon: "error",
+                theme: "dark",
+                onOk: function () {
+                    window.location = "/admin/home"
+                }
+            });
         }
     }
 
