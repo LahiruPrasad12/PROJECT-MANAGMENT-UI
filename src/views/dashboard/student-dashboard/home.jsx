@@ -11,7 +11,7 @@ import Loader from '../../../loader/loader'
 export default function Studenthome() {
 
     const [members, setMembers] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true)
