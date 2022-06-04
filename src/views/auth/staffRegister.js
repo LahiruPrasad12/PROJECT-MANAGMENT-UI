@@ -126,7 +126,7 @@ export default function StaffRegister() {
                                         }}
                                     >
                                         {({errors, touched}) => (
-                                            <Form>
+                                            <Form autoComplete="off">
                                                 <div>
                                                     <Field type="text" name="name" id="name" class="form-control"
                                                            placeholder="Name"/>

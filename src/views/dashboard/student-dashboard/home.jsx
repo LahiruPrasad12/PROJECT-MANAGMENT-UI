@@ -42,16 +42,16 @@ export default function Studenthome() {
             {
                 !loading && (
                     <div className="content">
-                        <div className="container" style={{marginRight:'9%'}}>
+                        <div className="container">
                             <center>
                                 <h1>GROUP DETAILS</h1>
                                 <p>Student</p>
-                                <Button className="btn btn-primary" hidden={members.length === 4} sx={{
+                                <button className="btn btn-primary" hidden={members.length === 4} sx={{
                                     float: 'right'
                                 }}
                                         data-bs-toggle="modal" data-bs-target="#addStudent" variant="contained"
                                         disableElevation>Add
-                                    members</Button>
+                                    members</button>
                                 <div style={{marginTop: '5%'}} className="row">
                                     <div className="col">
                                         <table className="table">

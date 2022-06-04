@@ -25,7 +25,7 @@ export default function Submissionsst() {
                                      style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
                                     <p class="numbers"
                                        style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Document</p>
-                                    <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                                    <p class="name" style={{color: 'white', fontWeight: '400'}}>(Click Here to Upload File)</p>
 
                                         <UploadDocument/>
 
@@ -36,7 +36,7 @@ export default function Submissionsst() {
                                      style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
                                     <p className="numbers"
                                        style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Presentation</p>
-                                    <p className="name" style={{color: 'white', fontWeight: '400'}}>Deadline : 2022/10/10</p>
+                                    <p className="name" style={{color: 'white', fontWeight: '400'}}>(Click Here to Upload File)</p>
                                     <UploadPresentation/>
                                 </div>
                             </div>
@@ -45,8 +45,7 @@ export default function Submissionsst() {
                                      style={{height: 'auto', width: 'auto', backgroundColor: '#4285F4'}}>
                                     <p class="numbers"
                                        style={{color: 'white', fontWeight: '600', fontSize: '22px'}}>Final Thesis</p>
-                                    <p class="name" style={{color: 'white', fontWeight: '400'}}>Deadline :
-                                        2022/10/10</p>
+                                    <p class="name" style={{color: 'white', fontWeight: '400'}}>(Click Here to Upload File)</p>
                                     <UploadFinalThesis/>
                                 </div>
                             </div>
