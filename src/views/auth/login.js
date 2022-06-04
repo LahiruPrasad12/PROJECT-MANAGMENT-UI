@@ -42,7 +42,7 @@ export default function Login() {
                 window.location = '/cosupervisor/home'
             } else if (respond.data.user.role === 'supervisor') {
                 window.location = '/supervisor/home'
-            } else {
+            } else if (respond.data.user.role === 'Panel-Member') {
                 window.location = '/pannelmember/home'
             }
 
