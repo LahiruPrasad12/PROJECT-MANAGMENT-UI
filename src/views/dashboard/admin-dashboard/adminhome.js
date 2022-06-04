@@ -260,6 +260,7 @@ export default function Adminhome() {
                                             <form>
                                                 <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
                                                 <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
+                                                    <option name="" value="">---Select Role---</option>
                                                     <option name="supervisor" value="supervisor">Supervisor</option>
                                                     <option name="Co-supervisor" value="Co-supervisor">Co-supervisor</option>
                                                     <option name="Panel-Member" value="Panel-Member">Panel-Member</option>
