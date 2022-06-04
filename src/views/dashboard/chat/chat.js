@@ -11,17 +11,18 @@ import Footerdashboard from "../../../layouts/footerdashboard";
 export default function Chat() {
   const [fetchAgain, setFetchAgain] = useState(false);
 
-  return (
-    <>
-      {/* <Sidenav name="char"/> */}
-      <div className="content">
-        <div className="container">
-          <MyChats fetchAgain={fetchAgain} />
-          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-        </div>
+    return (
+        <>
 
-        <Footerdashboard />
-      </div>
-    </>
-  );
+            {/* <Sidenav name="char"/> */}
+            <div className="content">
+                <div className="container">
+                    <MyChats fetchAgain={fetchAgain} />
+                    
+                </div>
+
+                <Footerdashboard/>
+            </div>
+        </>
+    )
 }
