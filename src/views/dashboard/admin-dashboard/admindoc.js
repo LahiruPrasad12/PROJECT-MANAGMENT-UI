@@ -136,7 +136,7 @@ export default function Admindoc() {
                   }}
                   className="card"
                 >
-                  <h4>Upload Document / Template</h4>
+                  <h4>Upload Document / Marking Schema</h4>
                   <form>
                     <center>
                       <div className="form-group mt-2">
@@ -146,8 +146,8 @@ export default function Admindoc() {
                         >
                           <input {...getInputProps()} />
                           <p>
-                            Drag 'n' drop your file here, or click to select
-                            files
+                            Drag 'n' drop your image file here, or click to
+                            select files
                           </p>
                         </div>
 
@@ -168,7 +168,7 @@ export default function Admindoc() {
                   <br />
                 </div>
               </div>
-              {/*<div class="col">*/}
+              {/<div class="col">/}
               {/*    <div style={{*/}
               {/*        paddingTop: '3%',*/}
               {/*        paddingLeft: '5%',*/}
@@ -200,7 +200,6 @@ export default function Admindoc() {
               {/*        </form>*/}
               {/*        <br/>*/}
               {/*    </div>*/}
-              {/*</div>*/}
             </div>
           </center>
         </div>

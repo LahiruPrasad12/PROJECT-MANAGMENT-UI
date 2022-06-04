@@ -42,8 +42,7 @@ export default function Studenthome() {
             {
                 !loading && (
                     <div className="content">
-
-                        <div className="container">
+                        <div className="container" style={{marginRight:'9%'}}>
                             <center>
                                 <h1>GROUP DETAILS</h1>
                                 <p>Student</p>
