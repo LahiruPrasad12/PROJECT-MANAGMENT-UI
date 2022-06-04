@@ -49,11 +49,10 @@ export default function LandingPage(){
                 <h1>Start Research Project Now.</h1>
               </div>
               <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!
+                Sri Lanka Institute of Information Technology is Proudly Introducing 
+                a New Research Project Management System for the University Students 
+                & the Staff Members.Explore the New Features and Get Done Your All 
+                Works in One Place.
               </p>
               <div class="cta">
 
