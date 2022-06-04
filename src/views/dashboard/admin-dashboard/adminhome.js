@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import Sidenavadmin from "../../../layouts/sidenavadmin";
 import '../../dashboard/student-dashboard/studenthome.css';
 import Footerdashboard from "../../../layouts/footerdashboard";
@@ -15,7 +14,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import { SettingsSystemDaydreamTwoTone } from "@mui/icons-material";
+import SoloAlert from 'soloalert';
 
 const style = {
     position: 'absolute',
@@ -67,23 +66,19 @@ function a11yProps(index) {
 export default function Adminhome() {
     const [users, setUsers] = useState([]);
     const [data, setData] = useState([]);
-    // const [student, setStudent] = useState([]);
-    // const [supervisor, setSupervisor] = useState([]);
-    // const [coSupervisor, setCoSupervisor] = useState([]);
-    // const [staff, setStaff] = useState([]);
-    // const [panelMember, setPanelMember] = useState([]);
-    const [showToast, setShowToast] = useState(false);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [role, setRole] = useState('')
     const [value, setValue] = React.useState(0);
-
-    console.log(role)
+    // const [supervisorData, setSupervisor] = useState('')
+    // const [coSupervisorData, setCoSupervisor] = useState('')
+    // const [staffData, setStaff] = useState('')
+    // const [panelMemberData, setPanelMember] = useState('')
+    // const [studentData, setStudent] = useState('')
 
     const handleChange = (event, newValue) => {
-        console.log(event.target.name)
         var arr = []
         users.map((obj) => {
             return (
@@ -97,16 +92,28 @@ export default function Adminhome() {
         setValue(newValue);
     };
 
+    const getRole = (respond, name) => {
+        var set = respond.filter(obj => {
+            return obj.role === name
+        })
+
+        return set;
+    }
+
     useEffect(() => {
         try {
             const getUsersData = async () => {
                 var arr = []
                 const respond = (await admin.getRoles()).data.data.group
-                var set = respond.filter(obj => {
-                    return obj.role === 'supervisor'
-                })
 
-                set.map((obj) => {
+
+                // var staff = getRole(respond, 'staff')
+                // var coSupervisor = getRole(respond, 'Co-supervisor')
+                // var panelMember = getRole(respond, 'Panel-Member')
+                // var student = getRole(respond, 'student')
+                var supervisor = getRole(respond, 'supervisor')
+
+                supervisor.map((obj) => {
                     return (
                         obj.items.map((e, index) => {
                             arr.push({ ...e, id: index })
@@ -114,10 +121,20 @@ export default function Adminhome() {
                     )
                 })
 
+                // console.log(supervisor)
+
+                // setSupervisor(supervisor[0].items.length)
+                // setCoSupervisor(coSupervisor[0].items.length)
+                // setStaff(staff[0].items.length)
+                // setPanelMember(panelMember[0].items.length)
+                // setStudent(student[0].items.length)
+
+
                 setData(arr)
                 setUsers(respond)
-            }
 
+                // console.log(supervisor[0].items.length)
+            }
             getUsersData()
         } catch {
             setUsers(null)
@@ -130,7 +147,6 @@ export default function Adminhome() {
             await admin.deleteUser(id)
             window.location = "/admin/home"
         } catch {
-            setShowToast(true)
         }
     }
 
@@ -142,19 +158,27 @@ export default function Adminhome() {
             }
 
             await admin.updateUser(payload)
-            window.location = "/admin/home"
+            SoloAlert.alert({
+                title: "Success",
+                body: "User updated successfully",
+                icon: "success",
+                theme: "dark",
+                onOk: function () {
+                    window.location = "/admin/home"
+                }
+            });
         } catch {
-
+            SoloAlert.alert({
+                title: "Error",
+                body: "Sorry! User update Failed",
+                icon: "error",
+                theme: "dark",
+                onOk: function () {
+                    window.location = "/admin/home"
+                }
+            });
         }
     }
-
-    const handleCellClick = (param, event) => {
-        event.stopPropagation();
-    };
-
-    const handleRowClick = (param, event) => {
-        event.stopPropagation();
-    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -178,13 +202,12 @@ export default function Adminhome() {
         { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 70 },
         { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 230 },
         { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 300 },
-        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 150 },
+        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 230 },
         {
             field: "Print",
             headerAlign: 'center',
             align: "center",
             renderCell: (cellValues) => {
-                console.log(cellValues)
                 return (
                     <ButtonGroup>
                         <Button
@@ -193,35 +216,8 @@ export default function Adminhome() {
                             onClick={handleModalOpen}
                             style={{ marginRight: "10px", borderRadius: "5px" }}
                         >
-                             <i class="fas fa-pen"></i>
+                            <i class="fas fa-pen"></i>
                         </Button>
-                        {/* <Modal
-                            hideBackdrop
-                            open={openModal}
-                            onClose={handleModalClose}
-                            aria-labelledby="child-modal-title"
-                            aria-describedby="child-modal-description"
-                        >
-                            <Box sx={{ ...style, width: 500 }}>
-                                <h4 id="child-modal-title" style={{ textAlign: "center" }}>Update User</h4>
-                                <p id="child-modal-description">
-                                    <div className="form-group">
-                                        <form>
-                                            <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
-                                            <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                <option name="supervisor">supervisor</option>
-                                                <option name="Co-supervisor">Co-supervisor</option>
-                                                <option name="Panel-Member">Panel-Member</option>
-                                            </select>
-                                        </form>
-                                    </div>
-                                </p>
-                                <Button
-                                    onClick={() => updateUser(cellValues.row._id)}
-                                    style={{ marginRight: "10px" }}>Update</Button>
-                                <Button onClick={handleModalClose}>Close</Button>
-                            </Box>
-                        </Modal> */}
                         <Modal
                             open={openModal}
                             onClose={handleModalClose}
@@ -238,9 +234,9 @@ export default function Adminhome() {
                                             <form>
                                                 <label style={{ fontWeight: 'bold', color: '#5A5A5A' }}>Role</label>
                                                 <select className="btn btn-light dropdown-toggle" defaultValue={cellValues.row.role} onChange={(e) => setRole(e.target.value)}>
-                                                    <option name="supervisor">Supervisor</option>
-                                                    <option name="Co-supervisor">Co-supervisor</option>
-                                                    <option name="Panel-Member">Panel-Member</option>
+                                                    <option name="supervisor" value="supervisor">Supervisor</option>
+                                                    <option name="Co-supervisor" value="Co-supervisor">Co-supervisor</option>
+                                                    <option name="Panel-Member" value="Panel-Member">Panel-Member</option>
                                                 </select>
                                             </form>
                                         </div>
@@ -294,10 +290,10 @@ export default function Adminhome() {
     ];
 
     const columnsStudent = [
-        { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 70 },
-        { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 230 },
-        { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 300 },
-        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 150 },
+        { field: 'id', headerName: 'ID', headerAlign: 'center', align: "center", width: 200 },
+        { field: 'name', headerName: 'Name', headerAlign: 'center', align: "center", width: 300 },
+        { field: 'email', headerName: 'Email', headerAlign: 'center', align: "center", width: 330 },
+        { field: 'role', headerName: 'Role', headerAlign: 'center', align: "center", width: 200 },
     ];
 
     return (
@@ -307,126 +303,111 @@ export default function Adminhome() {
                 <div class="container">
                     <center>
                         <h1>USERS DETAILS</h1>
-                        <p>Admin</p>
+                        {/* <p>Admin</p> */}
+                        <br />
+                        <Box sx={{ width: '100%' }}>
+                            <p>Admin</p>
 
-                        <div class="row" style={{paddingTop: '1%'}}>
-                        <div class="col-md-2">
-                            <div class="card-counter primary">
-                                <i class="fa fa-users"></i>
-                                <span class="count-numbers">12</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>All</span>
-                            </div>
-                            </div>                        
-                            <div class="col-md-2">
-                            <div class="card-counter info">
-                                <i class="fas fa-user-graduate"></i>
-                                <span class="count-numbers">12</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Supervisors</span>
-                            </div>
-                            </div>
-                            <div class="col-md-2">
-                            <div class="card-counter danger">
-                                <i class="fas fa-user-md"></i>
-                                <span class="count-numbers">599</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Co-Supervisors</span>
-                            </div>
-                            </div>
+                            <div class="row" style={{ paddingTop: '1%' }}>
+                                <div class="col-md-2">
+                                    <div class="card-counter primary">
+                                        <i class="fa fa-users"></i>
+                                        <span class="count-numbers">12</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>All</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card-counter info">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <span class="count-numbers">12</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Supervisors</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card-counter danger">
+                                        <i class="fas fa-user-md"></i>
+                                        <span class="count-numbers">599</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Co-Supervisors</span>
+                                    </div>
+                                </div>
 
-                            <div class="col-md-2">
-                            <div class="card-counter success">
-                                <i class="fas fa-user-shield"></i>
-                                <span class="count-numbers">6875</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Panel Members</span>
-                            </div>
-                            </div>
-
-                            <div class="col-md-2">
-                            <div class="card-counter success" style={{backgroundColor: '#ffbb33'}}>
-                                <i class="fa fa-users"></i>
-                                <span class="count-numbers">25</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Staff</span>
-                            </div>
-                            </div>
-                            <div class="col-md-2">
-                            <div class="card-counter info" style={{backgroundColor: '#2BBBAD'}}>
-                                <i class="fas fa-user-friends"></i>
-                                <span class="count-numbers">35</span>
-                                <span class="count-name" style={{color: 'white', fontWeight: '600'}}>Students</span>
-                            </div>
-                            </div>
-                            </div>
-                        <Box sx={{ width: '100%', paddingTop: '5%'}}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
-                                    <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
-                                    <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
-                                    <Tab label="Staff" name="staff" {...a11yProps(3)} />
-                                    <Tab label="Student" name="student" {...a11yProps(4)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={value} index={0}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
+                                <div class="col-md-2">
+                                    <div class="card-counter success">
+                                        <i class="fas fa-user-shield"></i>
+                                        <span class="count-numbers">6875</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Panel Members</span>
+                                    </div>
                                 </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
+                                <div class="col-md-2">
+                                    <div class="card-counter info" style={{ backgroundColor: '#2BBBAD' }}>
+                                        <i class="fas fa-user-friends"></i>
+                                        <span class="count-numbers">35</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Students</span>
+                                    </div>
                                 </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={2}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={3}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columns}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={4}>
-                                <div style={{ height: 530, width: '100%' }}>
-                                    <DataGrid
-                                        rows={data}
-                                        columns={columnsStudent}
-                                        pageSize={8}
-                                        rowsPerPageOptions={[8]}
-                                        onRowClick={() => handleRowClick}
-                                        onCellClick={() => handleCellClick}
-                                    />
-                                </div>
-                            </TabPanel>
+                                <Box sx={{ width: '100%', paddingTop: '5%' }}>
+                                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                            <Tab label="Supervisor" name="supervisor" {...a11yProps(0)} />
+                                            <Tab label="Co-supervisor" name="Co-supervisor" {...a11yProps(1)} />
+                                            <Tab label="Panel Member" name="Panel-Member" {...a11yProps(2)} />
+                                            <Tab label="Staff" name="staff" {...a11yProps(3)} />
+                                            <Tab label="Student" name="student" {...a11yProps(4)} />
+                                        </Tabs>
+                                    </Box>
+                                    <TabPanel value={value} index={0}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={1}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={2}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={3}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columns}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel value={value} index={4}>
+                                        <div style={{ height: 530, width: '100%' }}>
+                                            <DataGrid
+                                                rows={data}
+                                                columns={columnsStudent}
+                                                pageSize={8}
+                                                rowsPerPageOptions={[8]}
+                                            />
+                                        </div>
+                                    </TabPanel>
+                                </Box>
+                            </div>
                         </Box>
-
                     </center>
                 </div>
                 <Footerdashboard />
