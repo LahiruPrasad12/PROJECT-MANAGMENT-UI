@@ -72,6 +72,13 @@ export default function Adminhome() {
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [role, setRole] = useState('')
     const [value, setValue] = React.useState(0);
+
+    const [studentCount, setStudentCount] = React.useState(0);
+    const [adminCount, setAdminCount] = React.useState(1);
+    const [coSupervisorCount, setCoSupervisorsCount] = React.useState(0);
+    let [panelCount, setPanelCount] = React.useState(0);
+    const [supervisorCount, setSupervisorCount] = React.useState(0);
+    let [all, setAll] = React.useState(0);
     // const [supervisorData, setSupervisor] = useState('')
     // const [coSupervisorData, setCoSupervisor] = useState('')
     // const [staffData, setStaff] = useState('')
@@ -105,7 +112,26 @@ export default function Adminhome() {
             const getUsersData = async () => {
                 var arr = []
                 const respond = (await admin.getRoles()).data.data.group
+                console.log('ava')
+                console.log(respond)
+                let total = 0;
+                respond.map((element)=>{
+                    total = total+element.items.length
 
+
+                    if(element.role === 'Panel-Member'){
+                        setPanelCount(element.items.length)
+                    }else if(element.role === 'supervisor'){
+                        setSupervisorCount(element.items.length)
+                    }else if(element.role === 'Co-supervisor'){
+                        setCoSupervisorsCount(element.items.length)
+                    }else if(element.role === 'student'){
+                        setStudentCount(element.items.length)
+                    }
+
+                })
+
+                setAll(total)
 
                 // var staff = getRole(respond, 'staff')
                 // var coSupervisor = getRole(respond, 'Co-supervisor')
@@ -313,21 +339,21 @@ export default function Adminhome() {
                                 <div class="col-md-2">
                                     <div class="card-counter primary">
                                         <i class="fa fa-users"></i>
-                                        <span class="count-numbers">12</span>
+                                        <span class="count-numbers">{all}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>All</span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card-counter info">
                                         <i class="fas fa-user-graduate"></i>
-                                        <span class="count-numbers">12</span>
+                                        <span class="count-numbers">{supervisorCount}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Supervisors</span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card-counter danger">
                                         <i class="fas fa-user-md"></i>
-                                        <span class="count-numbers">599</span>
+                                        <span class="count-numbers">{coSupervisorCount}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Co-Supervisors</span>
                                     </div>
                                 </div>
@@ -335,14 +361,14 @@ export default function Adminhome() {
                                 <div class="col-md-2">
                                     <div class="card-counter success">
                                         <i class="fas fa-user-shield"></i>
-                                        <span class="count-numbers">6875</span>
+                                        <span class="count-numbers">{panelCount}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Panel Members</span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="card-counter info" style={{ backgroundColor: '#2BBBAD' }}>
                                         <i class="fas fa-user-friends"></i>
-                                        <span class="count-numbers">35</span>
+                                        <span class="count-numbers">{studentCount}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Students</span>
                                     </div>
                                 </div>
