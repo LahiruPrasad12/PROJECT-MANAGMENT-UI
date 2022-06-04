@@ -133,18 +133,18 @@ export default function Allocatepm() {
             <Sidenavadmin />
             <div class="content">
                 <div class="container">
-                    <center>
+                    <center >
                         <h1>ALLOCATE PANEL MEMBERS</h1>
                         <p><Link to='/admin/home'>Admin</Link> / Allocate Panel Members</p>
                         <div style={{ paddingTop: '5%' }} class="row">
                             <div class="col">
-                                <form action="src/views/dashboard/admin-dashboard/allocatepm#" method="get" id="searchForm" class="input-group">
+                                {/* <form action="src/views/dashboard/admin-dashboard/allocatepm#" method="get" id="searchForm" class="input-group">
                                     <input type="search" class="form-control" name="search" placeholder="Search Groups..."
                                     />
                                     <button type="button" style={{ borderRadius: '0px' }} class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
                                     </button>
-                                </form>
+                                </form> */}
                                 <br />
                                 <div style={{ height: 530, width: '50%' }}>
                                     <DataGrid
@@ -154,13 +154,12 @@ export default function Allocatepm() {
                                         rowsPerPageOptions={[8]}
                                     />
                                 </div>
-                                <br />
                             </div>
 
                         </div>
                     </center>
                 </div>
-                <Footerdashboard />
+                <Footerdashboard/>
             </div>
         </>
     )
