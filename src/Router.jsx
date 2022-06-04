@@ -16,7 +16,7 @@ const Routers = () => {
       <SupervisorRoutes />
       <CoSupervisorRoutes />
       <PannelMemberRoutes />
-        <Chat/>
+      <Chat />
     </div>
   );
 };

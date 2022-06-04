@@ -14,6 +14,9 @@ export default function Sidenavsupervisor() {
     localStorage.clear();
     window.location = "/login";
   };
+  const moveToChat = () => {
+    window.location = "/cosupervisor/chat";
+  };
   return (
     <>
       <div
@@ -59,8 +62,8 @@ export default function Sidenavsupervisor() {
             <span>Topic Status</span>
           </div>
         </Link>
-        <Link to="/cosupervisor/home">
-          <div className="menusb">
+        <Link to="#">
+          <div className="menusb" onClick={moveToChat}>
             <i class="fas fa-comment"></i>
             <span>Chat</span>
           </div>
