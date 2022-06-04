@@ -21,6 +21,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
 import Loader from "../../../../../loader/loader";
+import chatAPI from "../../../../../apis/modules/chat";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -117,6 +118,7 @@ export default function RegisterTopicToSupervisor(props) {
                 name: name
             }
             await topicAPI.submitTopicToSupervisor(payload)
+            await chatAPI.createChat(payload)
             setSuccessShowToast(true)
             setOpen(false);
             window.location.reload(false);

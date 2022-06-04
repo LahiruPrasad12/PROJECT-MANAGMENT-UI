@@ -16,6 +16,7 @@ import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
 import {useDropzone} from "react-dropzone";
 import panelAPI from '../../../../../apis/modules/panelmember'
+import chatAPI from '../../../../../apis/modules/chat'
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -148,6 +149,7 @@ export default function SubmitTopicToPanel(props) {
             formdata.append("topic_id", props.topic._id);
             formdata.append("panel_member_id", panel._id);
             await topicAPI.submitTopicToPanel(formdata)
+            await chatAPI.createChat(formdata)
             setSuccessShowToast(true)
             setOpen(false);
             window.location.reload(false);
