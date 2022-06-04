@@ -120,7 +120,7 @@ export default function Admindoc() {
                                     paddingRight: '5%',
                                     paddingBottom: '3%'
                                 }} className="card">
-                                    <h4>Upload Document / Template</h4>
+                                    <h4>Upload Document / Marking Schema</h4>
                                     <form>
                                         <center>
                                             <div className="form-group mt-2">
