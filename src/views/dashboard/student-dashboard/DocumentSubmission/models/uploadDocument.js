@@ -8,15 +8,11 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import {useEffect, useMemo, useState} from "react";
-import topicAPI from "../../../../../apis/modules/topic";
-import LoadingButton from "@mui/lab/LoadingButton";
-import SendIcon from '@mui/icons-material/Send';
-import ErrorToast from "../../../../../toast/error";
-import Success from "../../../../../toast/success";
+import {useMemo, useState} from "react";
 import {useDropzone} from "react-dropzone";
-import panelAPI from '../../../../../apis/modules/panelmember'
-import chatAPI from '../../../../../apis/modules/chat'
+import documentAPI from "../../../../../apis/modules/document";
+import Success from "../../../../../toast/success";
+import ErrorToast from "../../../../../toast/error";
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
     '& .MuiDialogContent-root': {
@@ -33,7 +29,7 @@ export interface DialogTitleProps {
     onClose: () => void;
 }
 
-const BootstrapDialogTitle = (props: DialogTitleProps) => {
+const UploadDocument = (props: DialogTitleProps) => {
     const {children, onClose, ...other} = props;
 
     return (
@@ -57,24 +53,15 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function SubmitTopicToPanel(props) {
-    const [openned, setOpen] = React.useState(false);
-    const [btnLoading, setBtnLoading] = useState(false);
+export default function CustomizedDialogs() {
+    const [openModel, setOpenModel] = React.useState(false);
 
+    const [value, setValue] = React.useState(0);
+
+    const [files, setFiles] = useState([]);
+    const [btnLoading, setBtnLoading] = useState(false);
     const [showSuccessToast, setSuccessShowToast] = useState(false);
     const [showErrorToast, setErrorShowToast] = useState(false);
-
-    const [panel, setPanel] = useState([]);
-
-    useEffect(()=>{
-        const getOurPanel=async ()=>{
-            let result = (await panelAPI.getOurPanel()).data.results[0]
-            setPanel(result)
-            console.log(result)
-        }
-        getOurPanel()
-    },[])
-    const [files, setFiles] = useState([]);
 
     const baseStyle = {
         flex: 1,
@@ -135,24 +122,20 @@ export default function SubmitTopicToPanel(props) {
         </li>
     ));
 
-
-    const handleClose = () => {
-        setOpen(false);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
     };
 
-    const submitTopicToPanel = async () => {
+    const uploadDocument = async () => {
         try {
+
             setBtnLoading(true)
 
             let formdata = new FormData();
             formdata.append("doc", acceptedFiles[0]);
-            formdata.append("topic_id", props.topic._id);
-            formdata.append("panel_member_id", panel._id);
-            await topicAPI.submitTopicToPanel(formdata)
-            await chatAPI.createChat(formdata)
+
+            await documentAPI.uploadDocument(formdata)
             setSuccessShowToast(true)
-            setOpen(false);
-            window.location.reload(false);
 
         } catch (e) {
             setErrorShowToast(true)
@@ -160,68 +143,77 @@ export default function SubmitTopicToPanel(props) {
         setBtnLoading(false)
     }
 
+
     const handleClickOpen = () => {
-        setOpen(true)
-    }
+        setSuccessShowToast(false)
+        setErrorShowToast(false)
+        setOpenModel(true);
+    };
+    const handleClose = () => {
+        setOpenModel(false);
+    };
 
     return (
         <div>
-            {
-                showSuccessToast && (<>
-                        <Success message="Your topic submit to supervisor successfully"/>
-                    </>
-                )
-            }
 
-            {
-                showErrorToast && (<>
-                        <ErrorToast message="There have some error. Please try again later"/>
-                    </>
-                )
-            }
-            <Button variant="outlined" sx={{
-                float: 'right',
-            }} onClick={handleClickOpen}>
-                Submit My Topic to Panel
-            </Button>
+            <button type="button" className="btn btn-outline-light" onClick={handleClickOpen}>Upload</button>
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                disableEscapeKeyDown={true}
-                open={openned}
-
+                open={openModel}
             >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    SUBMIT OUR TOPIC TO PANEL
-                </BootstrapDialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        <form>
-                            <div className="form-group mt-2">
-                                <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Panel
-                                    member</label>
-                                <input className="form-control" id="" disabled={true}
-                                       placeholder="Enter Your Topic Name" required value={panel.name}/>
-                            </div>
-                            <div className="form-group mt-2">
-                                <label className="mt-4" style={{fontWeight: 'bold', color: '#5A5A5A'}}>Topic
-                                    Name</label>
-                                <textarea className="form-control" id="" disabled={true}
-                                          placeholder="Enter Your Topic Name" required style={{height: '100px'}}
-                                          value={props.topic.name}/>
-                            </div>
-                            <div className="form-group mt-2">
-                                <div hidden={filepath.length > 0} {...getRootProps({style})}>
-                                    <input {...getInputProps()} />
-                                    <p>Drag 'n' drop your image file here, or click to select files</p>
-                                </div>
+                {
+                    showSuccessToast && (<>
+                            <Success message="Document upload successfully"/>
+                        </>
+                    )
+                }
 
-                                <h4>File Details</h4>
-                                <ul>{filepath}</ul>
-                            </div>
-                            <br/>
+                {
+                    showErrorToast && (<>
+                            <ErrorToast message="Please upload PDF document"/>
+                        </>
+                    )
+                }
+                <UploadDocument id="customized-dialog-title" onClose={handleClose}>
+                    UPLOAD DOCUMENT
+                </UploadDocument>
+                <DialogContent dividers>
+                    <div
+                        style={{
+                            paddingTop: "3%",
+                            paddingLeft: "5%",
+                            paddingRight: "5%",
+                            paddingBottom: "3%",
+                        }}
+                        className="card"
+                    >
+                        <h4>Upload Documentation</h4>
+                        <form>
+                            <center>
+                                <div className="form-group mt-2">
+                                    <div hidden={filepath.length > 0} {...getRootProps({style})}>
+                                        <input {...getInputProps()} />
+                                        <p>Drag 'n' drop your image file here, or click to select files</p>
+                                    </div>
+
+                                    <h4>File Details</h4>
+                                    <ul>{filepath}</ul>
+                                </div>
+                            </center>
+                            <button
+                                style={{borderRadius: "0", width: "100%"}}
+                                type="submit"
+                                className="btn btn-primary btn-lg"
+                                onClick={uploadDocument}
+                                disabled={btnLoading || filepath.length === 0}
+                            >
+                                {btnLoading ? 'Uploading...' : 'Upload Documentation'}
+                            </button>
                         </form>
-                    </Typography>
+                        <br/>
+                    </div>
+
                     <Typography gutterBottom>
                         Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
                         magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
@@ -229,19 +221,11 @@ export default function SubmitTopicToPanel(props) {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <LoadingButton
-                        onClick={submitTopicToPanel}
-                        endIcon={<SendIcon/>}
-                        loading={btnLoading}
-                        loadingPosition="end"
-                        variant="contained"
-                    >
-                        Send
-                    </LoadingButton>
+                    <Button autoFocus onClick={handleClose}>
+                        Close
+                    </Button>
                 </DialogActions>
-
             </BootstrapDialog>
-
         </div>
     );
 }

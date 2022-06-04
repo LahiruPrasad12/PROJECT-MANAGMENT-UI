@@ -4,7 +4,7 @@ import StudentHome from "../views/dashboard/student-dashboard/home";
 import Documents from "../views/dashboard/student-dashboard/documents";
 import Groupregister from "../views/dashboard/student-dashboard/groupregister";
 import Topicregister from "../views/dashboard/student-dashboard/TopicRegistration/topicregister";
-import Submissionsst from "../views/dashboard/student-dashboard/submissionsst";
+import Submissionsst from "../views/dashboard/student-dashboard/DocumentSubmission/submissionsst";
 import Uploads from "../views/dashboard/student-dashboard/uploads";
 // import SdentHome from '../views/student/studenthome'
 
