@@ -78,12 +78,8 @@ export default function Adminhome() {
     const [coSupervisorCount, setCoSupervisorsCount] = React.useState(0);
     let [panelCount, setPanelCount] = React.useState(0);
     const [supervisorCount, setSupervisorCount] = React.useState(0);
+    const [userId, setUserId] = React.useState('');
     let [all, setAll] = React.useState(0);
-    // const [supervisorData, setSupervisor] = useState('')
-    // const [coSupervisorData, setCoSupervisor] = useState('')
-    // const [staffData, setStaff] = useState('')
-    // const [panelMemberData, setPanelMember] = useState('')
-    // const [studentData, setStudent] = useState('')
 
     const handleChange = (event, newValue) => {
         var arr = []
@@ -115,17 +111,17 @@ export default function Adminhome() {
                 console.log('ava')
                 console.log(respond)
                 let total = 0;
-                respond.map((element)=>{
-                    total = total+element.items.length
+                respond.map((element) => {
+                    total = total + element.items.length
 
 
-                    if(element.role === 'Panel-Member'){
+                    if (element.role === 'Panel-Member') {
                         setPanelCount(element.items.length)
-                    }else if(element.role === 'supervisor'){
+                    } else if (element.role === 'supervisor') {
                         setSupervisorCount(element.items.length)
-                    }else if(element.role === 'Co-supervisor'){
+                    } else if (element.role === 'Co-supervisor') {
                         setCoSupervisorsCount(element.items.length)
-                    }else if(element.role === 'student'){
+                    } else if (element.role === 'student') {
                         setStudentCount(element.items.length)
                     }
 
@@ -133,10 +129,6 @@ export default function Adminhome() {
 
                 setAll(total)
 
-                // var staff = getRole(respond, 'staff')
-                // var coSupervisor = getRole(respond, 'Co-supervisor')
-                // var panelMember = getRole(respond, 'Panel-Member')
-                // var student = getRole(respond, 'student')
                 var supervisor = getRole(respond, 'supervisor')
 
                 supervisor.map((obj) => {
@@ -147,19 +139,8 @@ export default function Adminhome() {
                     )
                 })
 
-                // console.log(supervisor)
-
-                // setSupervisor(supervisor[0].items.length)
-                // setCoSupervisor(coSupervisor[0].items.length)
-                // setStaff(staff[0].items.length)
-                // setPanelMember(panelMember[0].items.length)
-                // setStudent(student[0].items.length)
-
-
                 setData(arr)
                 setUsers(respond)
-
-                // console.log(supervisor[0].items.length)
             }
             getUsersData()
         } catch {
@@ -168,9 +149,9 @@ export default function Adminhome() {
         }
     }, [])
 
-    const deleteUser = async (id) => {
+    const deleteUser = async () => {
         try {
-            await admin.deleteUser(id)
+            await admin.deleteUser(userId)
             window.location = "/admin/home"
         } catch {
         }
@@ -179,7 +160,7 @@ export default function Adminhome() {
     const updateUser = async (id) => {
         try {
             let payload = {
-                staff_id: id,
+                staff_id: userId,
                 role
             }
 
@@ -212,6 +193,7 @@ export default function Adminhome() {
 
     const handleModalOpen = () => {
         setOpenModal(true);
+        // setUserId(id)
     };
 
     const handleModalClose = () => {
@@ -239,7 +221,7 @@ export default function Adminhome() {
                         <Button
                             variant="contained"
                             color="success"
-                            onClick={handleModalOpen}
+                            onClick={() => { handleModalOpen(); setUserId(cellValues.row._id) }}
                             style={{ marginRight: "10px", borderRadius: "5px" }}
                         >
                             <i class="fas fa-pen"></i>
@@ -269,7 +251,7 @@ export default function Adminhome() {
                                         </div>
                                     </p>
                                     <Button
-                                        onClick={() => updateUser(cellValues.row._id)}
+                                        onClick={() => updateUser()}
                                         style={{ marginRight: "10px" }}>Update</Button>
                                     <Button onClick={handleModalClose}>Close</Button>
                                 </Typography>
@@ -278,7 +260,7 @@ export default function Adminhome() {
                         <Button
                             variant="contained"
                             color="error"
-                            onClick={handleClickOpen}
+                            onClick={() => { handleClickOpen(); setUserId(cellValues.row._id) }}
                             style={{ borderRadius: "5px" }}
                         >
                             <i class="fas fa-trash"></i>
@@ -303,7 +285,7 @@ export default function Adminhome() {
                                 <Button autoFocus onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button onClick={() => deleteUser(cellValues.row._id)} autoFocus>
+                                <Button onClick={() => deleteUser()} autoFocus>
                                     Delete
                                 </Button>
                             </DialogActions>
