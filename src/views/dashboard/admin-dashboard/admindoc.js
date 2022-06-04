@@ -168,38 +168,6 @@ export default function Admindoc() {
                   <br />
                 </div>
               </div>
-              {/<div class="col">/}
-              {/*    <div style={{*/}
-              {/*        paddingTop: '3%',*/}
-              {/*        paddingLeft: '5%',*/}
-              {/*        paddingRight: '5%',*/}
-              {/*        paddingBottom: '3%'*/}
-              {/*    }} className="card">*/}
-              {/*        <h4>Upload Document / Template</h4>*/}
-              {/*        <form>*/}
-              {/*            <center>*/}
-              {/*                <div className="form-group mt-2">*/}
-              {/*                    <div hidden={filepath.length > 0} {...getRootProps({style})}>*/}
-              {/*                        <input {...getInputProps()} />*/}
-              {/*                        <p>Drag 'n' drop your image file here, or click to select files</p>*/}
-              {/*                    </div>*/}
-
-              {/*                    <h4>File Details</h4>*/}
-              {/*                    <ul>{filepath}</ul>*/}
-              {/*                </div>*/}
-              {/*            </center>*/}
-              {/*            <button*/}
-              {/*                style={{borderRadius: "0", width: "100%"}}*/}
-              {/*                type="submit"*/}
-              {/*                className="btn btn-primary btn-lg"*/}
-              {/*                onClick={uploadMarkingSchema}*/}
-              {/*                disabled={btnLoading || filepath.length === 0}*/}
-              {/*            >*/}
-              {/*                {btnLoading ? 'Uploading...' : 'Upload Marking Schema'}*/}
-              {/*            </button>*/}
-              {/*        </form>*/}
-              {/*        <br/>*/}
-              {/*    </div>*/}
             </div>
           </center>
         </div>

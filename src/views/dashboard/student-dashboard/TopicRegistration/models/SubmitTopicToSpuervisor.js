@@ -212,7 +212,6 @@ export default function SubmitTopicToCoSupervisor(props) {
                       placeholder="Enter Your Topic Name"
                       required
                       style={{ height: "100px" }}
-                      value={props.topic.name}
                     />
                   </div>
                   <br />
