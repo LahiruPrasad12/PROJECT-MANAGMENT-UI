@@ -159,11 +159,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                             ) : (
                                 <>
                                     {selectedChat.chatName.toUpperCase()}
-                                    {/*<UpdateGroupChatModal*/}
-                                    {/*  fetchMessages={fetchMessages}*/}
-                                    {/*  fetchAgain={fetchAgain}*/}
-                                    {/*  setFetchAgain={setFetchAgain}*/}
-                                    {/*/>*/}
+                                    
                                 </>
                             ))}
                     </div>
@@ -175,43 +171,30 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
 
                             />
                         ) : (
+                            <div class="mesgs">
                             <div className="chatContent">
                                 <ScrollableChat messages={messages}/>
                             </div>
+        </div>
                         )}
 
                         <div
                             onKeyDown={sendMessage}
                             id="first-name"
-
+                            class="input_msg_write"
                         >
-                            {istyping ? (
-                                <div>
-                                    <Lottie
-                                        options={defaultOptions}
-                                        // height={50}
-                                        width={70}
-                                        style={{marginBottom: 15, marginLeft: 0}}
-                                    />
-                                </div>
-                            ) : (
-                                <></>
-                            )}
                             <input type="text"
-
+                                   class="write_msg"
                                    placeholder="Enter a message.."
                                    value={newMessage}
                                    onChange={typingHandler}
                             />
+                            
                         </div>
                     </div>
                 </>
             ) : (
-                // to get socket.io on same page
                 <div>
-                    <div>
-                        Click on a user to start chatting
-                    </div>
                 </div>
             )}
         </>
@@ -219,3 +202,4 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
 };
 
 export default SingleChat;
+              

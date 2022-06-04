@@ -10,7 +10,7 @@ import Footerdashboard from "../../../layouts/footerdashboard";
 
 export default function Chat() {
 
-    const [fetchAgain, setFetchAgain] = useState(false);
+    const [fetchAgain] = useState(false);
 
     return (
         <>
@@ -19,14 +19,11 @@ export default function Chat() {
             <div className="content">
                 <div className="container">
                     <MyChats fetchAgain={fetchAgain} />
-                    <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+                    
                 </div>
 
                 <Footerdashboard/>
             </div>
-            HI
-
-
         </>
     )
 }
