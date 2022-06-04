@@ -111,7 +111,7 @@ export default function Header() {
                 <>
                   <Link to="/panelmember/home">
                     <li>
-                      <a>panel Member Dashboard</a>
+                      <a>Panel Member Dashboard</a>
                     </li>
                   </Link>
                   <Link to="/login">

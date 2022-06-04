@@ -16,8 +16,6 @@ export default function Staffwaiting() {
       window.location = '/cosupervisor/home'
     }else if(loggedIn.role === 'Panel-Member'){
       window.location = '/panelmember/home'
-    }else {
-      window.location = '/student/staffwaiting'
     }
     
     
@@ -43,9 +41,7 @@ export default function Staffwaiting() {
           <Alert show={show} variant="success">
             <Alert.Heading>Hey {loggedIn.name}, Nice to see you</Alert.Heading>
             <p>
-              Aww yeah, you successfully read this important alert message. This
-              example text is going to run a bit longer so that you can see how
-              spacing within an
+              Please wait here for for a while. Administrator will assign you a new role!
             </p>
             <hr />
             <div className="d-flex justify-content-end">
