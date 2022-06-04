@@ -78,7 +78,6 @@ export default function RegisterTopicToSupervisor(props) {
     const [loading, setLoading] = useState(false);
 
 
-
     const handleClickOpen = async () => {
         try {
             setLoading(true)
@@ -100,12 +99,18 @@ export default function RegisterTopicToSupervisor(props) {
     };
 
     const selectCategory = async (event: selectedCategory) => {
-        setSelectedCategory(event.target.value);
-        const payload = {
-            category_id: event.target.value
+        try {
+            setLoading(true)
+            setSelectedCategory(event.target.value);
+            const payload = {
+                category_id: event.target.value
+            }
+            let supervisorsRespond = (await topicAPI.getStaff(payload, 'supervisor')).data.data.filteredData
+            setSupervisors(supervisorsRespond)
+        } catch (e) {
+
         }
-        let supervisorsRespond = (await topicAPI.getStaff(payload, 'supervisor')).data.data.filteredData
-        setSupervisors(supervisorsRespond)
+        setLoading(false)
 
     };
 
@@ -174,7 +179,8 @@ export default function RegisterTopicToSupervisor(props) {
                                             <div className="col-md-6">
 
                                                 <FormControl loading fullWidth>
-                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select
+                                                        your
                                                         category</InputLabel>
                                                     <Select
                                                         size="small"
@@ -188,7 +194,8 @@ export default function RegisterTopicToSupervisor(props) {
                                                     >
                                                         {
                                                             category.map((element) => {
-                                                                return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                                return <MenuItem
+                                                                    value={element._id}>{element.name}</MenuItem>
                                                             })
                                                         }
                                                     </Select>
@@ -196,7 +203,8 @@ export default function RegisterTopicToSupervisor(props) {
                                             </div>
                                             <div className="col-md-6">
                                                 <FormControl fullWidth disabled={!supervisors}>
-                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your
+                                                    <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select
+                                                        your
                                                         professor</InputLabel>
                                                     <Select
                                                         size="small"
@@ -209,7 +217,8 @@ export default function RegisterTopicToSupervisor(props) {
 
                                                         {
                                                             supervisors.map((element) => {
-                                                                return <MenuItem value={element._id}>{element.name}</MenuItem>
+                                                                return <MenuItem
+                                                                    value={element._id}>{element.name}</MenuItem>
                                                             })
                                                         }
 
