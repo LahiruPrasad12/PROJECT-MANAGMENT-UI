@@ -11,7 +11,7 @@ import Loader from '../../../loader/loader'
 export default function Studenthome() {
 
     const [members, setMembers] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true)
@@ -42,8 +42,7 @@ export default function Studenthome() {
             {
                 !loading && (
                     <div className="content">
-
-                        <div className="container">
+                        <div className="container" style={{marginRight:'9%'}}>
                             <center>
                                 <h1>GROUP DETAILS</h1>
                                 <p>Student</p>

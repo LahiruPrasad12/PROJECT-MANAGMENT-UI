@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 import auth from "../apis/modules/auth";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Image from "../assets/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.webp";
 
 export default function Sidenav(props) {
@@ -88,16 +89,16 @@ export default function Sidenav(props) {
           </Link>
           <Link to="/student/document">
             <div className="menusb">
-              <i class="fas fa-file-alt"></i>
-              <span>Documents</span>
+              <ArrowDownwardIcon/>
+              <span class="ml-1">Download</span>
             </div>
           </Link>
-          <Link to="/student/uploads">
-            <div className="menusb">
-              <i class="fas fa-cloud-upload-alt"></i>
-              <span>Uploads</span>
-            </div>
-          </Link>
+          {/*<Link to="/student/uploads">*/}
+          {/*  <div className="menusb">*/}
+          {/*    <i class="fas fa-cloud-upload-alt"></i>*/}
+          {/*    <span>Uploads</span>*/}
+          {/*  </div>*/}
+          {/*</Link>*/}
         </div>
       </div>
     </>

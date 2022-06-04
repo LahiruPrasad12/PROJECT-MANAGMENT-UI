@@ -12,9 +12,7 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
   return (
     <div>
 
-        <div class="col-md-4" id="content">
             <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-        </div>
 
 
     </div>
