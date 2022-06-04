@@ -3,6 +3,6 @@ const resource = "api/download";
 
 export default {
     downloadTopicDocByPanel: () => api.get(`${resource}/topicDoc`),
-    acceptRequest: (payload) => api.patch(`${resource}`, payload),
+    downloadMarkingSchema: () => api.get(`${resource}/marking-schema`),
     declineRequest: (payload) => api.patch(`${resource}`, payload),
 };
