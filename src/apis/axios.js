@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://project-managment-ui.vercel.app'
+    baseURL: 'https://reg14-new.herokuapp.com'
 })
 
 if (localStorage.getItem('JWT')) {
