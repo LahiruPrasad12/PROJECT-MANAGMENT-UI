@@ -39,7 +39,10 @@ export default function Login() {
         window.location = "/supervisor/home";
       } else if (respond.data.user.role === "Panel-Member") {
         window.location = "/panelmember/home";
+      } else if (respond.data.user.role === "staff") {
+        window.location = "/student/staffwaiting";
       }
+      
     } catch (e) {
       localStorage.clear();
       setError("Your user name or password is incorrect");
@@ -92,6 +95,7 @@ export default function Login() {
                       </Link>
                     </div>
                     <p class="login-card-description">Sign into your account</p>
+                    <Link to = '/staff-register' class="btn btn-info" style={{marginBottom: '3%'}}>Staff Register</Link>
                     <Formik
                       initialValues={{
                         email: "",
@@ -143,9 +147,6 @@ export default function Login() {
                         </Form>
                       )}
                     </Formik>
-                    <a href="#" class="forgot-password-link">
-                      Forgot password?
-                    </a>
                     <p class="login-card-footer-text">
                       Don't have an account?{" "}
                       <a href="/register" class="text-reset">

@@ -59,6 +59,7 @@ export default function StudentRegister() {
                                                           alt="Logo"/></Link>
                                     </div>
                                     <p class="login-card-description">Signup to your account</p>
+                                    <Link to = '/staff-register' class="btn btn-info" style={{marginBottom: '3%'}}>Staff Register</Link>
                                     <Formik
                                         initialValues={{
                                             name: '',

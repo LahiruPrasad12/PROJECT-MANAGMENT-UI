@@ -348,6 +348,13 @@ export default function Adminhome() {
                                     </div>
                                 </div>
                                 <div class="col-md-2">
+                                    <div class="card-counter success" style={{ backgroundColor: '#ffbb33' }}>
+                                        <i class="fas fa-user-cog"></i>
+                                        <span class="count-numbers">{panelCount}</span>
+                                        <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Staff</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
                                     <div class="card-counter info" style={{ backgroundColor: '#2BBBAD' }}>
                                         <i class="fas fa-user-friends"></i>
                                         <span class="count-numbers">{studentCount}</span>

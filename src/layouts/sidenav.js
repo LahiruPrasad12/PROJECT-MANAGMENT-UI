@@ -43,7 +43,7 @@ export default function Sidenav(props) {
                 <li class="rela-inline">
                   <Link to="/profile">
                     <IconButton>
-                      <Avatar alt="Remy Sharp" src="" />
+                      <Avatar alt="Remy Sharp" src="https://i.postimg.cc/fWFqYmvx/ezgif-com-gif-maker.gif" />
                     </IconButton>
                   </Link>
                 </li>
