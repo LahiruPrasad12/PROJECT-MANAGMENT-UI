@@ -38,6 +38,12 @@ export default function Login() {
 
             } else if (respond.data.user.role === 'admin') {
                 window.location = '/admin/home'
+            } else if (respond.data.user.role === 'Co-supervisor') {
+                window.location = '/cosupervisor/home'
+            } else if (respond.data.user.role === 'supervisor') {
+                window.location = '/supervisor/home'
+            } else {
+                window.location = '/pannelmember/home'
             }
 
         } catch (e) {
