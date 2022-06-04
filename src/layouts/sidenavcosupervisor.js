@@ -56,7 +56,7 @@ export default function Sidenavsupervisor() {
           <h4>Welcome</h4>
           <h5>{loggedIn.name}</h5>
         </div>
-        <Link to="/supervisor/home">
+        <Link to="/cosupervisor/home">
           <div className="menusb">
             <i class="fas fa-blog"></i>
             <span>Topic Status</span>

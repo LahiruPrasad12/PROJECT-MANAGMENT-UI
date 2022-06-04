@@ -21,6 +21,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ErrorToast from "../../../../../toast/error";
 import Success from "../../../../../toast/success";
 import Loader from "../../../../../loader/loader";
+import chatAPI from "../../../../../apis/modules/chat";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -61,43 +62,64 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
-export default function SubmitTopicToCoSupervisor(props) {
-  const [loading, setLoading] = useState(false);
+export default function RegisterTopicToSupervisor(props) {
   const [open, setOpen] = React.useState(false);
-  const [selectedCoSupervisor, setSelectedCoSupervisor] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSupervisor, setSelectedSupervisor] = useState("");
+  const [name, setName] = useState("");
   const [btnLoading, setBtnLoading] = useState(false);
 
   const [showSuccessToast, setSuccessShowToast] = useState(false);
   const [showErrorToast, setErrorShowToast] = useState(false);
 
-  const [coSuperVisor, setCoSupervisor] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [supervisors, setSupervisors] = useState([]);
+  const [topic, setTopic] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleClickOpen = async () => {
-    setOpen(true);
-    let payload = {
-      category_id: props.topic.category_id,
-    };
-    let supervisorsRespond = (await topicAPI.getStaff(payload, "Co-supervisor"))
-      .data.data.filteredData;
-    setCoSupervisor(supervisorsRespond);
+    try {
+      setLoading(true);
+      setOpen(true);
+      const categoryRespond = (await categoryAPI.getCategories()).data.data
+        .filteredData;
+      setCategory(categoryRespond);
+    } catch (e) {}
+    setLoading(false);
   };
   const handleClose = () => {
     setOpen(false);
   };
 
-  const selectSupervisor = (event: selectedCoSupervisor) => {
-    setSelectedCoSupervisor(event.target.value);
-    console.log(selectedCoSupervisor);
+  const selectSupervisor = (event: selectedSupervisor) => {
+    setSelectedSupervisor(event.target.value);
+    console.log(selectedCategory);
   };
 
-  const submitTopicToCoSupervisor = async () => {
+  const selectCategory = async (event: selectedCategory) => {
+    try {
+      setLoading(true);
+      setSelectedCategory(event.target.value);
+      const payload = {
+        category_id: event.target.value,
+      };
+      let supervisorsRespond = (await topicAPI.getStaff(payload, "supervisor"))
+        .data.data.filteredData;
+      setSupervisors(supervisorsRespond);
+    } catch (e) {}
+    setLoading(false);
+  };
+
+  const submitTopic = async () => {
     try {
       setBtnLoading(true);
       let payload = {
-        topic_id: props.topic._id,
-        co_supervisorID: selectedCoSupervisor,
+        category_id: selectedCategory,
+        supervisorID: selectedSupervisor,
+        name: name,
       };
-      await topicAPI.submitTopicToCoSupervisor(payload);
+      await topicAPI.submitTopicToSupervisor(payload);
+      await chatAPI.createChat(payload);
       setSuccessShowToast(true);
       setOpen(false);
       window.location.reload(false);
@@ -130,7 +152,7 @@ export default function SubmitTopicToCoSupervisor(props) {
             }}
             onClick={handleClickOpen}
           >
-            Submit My Topic to Co-supervisor
+            Register Our Topic
           </Button>
           <BootstrapDialog
             onClose={handleClose}
@@ -142,37 +164,41 @@ export default function SubmitTopicToCoSupervisor(props) {
               id="customized-dialog-title"
               onClose={handleClose}
             >
-              SUBMIT OUR TOPIC TO CO-SUPERVISOR
+              SUBMIT OUR TOPIC TO SUPERVISOR
             </BootstrapDialogTitle>
             <DialogContent dividers>
               <Typography gutterBottom>
                 <form>
                   <div className="row mt-2">
-                    {/<div class="col-md-6">/}
-
-                    {/*    <FormControl loading fullWidth>*/}
-                    {/*        <InputLabel sx={{marginTop: -1}} id="demo-simple-select-label">Select your*/}
-                    {/*            category</InputLabel>*/}
-                    {/*        <Select*/}
-                    {/*            size="small"*/}
-                    {/*            outlined*/}
-                    {/*            labelId="demo-simple-select-label"*/}
-                    {/*            id="demo-simple-select"*/}
-                    {/*            value={selectedCategory}*/}
-                    {/*            label="Age"*/}
-                    {/*            onChange={selectCategory}*/}
-
-                    {/*        >*/}
-                    {/*            {*/}
-                    {/*                category.map((element) => {*/}
-                    {/*                    return <MenuItem value={element._id}>{element.name}</MenuItem>*/}
-                    {/*                })*/}
-                    {/*            }*/}
-                    {/*        </Select>*/}
-                    {/*    </FormControl>*/}
-
-                    <div className="col-md-12">
-                      <FormControl fullWidth>
+                    <div className="col-md-6">
+                      <FormControl loading fullWidth>
+                        <InputLabel
+                          sx={{ marginTop: -1 }}
+                          id="demo-simple-select-label"
+                        >
+                          Select your category
+                        </InputLabel>
+                        <Select
+                          size="small"
+                          outlined
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={selectedCategory}
+                          label="Age"
+                          onChange={selectCategory}
+                        >
+                          {category.map((element) => {
+                            return (
+                              <MenuItem value={element._id}>
+                                {element.name}
+                              </MenuItem>
+                            );
+                          })}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div className="col-md-6">
+                      <FormControl fullWidth disabled={!supervisors}>
                         <InputLabel
                           sx={{ marginTop: -1 }}
                           id="demo-simple-select-label"
@@ -183,11 +209,11 @@ export default function SubmitTopicToCoSupervisor(props) {
                           size="small"
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
-                          value={selectedCoSupervisor}
+                          value={selectedSupervisor}
                           label="Age"
                           onChange={selectSupervisor}
                         >
-                          {coSuperVisor.map((element) => {
+                          {supervisors.map((element) => {
                             return (
                               <MenuItem value={element._id}>
                                 {element.name}
@@ -208,10 +234,12 @@ export default function SubmitTopicToCoSupervisor(props) {
                     <textarea
                       className="form-control"
                       id=""
-                      disabled={true}
                       placeholder="Enter Your Topic Name"
                       required
                       style={{ height: "100px" }}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
                     />
                   </div>
                   <br />
@@ -225,8 +253,8 @@ export default function SubmitTopicToCoSupervisor(props) {
             </DialogContent>
             <DialogActions>
               <LoadingButton
-                disabled={!selectedCoSupervisor}
-                onClick={submitTopicToCoSupervisor}
+                disabled={!name || !selectedSupervisor || !selectedCategory}
+                onClick={submitTopic}
                 endIcon={<SendIcon />}
                 loading={btnLoading}
                 loadingPosition="end"
