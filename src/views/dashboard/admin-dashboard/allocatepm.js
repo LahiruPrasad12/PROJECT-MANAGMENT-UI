@@ -65,10 +65,10 @@ export default function Allocatepm() {
 
     }
 
-    const assignPanelMember = async (id) => {
+    const assignPanelMember = async (id, panelId) => {
         try {
             let payload = {
-                panel_member_id: panelMember,
+                panel_member_id: panelId,
                 group_id: id
             }
 
@@ -119,7 +119,7 @@ export default function Allocatepm() {
                             })}
 
                         </select>
-                        <button style={{ marginLeft: '3%' }} type="button" class="btn btn-success btn-sm" onClick={() => assignPanelMember(cellValues.row._id)} disabled={cellValues.row.panel_member_id ? true : false}><i class="fas fa-sync"></i></button>
+                        <button style={{ marginLeft: '3%' }} type="button" class="btn btn-success btn-sm" onClick={() => assignPanelMember(cellValues.row._id, panelMember)} disabled={cellValues.row.panel_member_id ? true : false}><i class="fas fa-sync"></i></button>
                     </>
                 );
             },
