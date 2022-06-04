@@ -58,7 +58,76 @@ export default function Header() {
                       <a>Group Register</a>
                     </li>
                   </Link>
-                  {/*<Link to="/student/home"><li><a>Student Dashboard</a></li></Link>*/}
+                  <Link to="/login">
+                    <li class="btn2" onClick={logout}>
+                      Logout
+                    </li>
+                  </Link>
+                </>
+              )}
+              {loggedIn !== null && loggedIn.role === "admin" && (
+                <>
+                  <Link to="/admin/home">
+                    <li>
+                      <a>Admin Dashboard</a>
+                    </li>
+                  </Link>
+                  <Link to="/login">
+                    <li class="btn2" onClick={logout}>
+                      Logout
+                    </li>
+                  </Link>
+                </>
+              )}
+              {loggedIn !== null && loggedIn.role === "supervisor" && (
+                <>
+                  <Link to="/supervisor/home">
+                    <li>
+                      <a>Supervisor Dashboard</a>
+                    </li>
+                  </Link>
+                  <Link to="/login">
+                    <li class="btn2" onClick={logout}>
+                      Logout
+                    </li>
+                  </Link>
+                </>
+              )}
+              {loggedIn !== null && loggedIn.role === "Co-supervisor" && (
+                <>
+                  <Link to="/cosupervisor/home">
+                    <li>
+                      <a>Co-supervisor Dashboard</a>
+                    </li>
+                  </Link>
+                  <Link to="/login">
+                    <li class="btn2" onClick={logout}>
+                      Logout
+                    </li>
+                  </Link>
+                </>
+              )}
+              {loggedIn !== null && loggedIn.role === "Panel-Member" && (
+                <>
+                  <Link to="/panelmember/home">
+                    <li>
+                      <a>panel Member Dashboard</a>
+                    </li>
+                  </Link>
+                  <Link to="/login">
+                    <li class="btn2" onClick={logout}>
+                      Logout
+                    </li>
+                  </Link>
+                </>
+              )}
+              {loggedIn !== null && loggedIn.role === "staff" && (
+                <>
+                  <Link to="/student/staffwaiting">
+                    <li>
+                      <a>Get a Role</a>
+                    </li>
+                  </Link>
                   <Link to="/login">
                     <li class="btn2" onClick={logout}>
                       Logout

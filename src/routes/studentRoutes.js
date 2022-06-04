@@ -6,6 +6,7 @@ import Groupregister from "../views/dashboard/student-dashboard/groupregister";
 import Topicregister from "../views/dashboard/student-dashboard/TopicRegistration/topicregister";
 import Submissionsst from "../views/dashboard/student-dashboard/DocumentSubmission/submissionsst";
 import Uploads from "../views/dashboard/student-dashboard/uploads";
+import Staffwaiting from "../views/dashboard/student-dashboard/staffwaiting";
 // import SdentHome from '../views/student/studenthome'
 
 const AuthRoutes = () => {
@@ -13,6 +14,9 @@ const AuthRoutes = () => {
     <Router>
       <Route exact path="/student/groupregister">
         <Groupregister />
+      </Route>
+      <Route exact path="/student/staffwaiting">
+        <Staffwaiting />
       </Route>
       <Route exact path="/student/home">
         <StudentHome />
