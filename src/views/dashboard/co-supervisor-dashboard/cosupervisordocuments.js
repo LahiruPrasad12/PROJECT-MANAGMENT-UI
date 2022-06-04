@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import PannelMemberSidenav from "../../../layouts/sidenavpannelmember";
-import "./pannelMemberHome.css";
+import Sidenav from "../../../layouts/sidenavcosupervisor";
+import "./co-supervisorHome.css";
 
-export default function PannelMemberPresentation() {
+export default function CoSupervisorDocument() {
   return (
     <>
-      <PannelMemberSidenav />
+      <Sidenav />
       <div class="content">
         <div class="container">
           <center>
-            <h1>PRESENTATION EVALUATION</h1>
+            <h1>Documentations Evaluation</h1>
             <p>Pannel - Member</p>
             <button type="button" class="presentation">
               Download Marking Scheme
@@ -50,7 +50,7 @@ export default function PannelMemberPresentation() {
                       <th scope="col">#</th>
                       <th scope="col">Group Name</th>
                       <th scope="col">Topic</th>
-                      <th scope="col">Presentation</th>
+                      <th scope="col">Document</th>
                     </tr>
                   </thead>
                   <br />

@@ -43,8 +43,10 @@ const AddGroupMemberForm = (props) => {
                 setErrors(error.response.data.error)
                 setOpen(true)
             } else if (error.response.data.status === 406) {
-                setErrors('Your group already have maximum number of members')
-                window.location = '/student/home'
+                console.log(error.response.data.error)
+                setErrors(error.response.data.error)
+                setOpen(true)
+                // window.location = '/student/home'
             } else {
                 setErrors('something went wrong.. please try again later')
             }

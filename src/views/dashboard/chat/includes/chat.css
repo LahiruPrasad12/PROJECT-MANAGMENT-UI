@@ -1,0 +1,9 @@
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+}
+
+#content{
+    margin-left: 40%;
+    margin-top: -45%;
+}
