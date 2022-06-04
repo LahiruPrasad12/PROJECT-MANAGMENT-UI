@@ -8,7 +8,8 @@ const Success = () => {
   return (
     <div>
       <Alert show={show} variant="success">
-        <Alert.Heading>Successful..!</Alert.Heading>
+        <Alert.Heading>Hi student</Alert.Heading>
+        <p>You can submit your Research topic here</p>
         <hr />
         <div className="d-flex justify-content-end">
           <Button onClick={() => setShow(false)} variant="outline-success">
