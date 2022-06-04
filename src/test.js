@@ -1,112 +1,98 @@
 import * as React from 'react';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import SaveIcon from '@mui/icons-material/Save';
-import SendIcon from '@mui/icons-material/Send';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 
-export default function LoadingButtonsTransition() {
-    const [loading, setLoading] = React.useState(true);
-    function handleClick() {
-        setLoading(true);
-    }
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}));
+
+export interface DialogTitleProps {
+    id: string;
+    children?: React.ReactNode;
+    onClose: () => void;
+}
+
+const BootstrapDialogTitle = (props: DialogTitleProps) => {
+    const { children, onClose, ...other } = props;
 
     return (
-        <Box>
-            <FormControlLabel
-                sx={{
-                    display: 'block',
-                }}
-                control={
-                    <Switch
-                        checked={loading}
-                        onChange={() => setLoading(!loading)}
-                        name="loading"
-                        color="primary"
-                    />
-                }
-                label="Loading"
-            />
-            <Box sx={{ '& > button': { m: 1 } }}>
-                <LoadingButton
-                    size="small"
-                    onClick={handleClick}
-                    loading={loading}
-                    variant="outlined"
-                    disabled
+        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+            {children}
+            {onClose ? (
+                <IconButton
+                    aria-label="close"
+                    onClick={onClose}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
                 >
-                    disabled
-                </LoadingButton>
-                <LoadingButton
-                    size="small"
-                    onClick={handleClick}
-                    loading={loading}
-                    loadingIndicator="Loading..."
-                    variant="outlined"
-                >
-                    Fetch data
-                </LoadingButton>
-                <LoadingButton
-                    size="small"
-                    onClick={handleClick}
-                    endIcon={<SendIcon />}
-                    loading={loading}
-                    loadingPosition="end"
-                    variant="contained"
-                >
-                    Send
-                </LoadingButton>
-                <LoadingButton
-                    size="small"
-                    color="secondary"
-                    onClick={handleClick}
-                    loading={loading}
-                    loadingPosition="start"
-                    startIcon={<SaveIcon />}
-                    variant="contained"
-                >
-                    Save
-                </LoadingButton>
-            </Box>
+                    <CloseIcon />
+                </IconButton>
+            ) : null}
+        </DialogTitle>
+    );
+};
 
-            <Box sx={{ '& > button': { m: 1 } }}>
-                <LoadingButton
-                    onClick={handleClick}
-                    loading={loading}
-                    variant="outlined"
-                    disabled
-                >
-                    disabled
-                </LoadingButton>
-                <LoadingButton
-                    onClick={handleClick}
-                    loading={loading}
-                    loadingIndicator="Loading..."
-                    variant="outlined"
-                >
-                    Fetch data
-                </LoadingButton>
-                <LoadingButton
-                    onClick={handleClick}
-                    endIcon={<SendIcon />}
-                    loading={loading}
-                    loadingPosition="end"
-                    variant="contained"
-                >
-                    Send
-                </LoadingButton>
-                <LoadingButton
-                    color="secondary"
-                    onClick={handleClick}
-                    loading={loading}
-                    loadingPosition="start"
-                    startIcon={<SaveIcon />}
-                    variant="contained"
-                >
-                    Save
-                </LoadingButton>
-            </Box>
-        </Box>
+export default function CustomizedDialogs() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return (
+        <div>
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Open dialog
+            </Button>
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+            >
+                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                    Modal title
+                </BootstrapDialogTitle>
+                <DialogContent dividers>
+                    <Typography gutterBottom>
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+                        consectetur ac, vestibulum at eros.
+                    </Typography>
+                    <Typography gutterBottom>
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                    </Typography>
+                    <Typography gutterBottom>
+                        Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+                        ullamcorper nulla non metus auctor fringilla.
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose}>
+                        Save changes
+                    </Button>
+                </DialogActions>
+            </BootstrapDialog>
+        </div>
     );
 }

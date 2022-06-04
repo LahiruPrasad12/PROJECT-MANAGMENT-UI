@@ -1,10 +1,12 @@
 import api from "../axios";
-const resource = '/api/owner';
+const resource = '/api/admins';
+const resource1 = '/api/admins/roles'
+const resource2 = '/api/admins/panel-members';
 
 export default {
-    listPrduct: () => api.get(`${resource}`),
-    createProduct: (payload) => api.post(`${resource}`, payload),
-    getProduct: (id) => api.get(`${resource}/${id}`),
-    updateProduct: (id, payload) => api.patch(`${resource}/${id}`, payload),
-    deleteProduct: (id) => api.delete(`${resource}/${id}`)
+    getUsers: () => api.get(`${resource}`),
+    getRoles: () => api.get(`${resource1}`),
+    assignPanelMember: (payload) => api.patch(`${resource2}`, payload),
+    updateUser: (payload) => api.patch(`${resource}`, payload),
+    deleteUser: (id) => api.delete(`${resource}/${id}`)
 }

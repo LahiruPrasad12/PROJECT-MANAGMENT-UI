@@ -13,8 +13,18 @@ export default function LandingPage(){
       window.location = '/login'
     }else if(loggedIn.role === 'student'){
       window.location = '/student/home'
+    }else if(loggedIn.role === 'admin'){
+      window.location = '/admin/home'
+    }else if(loggedIn.role === 'supervisor'){
+      window.location = '/supervisor/home'
+    }else if(loggedIn.role === 'Co-supervisor'){
+      window.location = '/cosupervisor/home'
+    }else if(loggedIn.role === 'Panel-Member'){
+      window.location = '/panelmember/home'
+    }else if(loggedIn.role === 'staff'){
+      window.location = '/student/staffwaiting'
     }else {
-      window.location = '/home'
+      window.location = '/'
     }
 
   }
