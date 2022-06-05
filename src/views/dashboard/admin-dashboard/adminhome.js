@@ -76,6 +76,7 @@ export default function Adminhome() {
     const [studentCount, setStudentCount] = React.useState(0);
     const [adminCount, setAdminCount] = React.useState(1);
     const [coSupervisorCount, setCoSupervisorsCount] = React.useState(0);
+    const [staffCount, setStaffCount] = React.useState(0);
     let [panelCount, setPanelCount] = React.useState(0);
     const [supervisorCount, setSupervisorCount] = React.useState(0);
     const [userId, setUserId] = React.useState('');
@@ -123,6 +124,8 @@ export default function Adminhome() {
                         setCoSupervisorsCount(element.items.length)
                     } else if (element.role === 'student') {
                         setStudentCount(element.items.length)
+                    } else if (element.role === 'staff') {
+                        setStaffCount(element.items.length)
                     }
 
                 })
@@ -152,7 +155,16 @@ export default function Adminhome() {
     const deleteUser = async () => {
         try {
             await admin.deleteUser(userId)
-            window.location = "/admin/home"
+
+            SoloAlert.alert({
+                title: "Success",
+                body: "User Deleted successfully",
+                icon: "success",
+                theme: "dark",
+                onOk: function () {
+                    window.location = "/admin/home"
+                }
+            });
         } catch {
         }
     }
@@ -350,7 +362,7 @@ export default function Adminhome() {
                                 <div class="col-md-2">
                                     <div class="card-counter success" style={{ backgroundColor: '#ffbb33' }}>
                                         <i class="fas fa-user-cog"></i>
-                                        <span class="count-numbers">{panelCount}</span>
+                                        <span class="count-numbers">{staffCount}</span>
                                         <span class="count-name" style={{ color: 'white', fontWeight: '600' }}>Staff</span>
                                     </div>
                                 </div>
